@@ -8,130 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#e7bdb8",
-                        "surface": "#12121f",
-                        "bg-surface": "#161629",
-                        "surface-bright": "#383847",
-                        "on-surface": "#e3e0f4",
-                        "on-secondary-fixed": "#2f004c",
-                        "secondary": "#e4b5ff",
-                        "inverse-surface": "#e3e0f4",
-                        "on-error": "#690005",
-                        "border-pixel": "#5555AA",
-                        "surface-container-high": "#292937",
-                        "on-primary-fixed-variant": "#095300",
-                        "neon-yellow": "#FFE135",
-                        "surface-variant": "#343342",
-                        "on-secondary-fixed-variant": "#6f00a9",
-                        "background": "#12121f",
-                        "tertiary": "#fff8f7",
-                        "secondary-container": "#7c04bc",
-                        "on-secondary-container": "#e1b0ff",
-                        "bg-elevated": "#1F1F40",
-                        "error-container": "#93000a",
-                        "surface-container-low": "#1a1a28",
-                        "text-primary": "#E8E8F0",
-                        "on-primary-container": "#107100",
-                        "outline": "#85967c",
-                        "on-background": "#e3e0f4",
-                        "inverse-primary": "#106e00",
-                        "text-secondary": "#8888AA",
-                        "on-error-container": "#ffdad6",
-                        "primary-fixed-dim": "#2ae500",
-                        "on-primary-fixed": "#022100",
-                        "neon-cyan": "#00F5FF",
-                        "error": "#FF3B3B",
-                        "on-tertiary-container": "#7a5955",
-                        "tertiary-fixed": "#ffdad6",
-                        "on-tertiary-fixed": "#2c1513",
-                        "surface-tint": "#2ae500",
-                        "secondary-fixed": "#f4daff",
-                        "surface-container-lowest": "#0d0d1a",
-                        "on-secondary": "#4e0079",
-                        "primary-container": "#39ff14",
-                        "on-tertiary": "#442927",
-                        "on-tertiary-fixed-variant": "#5d3f3c",
-                        "primary": "#efffe3",
-                        "primary-fixed": "#79ff5b",
-                        "on-surface-variant": "#baccb0",
-                        "on-primary": "#053900",
-                        "surface-dim": "#12121f",
-                        "surface-container-highest": "#343342",
-                        "secondary-fixed-dim": "#e4b5ff",
-                        "outline-variant": "#3c4b35",
-                        "tertiary-container": "#ffd3ce",
-                        "surface-container": "#1e1e2c",
-                        "inverse-on-surface": "#2f2f3d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "pixel-unit": "4px",
-                        "gutter": "16px",
-                        "margin-desktop": "40px",
-                        "margin-mobile": "16px"
-                    },
-                    "fontFamily": {
-                        "button-label": ["\"Press Start 2P\""],
-                        "section-title": ["\"Press Start 2P\""],
-                        "hero-title": ["\"Press Start 2P\""],
-                        "dialog-text": ["VT323"],
-                        "caption": ["VT323"],
-                        "stats-value": ["VT323"],
-                        "hero-title-mobile": ["\"Press Start 2P\""]
-                    },
-                    "fontSize": {
-                        "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
-                        "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
-                        "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
-                        "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        body {
-            image-rendering: pixelated;
-        }
-        .crt-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 6px 100%;
-            z-index: 9999;
-            pointer-events: none;
-        }
-        .pixel-border {
-            box-shadow: 
-                inset -4px -4px 0 0 rgba(0,0,0,0.5),
-                inset 4px 4px 0 0 rgba(255,255,255,0.2),
-                0 0 0 4px var(--tw-colors-border-pixel);
-        }
-        .pixel-border-active {
-            box-shadow: 
-                inset -4px -4px 0 0 rgba(0,0,0,0.5),
-                inset 4px 4px 0 0 rgba(255,255,255,0.2),
-                0 0 0 4px var(--tw-colors-neon-cyan),
-                0 0 15px 5px rgba(0, 245, 255, 0.4);
-        }
-    </style>
+<script src="Style/tailwind.config.js"></script>
+<link href="Style/style.css" rel="stylesheet"/>
+<script src="assets/audio.js"></script>
 </head>
 <body class="bg-bg-surface text-text-primary min-h-screen flex flex-col pt-24 pb-12 font-dialog-text">
 <div class="crt-overlay"></div>
@@ -141,14 +20,14 @@
             FAREWELL QUEST
         </div>
 <div class="hidden md:flex gap-8 items-center Headlines: font-section-title text-section-title. Labels: font-button-label text-button-label.">
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">QUEST</a>
-<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">PARTY</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">LOG</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
+<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
 </div>
 <div class="flex gap-4">
 <button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">settings</span></button>
-<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">volume_up</span></button>
+<button onclick="toggleMute(event)" class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span id="volume-icon" class="material-symbols-outlined text-text-secondary">volume_off</span></button>
 </div>
 </nav>
 <main class="flex-grow container mx-auto px-margin-desktop md:px-margin-desktop mt-8">
@@ -160,42 +39,42 @@
 <!-- Character Card: Active -->
 <div class="bg-surface-container-high pixel-border-active p-4 flex flex-col items-center cursor-pointer transform scale-105 transition-all duration-200" onclick="selectCharacter(this)">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A pixel-art style portrait of a female character with dark hair in a retro 16-bit RPG aesthetic. Bright neon cyan highlights. Solid dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1kv_ONGC7VL6iKyAX6HvOnvc86xK8g6vqeD1MAHqT1yfr6XvJGwhKNUz8s_0eUYTdKm__gnqHY502tI5BAYhNA31XOXGKuHvurRJ5rz9kn7yLxngXjiZxiituFZxm1e6mg54O8Wx1LVBrhXBOehefiqkbdz2gq6KmB350FA5AW7Sb_6o6IMvVEsmbsKDopNCWgqGQU9tcBo2R0vIJ10QGjX7BBu6uTT_35_agDlHHsqJ4Ry1600wA5rvMWMYguhUis3EMcefU7x1P"/>
+<img class="w-full h-full object-cover" data-alt="A pixel-art style portrait of a female character with dark hair in a retro 16-bit RPG aesthetic. Bright neon cyan highlights. Solid dark background." src="assets/images/img_206a8f28.png"/>
 </div>
-<h3 class="font-button-label text-button-label text-neon-cyan mb-2">Teh Ica</h3>
-<p class="font-caption text-caption text-secondary">Mage</p>
-</div>
-<!-- Character Card -->
-<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
-<div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A 16-bit pixel art portrait of a male character with spiky hair, wearing light armor. Retro arcade aesthetic with neon purple accents against a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeta0BaGXuwtSLYJyOS_53huJ_T4FAc9XYlBkiF8JHc_7iXNjweDVMbKIfx1i0Dt6cKNhwpe9tu2nUjYyo5bYNgWaELJBUj_WijOsKNQDMJz0Ycg-dCPjCkbS5JGdN7rKXet__-hNUh3X23tHJgrtVhS_ZvKlVYvNPbTOG7PazUP6G4-6NHdqTR_xrmPv6u054naCMq267XzxHnd2VSD_Dgn2qrFh-gfb29Ct4frl80W1fzoDlsLbwiYQ5AesazQQwvaNRvkpH6Ibl"/>
-</div>
-<h3 class="font-button-label text-button-label text-on-surface mb-2">Surya</h3>
-<p class="font-caption text-caption text-text-secondary">Warrior</p>
+<h3 class="font-button-label text-button-label text-neon-cyan mb-2">Rei</h3>
+<p class="font-caption text-caption text-secondary">Curriculum Developer</p>
 </div>
 <!-- Character Card -->
 <div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A retro RPG pixel art style character portrait. A rogue class character with a hood, rendered in 16-bit style with neon highlights on a dark CRT monitor background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Do-o2rJnzXQkEy5nok4G_XpUvhzC4JQ4-xL2X46U9BXEoxDZ5Xhm5zA3zcurIXpCSVbf3H6XLIcef3r-JTcQJp0Xb4BioK9nbUOaYNuis91-ckGsL30JHXz3RIA1GbXYptK7UqPiWrFfWPd-UlV75pXRBQzoszHcIIfidkbrNKlRDdxhvOc6r-EMttBu0dOOShPcLlBXddcnPpDTUQioxBqlCsLmTEfzrU_kNAlV_0pBCmgR-CjejuF8f_iyuJURMSkeb1RX7qwn"/>
+<img class="w-full h-full object-cover" data-alt="A 16-bit pixel art portrait of a male character with spiky hair, wearing light armor. Retro arcade aesthetic with neon purple accents against a dark background." src="assets/images/img_5882fa35.png"/>
 </div>
-<h3 class="font-button-label text-button-label text-on-surface mb-2">Arif</h3>
-<p class="font-caption text-caption text-text-secondary">Rogue</p>
-</div>
-<!-- Character Card -->
-<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
-<div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="16-bit arcade pixel art portrait of a cleric or healer character, bright pastel colors with a dark gritty console background. High contrast neon edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE8PzZ5PvlcEPeEAECxlghCt-BATIKB-xoyRqGtKtzOEoCLtYTt17X1nI4NR6lH62IMk2h9viN2WHq87NOTEsdY00S62QqL1vm-hUst0WPbPWeJPRAyMcbD2SU1GjwXlipyAnyxD-YGt44trJuuwiL4DapUs68rr8v0BURwdGwvvZjk56es_nHkASpwixVmYf4GwC9t6A9rapTpTwEZ8mQY0z8l62W7RfiG_qKV6bKr3-5BX-hvjiNVIVXUJfbAkC8UAStHQC7FCd7"/>
-</div>
-<h3 class="font-button-label text-button-label text-on-surface mb-2">Budi</h3>
-<p class="font-caption text-caption text-text-secondary">Cleric</p>
+<h3 class="font-button-label text-button-label text-on-surface mb-2">Alfin</h3>
+<p class="font-caption text-caption text-text-secondary">Data Analyst</p>
 </div>
 <!-- Character Card -->
 <div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Pixel art character avatar, 8-bit or 16-bit style. A futuristic bard with synthwave neon colors, dark background, CRT scanline effect applied to the portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCssFP8wkgGIUaBfQWbhuQEqRBOXCF521Kd3Dn9FSWUeweE_RDDa15BueyrmygaVN0tSpO44tetxT5AwciEs53La1QC651wv0Vc7yGHcPHpcekZ5Gv2vvysIM473cJoS7tki4rkkQIdGjMqzQ9yOAW3nzve3b-MOTrNEY6aT6aRpYFxmr0XQA2f_SfeR7ieHDWEz2bcqCg0qIY4o52tfji9FtM-tvn29-dc_Uimf5h7-nH2kr2xxKhMcCP3dsskThmjO04GMazjh0ZE"/>
+<img class="w-full h-full object-cover" data-alt="A retro RPG pixel art style character portrait. A rogue class character with a hood, rendered in 16-bit style with neon highlights on a dark CRT monitor background." src="assets/images/img_5b026ed7.png"/>
 </div>
-<h3 class="font-button-label text-button-label text-on-surface mb-2">Dian</h3>
-<p class="font-caption text-caption text-text-secondary">Bard</p>
+<h3 class="font-button-label text-button-label text-on-surface mb-2">Reza</h3>
+<p class="font-caption text-caption text-text-secondary">UI/UX Designer</p>
+</div>
+<!-- Character Card -->
+<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
+<div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="16-bit arcade pixel art portrait of a cleric or healer character, bright pastel colors with a dark gritty console background. High contrast neon edges." src="assets/images/img_a15e9dc6.png"/>
+</div>
+<h3 class="font-button-label text-button-label text-on-surface mb-2">Qony Zen</h3>
+<p class="font-caption text-caption text-text-secondary">Graphic Designer</p>
+</div>
+<!-- Character Card -->
+<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
+<div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Pixel art character avatar, 8-bit or 16-bit style. A futuristic bard with synthwave neon colors, dark background, CRT scanline effect applied to the portrait." src="assets/images/img_08b6f6d6.png"/>
+</div>
+<h3 class="font-button-label text-button-label text-on-surface mb-2">Disa</h3>
+<p class="font-caption text-caption text-text-secondary">Eduplex Assistant</p>
 </div>
 </div>
 </main>
@@ -212,6 +91,7 @@
 </footer>
 <script>
         function selectCharacter(element) {
+            playSelectSFX();
             // Remove active class from all cards
             document.querySelectorAll('.pixel-border-active').forEach(card => {
                 card.classList.remove('pixel-border-active', 'scale-105');

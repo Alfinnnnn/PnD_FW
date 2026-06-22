@@ -13,154 +13,9 @@
 <!-- Material Symbols -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind Configuration -->
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#e7bdb8",
-                        "surface": "#12121f",
-                        "bg-surface": "#161629",
-                        "surface-bright": "#383847",
-                        "on-surface": "#e3e0f4",
-                        "on-secondary-fixed": "#2f004c",
-                        "secondary": "#e4b5ff",
-                        "inverse-surface": "#e3e0f4",
-                        "on-error": "#690005",
-                        "border-pixel": "#5555AA",
-                        "surface-container-high": "#292937",
-                        "on-primary-fixed-variant": "#095300",
-                        "neon-yellow": "#FFE135",
-                        "surface-variant": "#343342",
-                        "on-secondary-fixed-variant": "#6f00a9",
-                        "background": "#12121f",
-                        "tertiary": "#fff8f7",
-                        "secondary-container": "#7c04bc",
-                        "on-secondary-container": "#e1b0ff",
-                        "bg-elevated": "#1F1F40",
-                        "error-container": "#93000a",
-                        "surface-container-low": "#1a1a28",
-                        "text-primary": "#E8E8F0",
-                        "on-primary-container": "#107100",
-                        "outline": "#85967c",
-                        "on-background": "#e3e0f4",
-                        "inverse-primary": "#106e00",
-                        "text-secondary": "#8888AA",
-                        "on-error-container": "#ffdad6",
-                        "primary-fixed-dim": "#2ae500",
-                        "on-primary-fixed": "#022100",
-                        "neon-cyan": "#00F5FF",
-                        "error": "#FF3B3B",
-                        "on-tertiary-container": "#7a5955",
-                        "tertiary-fixed": "#ffdad6",
-                        "on-tertiary-fixed": "#2c1513",
-                        "surface-tint": "#2ae500",
-                        "secondary-fixed": "#f4daff",
-                        "surface-container-lowest": "#0d0d1a",
-                        "on-secondary": "#4e0079",
-                        "primary-container": "#39ff14",
-                        "on-tertiary": "#442927",
-                        "on-tertiary-fixed-variant": "#5d3f3c",
-                        "primary": "#efffe3",
-                        "primary-fixed": "#79ff5b",
-                        "on-surface-variant": "#baccb0",
-                        "on-primary": "#053900",
-                        "surface-dim": "#12121f",
-                        "surface-container-highest": "#343342",
-                        "secondary-fixed-dim": "#e4b5ff",
-                        "outline-variant": "#3c4b35",
-                        "tertiary-container": "#ffd3ce",
-                        "surface-container": "#1e1e2c",
-                        "inverse-on-surface": "#2f2f3d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "pixel-unit": "4px",
-                        "gutter": "16px",
-                        "margin-desktop": "40px",
-                        "margin-mobile": "16px"
-                    },
-                    "fontFamily": {
-                        "button-label": ["\"Press Start 2P\""],
-                        "section-title": ["\"Press Start 2P\""],
-                        "hero-title": ["\"Press Start 2P\""],
-                        "dialog-text": ["VT323"],
-                        "caption": ["VT323"],
-                        "stats-value": ["VT323"],
-                        "hero-title-mobile": ["\"Press Start 2P\""]
-                    },
-                    "fontSize": {
-                        "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
-                        "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
-                        "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
-                        "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        /* CRT Scanline Effect */
-        .scanlines {
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0,0,0,0.2) 50%,
-                rgba(0,0,0,0.2)
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 9999;
-            mix-blend-mode: overlay;
-        }
-
-        /* Typewriter Cursor */
-        .typewriter-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background-color: currentColor;
-            animation: blink 1s step-end infinite;
-            vertical-align: bottom;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Blinking Arrow Indicator */
-        .blinking-arrow {
-            animation: bounce-blink 1.5s infinite;
-        }
-
-        @keyframes bounce-blink {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(4px); opacity: 0.5; }
-        }
-
-        /* Pixel Image Rendering */
-        .pixel-art {
-            image-rendering: pixelated;
-        }
-    </style>
+<script src="Style/tailwind.config.js"></script>
+<link href="Style/style.css" rel="stylesheet"/>
+<script src="assets/audio.js"></script>
 </head>
 <body class="bg-surface text-text-primary min-h-screen flex flex-col relative overflow-x-hidden">
 <!-- Global CRT Overlay -->
@@ -171,19 +26,15 @@
 <span class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">FAREWELL QUEST</span>
 </div>
 <div class="hidden md:flex gap-8">
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">QUEST</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">PARTY</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
 <!-- Active Tab -->
-<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">LOG</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">WALL</a>
+<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
 </div>
-<div class="flex items-center gap-4 text-primary dark:text-primary">
-<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75">
-<span class="material-symbols-outlined">volume_up</span>
-</button>
+<div class="flex gap-4 items-center">
+<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span class="material-symbols-outlined">settings</span></button>
+<button onclick="toggleMute(event)" class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span id="volume-icon" class="material-symbols-outlined">volume_up</span></button>
 </div>
 </nav>
 <!-- Main Content Canvas -->
@@ -194,7 +45,7 @@
 <h2 class="font-section-title text-section-title text-neon-yellow mb-4 text-center">TEH ICA</h2>
 <!-- Portrait Frame -->
 <div class="border-4 border-border-pixel bg-surface-container-lowest p-2 mb-6 aspect-square flex items-center justify-center relative overflow-hidden">
-<img class="w-full h-full object-cover pixel-art" data-alt="A 16-bit retro pixel art portrait of a female character named Teh Ica. She has a determined expression, wearing a stylish cyberpunk RPG outfit. The background is a solid dark space-indigo color to emphasize the sprite. The art style mimics classic 90s JRPG character dialogue portraits with sharp edges, hard shading, and no anti-aliasing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxx1ALLSNcE7DAgd81yi3zaq1kdbwMShYrc4sFwrysVv4Vx6cDJbnSN-qGNTzGyhtYK9Vl59bYMV9nkttpzkr7gd551qiGFbXB9HEgI76ug2FJ-6f8UaCQ0fm85woLv1nqWeF_AxAQLiT1pAl3YxT0ZMuy_BPF5HrtMp_jLzbO4NE3CoeWTWrWvCJYzSQHAkl7bJCpUA23bQjJBvcsQoyMVXk60f767IjbOcdPQAu9HhYxnOZjDifC8gatk2sBs0F3iDzmZdnZRsA1"/>
+<img class="w-full h-full object-cover pixel-art" data-alt="A 16-bit retro pixel art portrait of a female character named Teh Ica. She has a determined expression, wearing a stylish cyberpunk RPG outfit. The background is a solid dark space-indigo color to emphasize the sprite. The art style mimics classic 90s JRPG character dialogue portraits with sharp edges, hard shading, and no anti-aliasing." src="assets/images/img_c130db73.png"/>
 <!-- Overlay vignette for monitor feel -->
 <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none"></div>
 </div>
@@ -253,7 +104,7 @@
 <!-- Surya -->
 <div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
 <div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
-<img alt="Surya" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVp2CUBCL22d-JrR0vLpJj535kxMaV-o0G5ZciTdDlH1ELRwKUVlJquocSBfloeR4Vhn6P1Ehb9So4QjET9u-0BYJaakj1_GSpcv13n3ArP6KtxiyyMJzICudMLg-W-PkoSPHdgffAyNTWis0vOmy6d338qppN5JZZd2ww6bkHDIk5dner-6wmLVL5LXX29cZosL44Pab_IIb-M5DgFebcmPa28aMcfC_p1bmWR1JfHbFrESWIuYRdL58OhtzRTB87cr0IJE4cHHM"/>
+<img alt="Surya" class="w-full h-full pixel-art" src="assets/images/img_9c203cf1.png"/>
 </div>
 <div>
 <div class="font-button-label text-[10px] text-neon-yellow mb-1">SURYA</div>
@@ -263,7 +114,7 @@
 <!-- Arif -->
 <div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
 <div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
-<img alt="Arif" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHo7s5TR7XGNbIc3o7UqHTrMO1nrZsH3Ru4KcGbW2cMkj69rCk0ZILwyg5HuieuQC1LdcerZhEur4mttp0w0KNbCAPR7sQgPrsQUpUjmWTDoOV_y-_q4cm3VFGNp1R3Dnq0TA9HPUSizNCgmSdnLUk7NGYDxrwNDE-4stvZFmjBhDtvUyIP7xTt_V_1YHT7d0TxZcKEVyq-YyWC9N1VyDXZ9mdhrKmCOSEvmgG3PcNgPTBzKyCglwXx6tWY9luBOlvAWonlNFYJG6"/>
+<img alt="Arif" class="w-full h-full pixel-art" src="assets/images/img_f8a18794.png"/>
 </div>
 <div>
 <div class="font-button-label text-[10px] text-neon-yellow mb-1">ARIF</div>
@@ -273,7 +124,7 @@
 <!-- Budi -->
 <div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
 <div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
-<img alt="Budi" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTrlMoZ7keXktBFHSVimu3s0WSchUQ6_hjIq5yKYyEZfWU6aUMNnaAbmCOKezSl861rTa1fRyWXAeWJ2dshClXQf18hhcphP-l69FXXNMmxp2pQ1xoTkkNLO2B9cUmVnBFNtA3rxjNVx_kKnuzC4gJRUmPfA1qRwn-QIw7BH8aG5duf02oMCbtKakBaamqmeqsPEZbdpdYcwQqdK696Iw2ES-6Adog2Nm9WUe9IOiKVgCg3T9VFd1ZPOWUZ1I5LpJQQj1NXsNL5e84"/>
+<img alt="Budi" class="w-full h-full pixel-art" src="assets/images/img_23793e43.png"/>
 </div>
 <div>
 <div class="font-button-label text-[10px] text-neon-yellow mb-1">BUDI</div>

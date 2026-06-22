@@ -8,142 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#e7bdb8",
-                        "surface": "#12121f",
-                        "bg-surface": "#161629",
-                        "surface-bright": "#383847",
-                        "on-surface": "#e3e0f4",
-                        "on-secondary-fixed": "#2f004c",
-                        "secondary": "#e4b5ff",
-                        "inverse-surface": "#e3e0f4",
-                        "on-error": "#690005",
-                        "border-pixel": "#5555AA",
-                        "surface-container-high": "#292937",
-                        "on-primary-fixed-variant": "#095300",
-                        "neon-yellow": "#FFE135",
-                        "surface-variant": "#343342",
-                        "on-secondary-fixed-variant": "#6f00a9",
-                        "background": "#12121f",
-                        "tertiary": "#fff8f7",
-                        "secondary-container": "#7c04bc",
-                        "on-secondary-container": "#e1b0ff",
-                        "bg-elevated": "#1F1F40",
-                        "error-container": "#93000a",
-                        "surface-container-low": "#1a1a28",
-                        "text-primary": "#E8E8F0",
-                        "on-primary-container": "#107100",
-                        "outline": "#85967c",
-                        "on-background": "#e3e0f4",
-                        "inverse-primary": "#106e00",
-                        "text-secondary": "#8888AA",
-                        "on-error-container": "#ffdad6",
-                        "primary-fixed-dim": "#2ae500",
-                        "on-primary-fixed": "#022100",
-                        "neon-cyan": "#00F5FF",
-                        "error": "#FF3B3B",
-                        "on-tertiary-container": "#7a5955",
-                        "tertiary-fixed": "#ffdad6",
-                        "on-tertiary-fixed": "#2c1513",
-                        "surface-tint": "#2ae500",
-                        "secondary-fixed": "#f4daff",
-                        "surface-container-lowest": "#0d0d1a",
-                        "on-secondary": "#4e0079",
-                        "primary-container": "#39ff14",
-                        "on-tertiary": "#442927",
-                        "on-tertiary-fixed-variant": "#5d3f3c",
-                        "primary": "#efffe3",
-                        "primary-fixed": "#79ff5b",
-                        "on-surface-variant": "#baccb0",
-                        "on-primary": "#053900",
-                        "surface-dim": "#12121f",
-                        "surface-container-highest": "#343342",
-                        "secondary-fixed-dim": "#e4b5ff",
-                        "outline-variant": "#3c4b35",
-                        "tertiary-container": "#ffd3ce",
-                        "surface-container": "#1e1e2c",
-                        "inverse-on-surface": "#2f2f3d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "pixel-unit": "4px",
-                        "gutter": "16px",
-                        "margin-desktop": "40px",
-                        "margin-mobile": "16px"
-                    },
-                    "fontFamily": {
-                        "button-label": ["\"Press Start 2P\""],
-                        "section-title": ["\"Press Start 2P\""],
-                        "hero-title": ["\"Press Start 2P\""],
-                        "dialog-text": ["VT323"],
-                        "caption": ["VT323"],
-                        "stats-value": ["VT323"],
-                        "hero-title-mobile": ["\"Press Start 2P\""]
-                    },
-                    "fontSize": {
-                        "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
-                        "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
-                        "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
-                        "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }],
-                        "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        .pixel-border {
-            box-shadow: 
-                0 -4px 0 0 theme('colors.border-pixel'),
-                0 4px 0 0 theme('colors.border-pixel'),
-                -4px 0 0 0 theme('colors.border-pixel'),
-                4px 0 0 0 theme('colors.border-pixel'),
-                inset 0 4px 0 0 theme('colors.bg-elevated'),
-                inset 0 -4px 0 0 theme('colors.bg-elevated'),
-                inset 4px 0 0 0 theme('colors.bg-elevated'),
-                inset -4px 0 0 0 theme('colors.bg-elevated'),
-                inset 0 8px 0 0 theme('colors.border-pixel'),
-                inset 0 -8px 0 0 theme('colors.border-pixel'),
-                inset 8px 0 0 0 theme('colors.border-pixel'),
-                inset -8px 0 0 0 theme('colors.border-pixel');
-        }
-        .pixel-button {
-            box-shadow: 0 4px 0 0 #93000a, 0 8px 0 0 #0d0d1a;
-            transition: transform 0.1s, box-shadow 0.1s;
-        }
-        .pixel-button:active {
-            transform: translateY(4px);
-            box-shadow: 0 0px 0 0 #93000a, 0 4px 0 0 #0d0d1a;
-        }
-        .scanlines {
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px;
-        }
-        .crt-glow {
-            text-shadow: 0 0 5px theme('colors.neon-cyan'), 0 0 10px theme('colors.neon-cyan');
-        }
-        .typewriter {
-            overflow: hidden;
-            border-right: .15em solid theme('colors.neon-cyan');
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: theme('colors.neon-cyan'); } }
-    </style>
+<script src="Style/tailwind.config.js"></script>
+<link href="Style/style.css" rel="stylesheet"/>
+<script src="assets/audio.js"></script>
 </head>
 <body class="bg-surface text-text-primary font-dialog-text min-h-screen flex flex-col relative overflow-x-hidden">
 <!-- CRT Scanline Overlay -->
@@ -154,17 +21,17 @@
             FAREWELL QUEST
         </div>
 <div class="hidden md:flex gap-8">
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">QUEST</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">PARTY</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">LOG</a>
-<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
+<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
 </div>
 <div class="flex gap-4">
 <button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
 <span class="material-symbols-outlined">settings</span>
 </button>
-<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
-<span class="material-symbols-outlined">volume_up</span>
+<button onclick="toggleMute(event)" class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<span id="volume-icon" class="material-symbols-outlined">volume_up</span>
 </button>
 </div>
 </nav>
@@ -176,22 +43,52 @@
 <p class="font-dialog-text text-dialog-text text-text-secondary typewriter inline-block">RECORD YOUR FINAL SAVE STATE...</p>
 </div>
 <!-- Photobooth Section -->
-<section class="w-full max-w-3xl flex flex-col items-center gap-6">
-<div class="pixel-border bg-surface-container-high p-4 w-full aspect-video relative flex flex-col items-center justify-center overflow-hidden">
-<!-- Arcade Monitor Bezel -->
-<div class="absolute inset-2 border-8 border-bg-elevated rounded-lg pointer-events-none z-10 flex items-start justify-center pt-2">
-<span class="font-button-label text-[10px] text-error crt-glow">REC ●</span>
-</div>
+<section class="w-full max-w-5xl flex flex-col items-center gap-4 relative mt-4">
+<div class="wall-pixel-border w-full bg-black relative overflow-hidden z-10" style="aspect-ratio: 16/9;">
+<!-- REC indicator inside top-right of frame -->
+<span id="rec-indicator" class="absolute top-2 right-3 font-button-label text-[10px] text-error z-30" style="display: none;">REC ●</span>
 <!-- Camera Feed Placeholder -->
-<div class="w-full h-full bg-black relative flex items-center justify-center">
-<img class="absolute inset-0 w-full h-full object-cover opacity-70 filter contrast-125 saturate-150" data-alt="A pixel art rendering of an empty arcade room, dimly lit with a glowing neon sign in the background. The visual style mimics a 16-bit retro game aesthetic with scanlines and a slight CRT bloom. Colors consist of deep purples, dark blues, and vibrant cyan highlights. The mood is nostalgic and expectant, typical of a 'press start' screen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtQfjTMAKB4MhzTEGWpTX1LmYbtYHN5C-9eNjAf7MYnqVjnicC190VCQySAqCdxCKWZ01EEb1UHs4U9SazHOinHXtVL9jVdTrTZzRP0wTu33lRjZfNwgZEgtInLaHUulzWdiVNO0xa-KhLE5k8Lfg6mMfYBg-2_R9FrKme4TQMtQxroIGWVOMquxFnoli8nSMgPCmfPSDbSJgv65_dgJb2BURYKI7bk1gdGBSCIMzeGlT6OeVZs_HN-c_0XaeVchJU7ek_5anq_Io2"/>
-<span class="material-symbols-outlined text-6xl text-text-secondary opacity-50 z-10">videocam</span>
+<img id="placeholder-img" class="absolute inset-0 w-full h-full object-cover opacity-70 filter contrast-125 saturate-150" src="assets/images/img_1f2e0b4a.png"/>
+<span id="placeholder-icon" class="material-symbols-outlined text-6xl text-text-secondary opacity-50 absolute inset-0 flex items-center justify-center" style="display:flex !important;">videocam</span>
+<video id="camera-feed" class="absolute inset-0 w-full h-full object-cover hidden" autoplay playsinline muted></video>
+<canvas id="pixel-canvas" class="hidden z-10" style="position:absolute;top:0;left:0;width:100%;height:100%;image-rendering: pixelated;"></canvas>
+<video id="recorded-video" class="absolute inset-0 w-full h-full object-cover hidden z-20" controls style="image-rendering: pixelated;"></video>
+<img id="captured-photo" class="absolute inset-0 w-full h-full object-cover hidden z-20" style="image-rendering: pixelated;" />
 </div>
-</div>
-<button class="pixel-button bg-error text-on-error font-button-label text-button-label px-8 py-4 uppercase tracking-widest flex items-center gap-2">
-<span class="material-symbols-outlined text-2xl">camera</span>
-                CAPTURE MEMORY
+<div class="flex flex-col gap-4 items-center w-full relative z-20 mt-2">
+<button id="start-cam-btn" onclick="startCamera()" class="pixel-button bg-primary-container text-on-primary-container font-button-label text-button-label px-8 py-4 uppercase tracking-widest flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_15px_rgba(0,245,255,0.3)]">
+<span class="material-symbols-outlined text-2xl animate-pulse">power_settings_new</span>
+                POWER ON
             </button>
+
+<div id="capture-ui" class="flex-col gap-6 items-center w-full hidden">
+    <!-- Mode selector -->
+    <div class="flex items-center gap-4 bg-surface-container-low border-2 border-border-pixel p-2 rounded-sm shadow-inner">
+        <span class="font-button-label text-text-secondary text-xs">MODE:</span>
+        <div class="flex border-2 border-surface-variant bg-bg-elevated relative overflow-hidden">
+            <button id="mode-photo-btn" onclick="setMode('photo')" class="relative z-10 font-button-label text-surface bg-neon-cyan px-6 py-2 transition-all duration-200 shadow-[0_0_10px_rgba(0,245,255,0.5)]">PHOTO</button>
+            <button id="mode-video-btn" onclick="setMode('video')" class="relative z-10 font-button-label text-text-secondary hover:text-on-surface px-6 py-2 transition-all duration-200">VIDEO</button>
+        </div>
+    </div>
+
+    <!-- Action Button -->
+    <button id="action-btn" onclick="doAction()" class="pixel-button bg-neon-cyan text-surface font-button-label text-button-label px-10 py-5 uppercase tracking-widest flex items-center gap-3 shadow-[0_0_15px_rgba(0,245,255,0.4)] hover:shadow-[0_0_25px_rgba(0,245,255,0.6)] hover:scale-105 active:scale-95 transition-all">
+        <span id="action-icon" class="material-symbols-outlined text-3xl">camera</span>
+        <span id="action-text">CAPTURE</span>
+    </button>
+</div>
+
+<div id="review-actions" class="flex flex-wrap justify-center gap-4 hidden">
+    <button onclick="retakePhoto()" class="pixel-button bg-surface-variant text-on-surface hover:bg-error hover:text-surface font-button-label text-button-label px-6 py-4 uppercase tracking-widest flex items-center gap-2 transition-colors">
+        <span class="material-symbols-outlined text-2xl">delete</span>
+        DISCARD
+    </button>
+    <button onclick="saveMedia()" class="pixel-button bg-neon-yellow text-surface font-button-label text-button-label px-6 py-4 uppercase tracking-widest flex items-center gap-2 transition-colors shadow-[0_0_15px_rgba(255,225,53,0.4)] hover:shadow-[0_0_25px_rgba(255,225,53,0.6)] hover:scale-105 active:scale-95">
+        <span class="material-symbols-outlined text-2xl">save</span>
+        SAVE STATE
+    </button>
+</div>
+</div>
 </section>
 <!-- Wall of Fame Grid -->
 <section class="w-full max-w-6xl mt-8">
@@ -204,9 +101,9 @@
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 <!-- Card 1 -->
-<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
+<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
 <div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A 16-bit pixel art portrait of a character with spiky blue hair and a cyberpunk visor, grinning confidently. The character is set against a dark, neon-lit digital grid background. The color palette uses deep navy, vivid cyan, and magenta. The aesthetic is heavily influenced by retro 90s RPG character select screens with a nostalgic, glowing finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXdAecWQQXx_MD302crAoys3vNy1qIoFP7ER_K4LqK4JPvd2rsBg2lr_ih8TKxp8CwAZhNNXwBWeC5mq6qwOgrTBA4ki5ARK2Mg2rBrXJZwQK7pDTr6IM6LLJwuYJWPZvxQG8oEzcovz0iAtqBRXnQrCnDEGN-MHR6ug52BT-6inpQP26YvlILcdxNUPnWO7sbcIG1fNtjVwmgJzu-nkFV0xDxmXU8c8GkEQgzpjizvKgLb1TK7FFT2mAHkeRB0hMffG7_tTrrHsVY"/>
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A 16-bit pixel art portrait of a character with spiky blue hair and a cyberpunk visor, grinning confidently. The character is set against a dark, neon-lit digital grid background. The color palette uses deep navy, vivid cyan, and magenta. The aesthetic is heavily influenced by retro 90s RPG character select screens with a nostalgic, glowing finish." src="assets/images/img_a781cd42.png"/>
 </div>
 <div>
 <h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Player One</h3>
@@ -214,9 +111,9 @@
 </div>
 </div>
 <!-- Card 2 -->
-<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
+<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
 <div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A retro 16-bit style pixel portrait of a female character with pink hair and a glowing neon green headset. She looks determined. Background is a dark arcade cabinet texture. Colors are muted darks with bright neon pink and green accents, mimicking a classic fighting game character roster image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7gHnl9TgRSo2iNsyNd6jXrTVAjCMNwzzVfAjFm6ZTiIhY5ZhmwRwehxC9Yz2y4AwULbpKfYXnF_aBadc9PKvQEAdJ2gNzPGUBN4YcXQ9T7aSAlB-6ay0PpR0pC3Qj5HTVe2V52C3UnkZaVkqg5kppxJaaqBEIq7594WFAq7Zub-wwbbIic0jQvU-GU6fOUrDmD6S1eMI3hd1-nnoV3XBCGv2agCwbvMJ85IIythXLqIEbKgMAj6qOodscemkAPvcVksPt9RF4PaFn"/>
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A retro 16-bit style pixel portrait of a female character with pink hair and a glowing neon green headset. She looks determined. Background is a dark arcade cabinet texture. Colors are muted darks with bright neon pink and green accents, mimicking a classic fighting game character roster image." src="assets/images/img_8f10eeba.png"/>
 </div>
 <div>
 <h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Code Ninja</h3>
@@ -224,10 +121,10 @@
 </div>
 </div>
 <!-- Card 3 -->
-<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group relative">
+<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group relative">
 <div class="absolute -top-3 -right-3 bg-neon-yellow text-surface font-button-label text-[10px] px-2 py-1 rotate-12 z-10 border-2 border-surface">NEW</div>
 <div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A pixel art avatar of a wizard wearing a starry cloak, holding a glowing staff. The style is late 80s RPG. The background is a dark, starlit night sky. The color scheme is predominantly deep midnight blue, silver, and bright magical purple. The overall mood is mysterious yet playful, like an NPC from a vintage adventure game." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR7gFTcTfT40Nv1jIfOJioNZYTj1BAaxGfLlVr-6Y1XaBDZ5-D-gPitF3aSXvyxWuvVWvu5-Er_ASsK4VrzhrDxTdGeRG7xdVOFHKwhSqSq7DYLGw6yj3eGcc_w3ZOY6WbF7HH8QmysBHb_C6c0tGBTWKZ01oeZijPfjt5PKC1qdGn5q6qi1p9C9Lp_P_MopBPHVcC3LMHHaxAy-wxEw8Ial7uaXSRAJUkfOAIrx95W6ZoQ898rOwPzpS-lv2A8_SzPBAComtMT1dx"/>
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A pixel art avatar of a wizard wearing a starry cloak, holding a glowing staff. The style is late 80s RPG. The background is a dark, starlit night sky. The color scheme is predominantly deep midnight blue, silver, and bright magical purple. The overall mood is mysterious yet playful, like an NPC from a vintage adventure game." src="assets/images/img_23074950.png"/>
 </div>
 <div>
 <h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Grand Magus</h3>
@@ -256,4 +153,506 @@
 <a class="text-text-secondary hover:text-neon-yellow transition-colors cursor-pointer" href="#">QUIT GAME</a>
 </div>
 </footer>
+<script>
+let videoStream = null;
+let mediaRecorder;
+let recordedChunks = [];
+let isRecording = false;
+let currentMode = 'photo';
+let animationFrameId = null;
+
+async function startCamera() {
+    const video = document.getElementById('camera-feed');
+    const pixelCanvas = document.getElementById('pixel-canvas');
+    const placeholderImg = document.getElementById('placeholder-img');
+    const placeholderIcon = document.getElementById('placeholder-icon');
+    const startBtn = document.getElementById('start-cam-btn');
+    const captureUI = document.getElementById('capture-ui');
+
+    try {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    } catch (err) {
+        console.warn("Audio not available or denied, trying video only");
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        } catch (err2) {
+            console.error("Error accessing camera:", err2);
+            alert("Camera access denied or unavailable.");
+            return;
+        }
+    }
+    
+    video.srcObject = videoStream;
+    video.play().catch(err => console.error("Play error:", err));
+    
+    video.onloadedmetadata = () => {
+        // Setup pixel canvas
+        const ctx = pixelCanvas.getContext('2d', { willReadFrequently: true });
+        // Fixed 16:9 canvas — matches the container aspect ratio exactly, no stretch
+        const W = 854;
+        const H = 480;
+        pixelCanvas.width = W;
+        pixelCanvas.height = H;
+        const W_const = W;
+        const H_const = H;
+
+        // Preload the sprite sheet
+        const spriteImg = new Image();
+        spriteImg.src = 'assets/party_sprites.png';
+
+        // --- Pixel drawing helpers ---
+        function px(size) { return Math.max(1, Math.round(size * W / 256)); }
+
+        function drawPixelRect(x, y, w, h, color, alpha = 1) {
+            ctx.globalAlpha = alpha;
+            ctx.fillStyle = color;
+            ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+            ctx.globalAlpha = 1;
+        }
+
+        function drawPixelText(text, x, y, size, color, shadowColor) {
+            ctx.font = `bold ${px(size)}px monospace`;
+            ctx.textBaseline = 'top';
+            if (shadowColor) {
+                ctx.fillStyle = shadowColor;
+                ctx.fillText(text, x + px(1), y + px(1));
+            }
+            ctx.fillStyle = color;
+            ctx.fillText(text, x, y);
+        }
+
+        // Draw a pixel-art heart shape
+        function drawHeart(cx, cy, r, color) {
+            const p = Math.max(1, Math.round(r));
+            ctx.fillStyle = color;
+            // simple blocky heart pattern
+            const grid = [
+                [0,1,1,0,1,1,0],
+                [1,1,1,1,1,1,1],
+                [1,1,1,1,1,1,1],
+                [0,1,1,1,1,1,0],
+                [0,0,1,1,1,0,0],
+                [0,0,0,1,0,0,0],
+            ];
+            grid.forEach((row, ry) => {
+                row.forEach((cell, rx) => {
+                    if (cell) ctx.fillRect(
+                        Math.round(cx - 3.5*p + rx*p),
+                        Math.round(cy - 2.5*p + ry*p),
+                        p, p
+                    );
+                });
+            });
+        }
+
+        // Draw a blocky pixel star
+        function drawStar(cx, cy, r, color) {
+            const p = Math.max(1, Math.round(r));
+            ctx.fillStyle = color;
+            const grid = [
+                [0,0,1,0,0],
+                [1,1,1,1,1],
+                [0,1,1,1,0],
+                [1,0,1,0,1],
+                [0,0,1,0,0],
+            ];
+            grid.forEach((row, ry) => {
+                row.forEach((cell, rx) => {
+                    if (cell) ctx.fillRect(
+                        Math.round(cx - 2.5*p + rx*p),
+                        Math.round(cy - 2.5*p + ry*p),
+                        p, p
+                    );
+                });
+            });
+        }
+
+        // Draw a mini pixel-art bar (HP/EXP style)
+        function drawBar(x, y, w, h, fill, trackColor, fillColor) {
+            drawPixelRect(x, y, w, h, trackColor);
+            drawPixelRect(x, y, w * fill, h, fillColor);
+        }
+
+        // Draw pixel-art RPG characters using canvas (5 chars: 3 girl, 2 boy)
+        // Each is a tiny 8x16 stick figure with unique colors
+        const chars = [
+            // [hair, skin, clothes, is_girl]
+            { hair: '#ff6ec7', skin: '#ffd6a5', top: '#bf5fff', bot: '#7c00ff', girl: true },   // girl - mage purple
+            { hair: '#00f5ff', skin: '#ffd6a5', top: '#00b4d8', bot: '#023e8a', girl: false },  // boy - warrior cyan
+            { hair: '#ff9f1c', skin: '#ffd6a5', top: '#06d6a0', bot: '#1b4332', girl: true },   // girl - archer green
+            { hair: '#e63946', skin: '#ffd6a5', top: '#e63946', bot: '#3d0000', girl: false },  // boy - knight red
+            { hair: '#f8f32b', skin: '#ffd6a5', top: '#ffd166', bot: '#6a4c93', girl: true },   // girl - healer yellow
+        ];
+
+        function drawCharacter(char, cx, cy, scale) {
+            const s = Math.max(1, Math.round(scale));
+            // Head
+            ctx.fillStyle = char.skin;
+            ctx.fillRect(cx - s, cy - 4*s, 2*s, 2*s);
+            // Hair
+            ctx.fillStyle = char.hair;
+            ctx.fillRect(cx - s, cy - 5*s, 2*s, s);
+            if (char.girl) ctx.fillRect(cx - s, cy - 3*s, s, s); // hair strand
+            // Body top
+            ctx.fillStyle = char.top;
+            ctx.fillRect(cx - s, cy - 2*s, 2*s, 2*s);
+            // Legs
+            ctx.fillStyle = char.bot;
+            ctx.fillRect(cx - s, cy, s, 2*s);
+            ctx.fillRect(cx, cy, s, 2*s);
+            // Shoes
+            ctx.fillStyle = '#111';
+            ctx.fillRect(cx - s, cy + 2*s, s, s);
+            ctx.fillRect(cx, cy + 2*s, s, s);
+        }
+
+        let frameCount = 0;
+
+        function drawRetroFrame() {
+            frameCount++;
+            ctx.filter = 'none';
+            ctx.globalAlpha = 1;
+            ctx.globalCompositeOperation = 'source-over';
+
+            if (!video.paused && !video.ended) {
+                // 1. Draw camera feed with object-cover logic (center-crop, no stretch)
+                ctx.filter = 'contrast(1.05) saturate(1.2)';
+                const vw = video.videoWidth || 640;
+                const vh = video.videoHeight || 480;
+                const vRatio = vw / vh;
+                const cRatio = W / H;
+                let sx = 0, sy = 0, sw = vw, sh = vh;
+                if (vRatio > cRatio) {
+                    // Video wider than canvas: crop sides
+                    sw = Math.round(vh * cRatio);
+                    sx = Math.round((vw - sw) / 2);
+                } else {
+                    // Video taller than canvas: crop top/bottom
+                    sh = Math.round(vw / cRatio);
+                    sy = Math.round((vh - sh) / 2);
+                }
+                ctx.drawImage(video, sx, sy, sw, sh, 0, 0, W, H);
+                ctx.filter = 'none';
+
+                // ========== FRAME BORDER ==========
+                const B = px(6); // border thickness
+
+                // Outer neon border
+                ctx.strokeStyle = '#00f5ff';
+                ctx.lineWidth = px(3);
+                ctx.strokeRect(B/2, B/2, W - B, H - B);
+
+                // Inner dark inset border
+                ctx.strokeStyle = '#0d0d2b';
+                ctx.lineWidth = px(2);
+                ctx.strokeRect(B + px(2), B + px(2), W - 2*B - px(4), H - 2*B - px(4));
+
+                // ========== CORNER BRACKETS ==========
+                const cl = px(10); // corner length
+                const ct = px(3);  // corner thickness
+                const corners = [
+                    [B, B],                  // top-left
+                    [W - B - cl, B],         // top-right
+                    [B, H - B - cl],         // bottom-left
+                    [W - B - cl, H - B - cl] // bottom-right
+                ];
+                ctx.fillStyle = '#ffe135';
+                corners.forEach(([cx2, cy2]) => {
+                    ctx.fillRect(cx2, cy2, cl, ct);       // horizontal
+                    ctx.fillRect(cx2, cy2, ct, cl);       // vertical
+                    ctx.fillRect(cx2 + cl - ct, cy2, ct, cl); // right vert
+                    ctx.fillRect(cx2, cy2 + cl - ct, cl, ct); // bottom horiz
+                });
+
+                // ========== TOP HUD BAND ==========
+                drawPixelRect(0, 0, W, px(14), 'rgba(13,13,27,0.72)');
+
+                // Quest label top-left
+                drawPixelText('✦ QUEST PHOTO ✦', px(8), px(3), 7, '#00f5ff', '#004466');
+
+                // Date top-right
+                const now = new Date();
+                const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+                const dtW = ctx.measureText(dateStr).width;
+                drawPixelText(dateStr, W - dtW - px(6), px(3), 6, '#ffe135', '#3a2d00');
+
+                // ========== BOTTOM HUD BAND ==========
+                drawPixelRect(0, H - px(26), W, px(26), 'rgba(13,13,27,0.80)');
+
+                // HP bar left side
+                drawPixelText('HP', px(8), H - px(23), 6, '#ff4d6d', '#3d0000');
+                drawBar(px(22), H - px(22), px(40), px(6), 0.78, '#3d0000', '#ff4d6d');
+
+                // EXP bar next to HP
+                drawPixelText('EXP', px(67), H - px(23), 6, '#06d6a0', '#003322');
+                drawBar(px(87), H - px(22), px(40), px(6), 0.55, '#003322', '#06d6a0');
+
+                // Animated score / sparkle right side
+                const scoreVal = 100 + Math.floor(frameCount / 30);
+                drawPixelText(`★ ${String(scoreVal * 99).padStart(6,'0')}`, W - px(68), H - px(23), 6, '#ffe135', '#3a2d00');
+
+                // ========== 5 MINI CHARACTERS bottom strip ==========
+                // Spread across bottom HUD, equally spaced
+                const charSpacing = W / 6;
+                const charY = H - px(13); // sit on bottom band
+                const charScale = px(2.5);
+                chars.forEach((ch, i) => {
+                    const cx2 = Math.round(charSpacing * (i + 1));
+                    // Subtle bob animation per character
+                    const bobOffset = Math.round(Math.sin((frameCount * 0.07) + i * 1.2) * px(1.5));
+                    drawCharacter(ch, cx2, charY + bobOffset, charScale);
+                });
+
+                // ========== CORNER DECORATIONS ==========
+                // Top-left: blinking hearts
+                const heartAlpha = 0.6 + 0.4 * Math.sin(frameCount * 0.1);
+                ctx.globalAlpha = heartAlpha;
+                drawHeart(px(22), px(28), px(2.5), '#ff6ec7');
+                drawHeart(px(32), px(24), px(2), '#ff4d6d');
+                ctx.globalAlpha = 1;
+
+                // Top-right: twinkling stars
+                const starAlpha = 0.5 + 0.5 * Math.sin(frameCount * 0.13 + 1);
+                ctx.globalAlpha = starAlpha;
+                drawStar(W - px(22), px(26), px(2), '#ffe135');
+                drawStar(W - px(34), px(22), px(1.5), '#ffffff');
+                ctx.globalAlpha = 1;
+
+                // Bottom-left corner: small speech bubble "SMILE!"
+                const bubbleX = px(10), bubbleY = H - px(48);
+                const bubbleW = px(34), bubbleH = px(11);
+                // Bubble bg
+                drawPixelRect(bubbleX, bubbleY, bubbleW, bubbleH, 'rgba(0,245,255,0.85)');
+                // Bubble tail (2px triangle pointing down-right)
+                drawPixelRect(bubbleX + px(4), bubbleY + bubbleH, px(4), px(3), 'rgba(0,245,255,0.85)');
+                drawPixelText('SMILE!', bubbleX + px(4), bubbleY + px(2), 6, '#0d0d2b');
+
+                // Bottom-right: pixel "CHEEZ!" retro stamp (slightly rotated using transform)
+                ctx.save();
+                ctx.translate(W - px(28), H - px(42));
+                ctx.rotate(-0.3);
+                drawPixelRect(-px(18), -px(7), px(36), px(14), 'rgba(255,225,53,0.88)');
+                ctx.restore();
+                ctx.save();
+                ctx.translate(W - px(28), H - px(42));
+                ctx.rotate(-0.3);
+                drawPixelText('CHEEZ!', -px(14), -px(6), 7, '#0d0d2b');
+                ctx.restore();
+
+                // ========== Pixel scanline subtle overlay ==========
+                ctx.globalAlpha = 0.07;
+                ctx.fillStyle = '#000';
+                for (let yl = 0; yl < H; yl += 2) {
+                    ctx.fillRect(0, yl, W, 1);
+                }
+                ctx.globalAlpha = 1;
+            }
+            animationFrameId = requestAnimationFrame(drawRetroFrame);
+        }
+        drawRetroFrame();
+    };
+
+    // Show canvas, hide placeholder
+    pixelCanvas.classList.remove('hidden');
+    video.classList.add('hidden'); // Ensure raw video is hidden
+    placeholderImg.classList.add('hidden');
+    placeholderIcon.classList.add('hidden');
+    
+    // Show capture actions, hide start button
+    startBtn.classList.add('hidden');
+    captureUI.classList.remove('hidden');
+    captureUI.classList.add('flex');
+}
+
+function setMode(mode) {
+    if (isRecording) return; // Prevent mode switch while recording
+    
+    currentMode = mode;
+    const photoBtn = document.getElementById('mode-photo-btn');
+    const videoBtn = document.getElementById('mode-video-btn');
+    const actionBtn = document.getElementById('action-btn');
+    const actionIcon = document.getElementById('action-icon');
+    const actionText = document.getElementById('action-text');
+    
+    if (mode === 'photo') {
+        photoBtn.className = "relative z-10 font-button-label text-surface bg-neon-cyan px-6 py-2 transition-all duration-200 shadow-[0_0_10px_rgba(0,245,255,0.5)]";
+        videoBtn.className = "relative z-10 font-button-label text-text-secondary hover:text-on-surface px-6 py-2 transition-all duration-200";
+        
+        actionBtn.className = "pixel-button bg-neon-cyan text-surface font-button-label text-button-label px-10 py-5 uppercase tracking-widest flex items-center gap-3 shadow-[0_0_15px_rgba(0,245,255,0.4)] hover:shadow-[0_0_25px_rgba(0,245,255,0.6)] hover:scale-105 active:scale-95 transition-all";
+        actionIcon.innerText = "camera";
+        actionText.innerText = "CAPTURE";
+    } else {
+        videoBtn.className = "relative z-10 font-button-label text-surface bg-error px-6 py-2 transition-all duration-200 shadow-[0_0_10px_rgba(255,85,85,0.5)]";
+        photoBtn.className = "relative z-10 font-button-label text-text-secondary hover:text-on-surface px-6 py-2 transition-all duration-200";
+        
+        actionBtn.className = "pixel-button bg-error text-surface font-button-label text-button-label px-10 py-5 uppercase tracking-widest flex items-center gap-3 shadow-[0_0_15px_rgba(255,85,85,0.4)] hover:shadow-[0_0_25px_rgba(255,85,85,0.6)] hover:scale-105 active:scale-95 transition-all";
+        actionIcon.innerText = "videocam";
+        actionText.innerText = "RECORD";
+    }
+}
+
+function doAction() {
+    if (currentMode === 'photo') {
+        takePhoto();
+    } else {
+        toggleRecording();
+    }
+}
+
+function takePhoto() {
+    const pixelCanvas = document.getElementById('pixel-canvas');
+    const photo = document.getElementById('captured-photo');
+    const captureUI = document.getElementById('capture-ui');
+    const reviewActions = document.getElementById('review-actions');
+    
+    // Scale up for saving to maintain the retro aesthetic without blurring
+    const outCanvas = document.createElement('canvas');
+    const scale = 4; // 4x scale for the saved image
+    outCanvas.width = pixelCanvas.width * scale;
+    outCanvas.height = pixelCanvas.height * scale;
+    const outCtx = outCanvas.getContext('2d');
+    outCtx.imageSmoothingEnabled = false; // Keeps it perfectly pixelated
+    outCtx.drawImage(pixelCanvas, 0, 0, outCanvas.width, outCanvas.height);
+    
+    const dataUrl = outCanvas.toDataURL('image/png');
+    photo.src = dataUrl;
+    photo.classList.remove('hidden');
+    
+    pixelCanvas.classList.add('hidden');
+    
+    captureUI.classList.add('hidden');
+    captureUI.classList.remove('flex');
+    reviewActions.classList.remove('hidden');
+    reviewActions.classList.add('flex');
+}
+
+function toggleRecording() {
+    if (!isRecording) {
+        startRecording();
+    } else {
+        stopRecording();
+    }
+}
+
+function startRecording() {
+    recordedChunks = [];
+    const pixelCanvas = document.getElementById('pixel-canvas');
+    const canvasStream = pixelCanvas.captureStream(30); // Capture at 30 FPS
+    
+    // Add audio track if available
+    if (videoStream) {
+        const audioTrack = videoStream.getAudioTracks()[0];
+        if (audioTrack) {
+            canvasStream.addTrack(audioTrack);
+        }
+    }
+
+    try {
+        mediaRecorder = new MediaRecorder(canvasStream, { mimeType: "video/webm" });
+    } catch (e) {
+        console.warn("webm not supported, trying default");
+        mediaRecorder = new MediaRecorder(canvasStream);
+    }
+
+    mediaRecorder.ondataavailable = function(e) {
+        if (e.data.size > 0) {
+            recordedChunks.push(e.data);
+        }
+    };
+    mediaRecorder.onstop = function() {
+        const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || "video/webm" });
+        const url = URL.createObjectURL(blob);
+        
+        const recordedVideo = document.getElementById('recorded-video');
+        recordedVideo.src = url;
+        recordedVideo.classList.remove('hidden');
+        
+        pixelCanvas.classList.add('hidden');
+        document.getElementById('capture-ui').classList.add('hidden');
+        document.getElementById('capture-ui').classList.remove('flex');
+        const reviewActions = document.getElementById('review-actions');
+        reviewActions.classList.remove('hidden');
+        reviewActions.classList.add('flex');
+    };
+    
+    mediaRecorder.start();
+    isRecording = true;
+    
+    // UI updates
+    const actionBtn = document.getElementById('action-btn');
+    const actionText = document.getElementById('action-text');
+    const actionIcon = document.getElementById('action-icon');
+    
+    actionText.innerText = 'STOP REC';
+    actionIcon.innerText = 'stop_circle';
+    actionBtn.classList.replace('bg-error', 'bg-surface-bright');
+    actionBtn.classList.add('animate-pulse');
+    
+    const recIndicator = document.getElementById('rec-indicator');
+    recIndicator.style.display = 'block';
+    recIndicator.classList.add('animate-pulse');
+}
+
+function stopRecording() {
+    mediaRecorder.stop();
+    isRecording = false;
+    
+    // UI resets
+    const actionBtn = document.getElementById('action-btn');
+    const actionText = document.getElementById('action-text');
+    const actionIcon = document.getElementById('action-icon');
+    
+    actionText.innerText = 'RECORD';
+    actionIcon.innerText = 'videocam';
+    actionBtn.classList.replace('bg-surface-bright', 'bg-error');
+    actionBtn.classList.remove('animate-pulse');
+    
+    const recIndicator = document.getElementById('rec-indicator');
+    recIndicator.classList.remove('animate-pulse');
+    recIndicator.style.display = 'none';
+}
+
+function retakePhoto() {
+    const pixelCanvas = document.getElementById('pixel-canvas');
+    const photo = document.getElementById('captured-photo');
+    const recordedVideo = document.getElementById('recorded-video');
+    const captureUI = document.getElementById('capture-ui');
+    const reviewActions = document.getElementById('review-actions');
+    
+    photo.classList.add('hidden');
+    recordedVideo.classList.add('hidden');
+    recordedVideo.src = '';
+    pixelCanvas.classList.remove('hidden');
+    
+    reviewActions.classList.add('hidden');
+    reviewActions.classList.remove('flex');
+    captureUI.classList.remove('hidden');
+    captureUI.classList.add('flex');
+}
+
+function saveMedia() {
+    const photo = document.getElementById('captured-photo');
+    const recordedVideo = document.getElementById('recorded-video');
+    
+    let url = '';
+    let filename = '';
+    
+    if (!photo.classList.contains('hidden')) {
+        url = photo.src;
+        filename = 'quest-save-state.png';
+    } else if (!recordedVideo.classList.contains('hidden')) {
+        url = recordedVideo.src;
+        filename = 'quest-save-state.webm';
+    }
+    
+    if (url) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+}
+</script>
 </body></html>

@@ -1,0 +1,211 @@
+/* Retro Utilities from index.html */
+.pixel-corners {
+    clip-path: polygon(
+        0 4px, 4px 4px, 4px 0, 
+        calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px, 
+        100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 
+        4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    );
+}
+
+.crt-scanlines {
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.1)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+.crt-flicker {
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+}
+
+.text-glow-neon {
+    text-shadow: 0 0 8px rgba(0, 245, 255, 0.8), 0 0 16px rgba(0, 245, 255, 0.4);
+}
+
+.text-glow-yellow {
+    text-shadow: 0 0 8px rgba(255, 225, 53, 0.8), 0 0 16px rgba(255, 225, 53, 0.4);
+}
+
+.blink-animation {
+    animation: blinker 1.5s step-start infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+.pixel-shadow {
+    box-shadow: 
+        4px 0 0 0 #5555AA,
+        0 4px 0 0 #5555AA,
+        -4px 0 0 0 #5555AA,
+        0 -4px 0 0 #5555AA,
+        4px 4px 0 0 #0d0d1a,
+        8px 8px 0 0 #0d0d1a;
+}
+
+.pixel-button-hover:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 
+        4px 0 0 0 #5555AA,
+        0 4px 0 0 #5555AA,
+        -4px 0 0 0 #5555AA,
+        0 -4px 0 0 #5555AA,
+        2px 2px 0 0 #0d0d1a,
+        4px 4px 0 0 #0d0d1a;
+}
+
+.star-field {
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 160px 120px, #ddd, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: stars 20s linear infinite;
+}
+
+@keyframes stars {
+    0% { background-position: 0 0; }
+    100% { background-position: 200px 200px; }
+}
+
+/* From chara_selection.html and others */
+body {
+    image-rendering: pixelated;
+}
+
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.pixel-border {
+    box-shadow: 
+        inset -4px -4px 0 0 rgba(0,0,0,0.5),
+        inset 4px 4px 0 0 rgba(255,255,255,0.2),
+        0 0 0 4px #5555AA;
+}
+
+.pixel-border-active {
+    box-shadow: 
+        inset -4px -4px 0 0 rgba(0,0,0,0.5),
+        inset 4px 4px 0 0 rgba(255,255,255,0.2),
+        0 0 0 4px #00F5FF,
+        0 0 15px 5px rgba(0, 245, 255, 0.4);
+}
+
+/* CRT Scanline Effect from Rei.html */
+.scanlines {
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.2) 50%,
+        rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    mix-blend-mode: overlay;
+}
+
+/* Typewriter Cursor from Rei.html */
+.typewriter-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 20px;
+    background-color: currentColor;
+    animation: blink 1s step-end infinite;
+    vertical-align: bottom;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Blinking Arrow Indicator from Rei.html */
+.blinking-arrow {
+    animation: bounce-blink 1.5s infinite;
+}
+
+@keyframes bounce-blink {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(4px); opacity: 0.5; }
+}
+
+/* Pixel Image Rendering from Rei.html */
+.pixel-art {
+    image-rendering: pixelated;
+}
+
+/* From wall_of_Fame.html */
+.wall-pixel-border {
+    box-shadow: 
+        0 -4px 0 0 #5555AA,
+        0 4px 0 0 #5555AA,
+        -4px 0 0 0 #5555AA,
+        4px 0 0 0 #5555AA,
+        inset 0 4px 0 0 #1F1F40,
+        inset 0 -4px 0 0 #1F1F40,
+        inset 4px 0 0 0 #1F1F40,
+        inset -4px 0 0 0 #1F1F40,
+        inset 0 8px 0 0 #5555AA,
+        inset 0 -8px 0 0 #5555AA,
+        inset 8px 0 0 0 #5555AA,
+        inset -8px 0 0 0 #5555AA;
+}
+
+.pixel-button {
+    box-shadow: 0 4px 0 0 #93000a, 0 8px 0 0 #0d0d1a;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pixel-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 0 #93000a, 0 4px 0 0 #0d0d1a;
+}
+
+.crt-glow {
+    text-shadow: 0 0 5px #00F5FF, 0 0 10px #00F5FF;
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid #00F5FF;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00F5FF; } }
