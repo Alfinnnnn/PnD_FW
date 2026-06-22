@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory Log - Farewell Quest</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#e7bdb8",
+                        "surface": "#12121f",
+                        "bg-surface": "#161629",
+                        "surface-bright": "#383847",
+                        "on-surface": "#e3e0f4",
+                        "on-secondary-fixed": "#2f004c",
+                        "secondary": "#e4b5ff",
+                        "inverse-surface": "#e3e0f4",
+                        "on-error": "#690005",
+                        "border-pixel": "#5555AA",
+                        "surface-container-high": "#292937",
+                        "on-primary-fixed-variant": "#095300",
+                        "neon-yellow": "#FFE135",
+                        "surface-variant": "#343342",
+                        "on-secondary-fixed-variant": "#6f00a9",
+                        "background": "#12121f",
+                        "tertiary": "#fff8f7",
+                        "secondary-container": "#7c04bc",
+                        "on-secondary-container": "#e1b0ff",
+                        "bg-elevated": "#1F1F40",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#1a1a28",
+                        "text-primary": "#E8E8F0",
+                        "on-primary-container": "#107100",
+                        "outline": "#85967c",
+                        "on-background": "#e3e0f4",
+                        "inverse-primary": "#106e00",
+                        "text-secondary": "#8888AA",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#2ae500",
+                        "on-primary-fixed": "#022100",
+                        "neon-cyan": "#00F5FF",
+                        "error": "#FF3B3B",
+                        "on-tertiary-container": "#7a5955",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#2c1513",
+                        "surface-tint": "#2ae500",
+                        "secondary-fixed": "#f4daff",
+                        "surface-container-lowest": "#0d0d1a",
+                        "on-secondary": "#4e0079",
+                        "primary-container": "#39ff14",
+                        "on-tertiary": "#442927",
+                        "on-tertiary-fixed-variant": "#5d3f3c",
+                        "primary": "#efffe3",
+                        "primary-fixed": "#79ff5b",
+                        "on-surface-variant": "#baccb0",
+                        "on-primary": "#053900",
+                        "surface-dim": "#12121f",
+                        "surface-container-highest": "#343342",
+                        "secondary-fixed-dim": "#e4b5ff",
+                        "outline-variant": "#3c4b35",
+                        "tertiary-container": "#ffd3ce",
+                        "surface-container": "#1e1e2c",
+                        "inverse-on-surface": "#2f2f3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pixel-unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "button-label": ["\"Press Start 2P\""],
+                        "section-title": ["\"Press Start 2P\""],
+                        "hero-title": ["\"Press Start 2P\""],
+                        "dialog-text": ["VT323"],
+                        "caption": ["VT323"],
+                        "stats-value": ["VT323"],
+                        "hero-title-mobile": ["\"Press Start 2P\""]
+                    },
+                    "fontSize": {
+                        "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
+                        "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
+                        "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* CRT Scanline Effect */
+        .scanlines {
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0,0,0,0.2) 50%,
+                rgba(0,0,0,0.2)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            mix-blend-mode: overlay;
+        }
+
+        /* Typewriter Cursor */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: currentColor;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Blinking Arrow Indicator */
+        .blinking-arrow {
+            animation: bounce-blink 1.5s infinite;
+        }
+
+        @keyframes bounce-blink {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(4px); opacity: 0.5; }
+        }
+
+        /* Pixel Image Rendering */
+        .pixel-art {
+            image-rendering: pixelated;
+        }
+    </style>
+</head>
+<body class="bg-surface text-text-primary min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- Global CRT Overlay -->
+<div class="scanlines"></div>
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-surface border-b-4 border-border-pixel shadow-[0_4px_0_0_#0d0d1a]">
+<div class="flex items-center gap-4">
+<span class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">FAREWELL QUEST</span>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">QUEST</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">PARTY</a>
+<!-- Active Tab -->
+<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">LOG</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">WALL</a>
+</div>
+<div class="flex items-center gap-4 text-primary dark:text-primary">
+<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[100px] px-margin-mobile md:px-margin-desktop pb-8 flex flex-col md:flex-row gap-8 max-w-7xl mx-auto w-full z-10 relative">
+<!-- Left Side: Character Stats Card -->
+<aside class="w-full md:w-1/3 flex-shrink-0">
+<div class="bg-bg-elevated border-4 border-border-pixel p-4 shadow-[4px_4px_0_0_#0d0d1a,8px_8px_0_0_rgba(85,85,170,0.5)] transition-transform hover:scale-[1.02] duration-200">
+<h2 class="font-section-title text-section-title text-neon-yellow mb-4 text-center">TEH ICA</h2>
+<!-- Portrait Frame -->
+<div class="border-4 border-border-pixel bg-surface-container-lowest p-2 mb-6 aspect-square flex items-center justify-center relative overflow-hidden">
+<img class="w-full h-full object-cover pixel-art" data-alt="A 16-bit retro pixel art portrait of a female character named Teh Ica. She has a determined expression, wearing a stylish cyberpunk RPG outfit. The background is a solid dark space-indigo color to emphasize the sprite. The art style mimics classic 90s JRPG character dialogue portraits with sharp edges, hard shading, and no anti-aliasing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxx1ALLSNcE7DAgd81yi3zaq1kdbwMShYrc4sFwrysVv4Vx6cDJbnSN-qGNTzGyhtYK9Vl59bYMV9nkttpzkr7gd551qiGFbXB9HEgI76ug2FJ-6f8UaCQ0fm85woLv1nqWeF_AxAQLiT1pAl3YxT0ZMuy_BPF5HrtMp_jLzbO4NE3CoeWTWrWvCJYzSQHAkl7bJCpUA23bQjJBvcsQoyMVXk60f767IjbOcdPQAu9HhYxnOZjDifC8gatk2sBs0F3iDzmZdnZRsA1"/>
+<!-- Overlay vignette for monitor feel -->
+<div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] pointer-events-none"></div>
+</div>
+<!-- Stats Panel -->
+<div class="space-y-4">
+<div class="flex flex-col border-b-2 border-surface-variant pb-2">
+<span class="font-button-label text-[10px] text-text-secondary uppercase mb-1">Class</span>
+<span class="font-stats-value text-stats-value text-neon-cyan drop-shadow-[0_0_4px_rgba(0,245,255,0.5)]">DESIGN WIZARD</span>
+</div>
+<div class="flex flex-col border-b-2 border-surface-variant pb-2">
+<span class="font-button-label text-[10px] text-text-secondary uppercase mb-1">Level</span>
+<span class="font-stats-value text-stats-value text-on-surface">99 (MAX)</span>
+</div>
+<div class="flex flex-col border-b-2 border-surface-variant pb-2">
+<span class="font-button-label text-[10px] text-text-secondary uppercase mb-1">Weakness</span>
+<span class="font-stats-value text-stats-value text-error drop-shadow-[0_0_4px_rgba(255,59,59,0.5)]">FOOD</span>
+</div>
+<div class="pt-2">
+<div class="flex justify-between items-center mb-1">
+<span class="font-button-label text-[10px] text-text-secondary uppercase">EXP</span>
+<span class="font-button-label text-[10px] text-neon-yellow">MAXED</span>
+</div>
+<div class="w-full h-4 bg-surface-container-lowest border-2 border-border-pixel">
+<div class="h-full bg-neon-yellow w-full"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Side: RPG Dialog Area -->
+<section class="w-full md:w-2/3 flex flex-col justify-end">
+<!-- Dialog Box -->
+<div class="bg-surface-container-lowest border-4 border-border-pixel p-6 md:p-8 min-h-[300px] shadow-[8px_8px_0_0_#0d0d1a,12px_12px_0_0_rgba(85,85,170,0.5)] relative flex flex-col">
+<!-- Speaker Name Tag -->
+<div class="absolute -top-6 left-4 bg-bg-elevated border-4 border-border-pixel px-4 py-2 text-neon-cyan font-button-label text-button-label shadow-[4px_4px_0_0_#0d0d1a]">
+                    TEH ICA
+                </div>
+<!-- Text Canvas -->
+<div class="flex-grow mt-2">
+<p class="font-dialog-text text-dialog-text text-on-surface leading-relaxed" data-full-text="*Sigh* I guess it's finally time... The portal is opening. Thank you all for joining my party. It's been an epic quest, filled with impossible deadlines and legendary bugs. But we conquered them all. I leave you my sacred design files... guard them well. And if anyone orders pizza, save me a slice in the astral plane. Farewell, brave heroes..." id="dialog-text">
+<!-- Text injected via JS -->
+</p>
+</div>
+<!-- Interactive Elements -->
+<div class="flex justify-between items-end mt-6">
+<span class="material-symbols-outlined text-neon-yellow blinking-arrow text-3xl" style="font-variation-settings: 'FILL' 1;">arrow_drop_down</span>
+<button class="bg-primary-container text-on-primary-container font-button-label text-button-label py-3 px-6 relative group overflow-hidden border-2 border-primary-fixed block w-fit shadow-[4px_4px_0_0_#107100,8px_8px_0_0_rgba(16,113,0,0.5)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#107100,4px_4px_0_0_rgba(16,113,0,0.5)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all flex items-center gap-2">
+                        NEXT
+                        <span class="material-symbols-outlined text-xl">keyboard_return</span>
+</button>
+</div>
+</div>
+<div class="mt-8 space-y-6">
+<h3 class="font-section-title text-button-label text-neon-cyan uppercase mb-4">UCAPAN DARI COMPANION LAIN</h3>
+<div class="grid grid-cols-1 gap-4">
+<!-- Surya -->
+<div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
+<div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
+<img alt="Surya" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVp2CUBCL22d-JrR0vLpJj535kxMaV-o0G5ZciTdDlH1ELRwKUVlJquocSBfloeR4Vhn6P1Ehb9So4QjET9u-0BYJaakj1_GSpcv13n3ArP6KtxiyyMJzICudMLg-W-PkoSPHdgffAyNTWis0vOmy6d338qppN5JZZd2ww6bkHDIk5dner-6wmLVL5LXX29cZosL44Pab_IIb-M5DgFebcmPa28aMcfC_p1bmWR1JfHbFrESWIuYRdL58OhtzRTB87cr0IJE4cHHM"/>
+</div>
+<div>
+<div class="font-button-label text-[10px] text-neon-yellow mb-1">SURYA</div>
+<p class="font-dialog-text text-caption text-on-surface">"Semangat di quest barumu, Teh! Jangan lupa mampir ke basecamp."</p>
+</div>
+</div>
+<!-- Arif -->
+<div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
+<div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
+<img alt="Arif" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtHo7s5TR7XGNbIc3o7UqHTrMO1nrZsH3Ru4KcGbW2cMkj69rCk0ZILwyg5HuieuQC1LdcerZhEur4mttp0w0KNbCAPR7sQgPrsQUpUjmWTDoOV_y-_q4cm3VFGNp1R3Dnq0TA9HPUSizNCgmSdnLUk7NGYDxrwNDE-4stvZFmjBhDtvUyIP7xTt_V_1YHT7d0TxZcKEVyq-YyWC9N1VyDXZ9mdhrKmCOSEvmgG3PcNgPTBzKyCglwXx6tWY9luBOlvAWonlNFYJG6"/>
+</div>
+<div>
+<div class="font-button-label text-[10px] text-neon-yellow mb-1">ARIF</div>
+<p class="font-dialog-text text-caption text-on-surface">"Gonna miss your design magic. GG WP!"</p>
+</div>
+</div>
+<!-- Budi -->
+<div class="bg-surface-container-lowest border-2 border-border-pixel p-4 flex gap-4 items-start shadow-[4px_4px_0_0_#0d0d1a]">
+<div class="w-12 h-12 flex-shrink-0 border-2 border-neon-cyan bg-bg-elevated overflow-hidden">
+<img alt="Budi" class="w-full h-full pixel-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTrlMoZ7keXktBFHSVimu3s0WSchUQ6_hjIq5yKYyEZfWU6aUMNnaAbmCOKezSl861rTa1fRyWXAeWJ2dshClXQf18hhcphP-l69FXXNMmxp2pQ1xoTkkNLO2B9cUmVnBFNtA3rxjNVx_kKnuzC4gJRUmPfA1qRwn-QIw7BH8aG5duf02oMCbtKakBaamqmeqsPEZbdpdYcwQqdK696Iw2ES-6Adog2Nm9WUe9IOiKVgCg3T9VFd1ZPOWUZ1I5LpJQQj1NXsNL5e84"/>
+</div>
+<div>
+<div class="font-button-label text-[10px] text-neon-yellow mb-1">BUDI</div>
+<p class="font-dialog-text text-caption text-on-surface">"Hati-hati di jalan, portalnya sudah stabil sekarang."</p>
+</div>
+</div>
+</div>
+</div></section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest dark:bg-surface-container-lowest border-t-4 border-border-pixel z-10 relative">
+<div class="text-on-surface font-button-label text-button-label">
+            FAREWELL QUEST
+        </div>
+<div class="font-caption text-caption text-text-secondary dark:text-text-secondary text-center">
+            © 199X RETRO QUEST SYSTEMS - INSERT COIN TO CONTINUE
+        </div>
+<div class="flex gap-4">
+<a class="text-text-secondary font-caption text-caption hover:text-neon-yellow transition-colors cursor-pointer" href="#">CREDITS</a>
+<a class="text-text-secondary font-caption text-caption hover:text-neon-yellow transition-colors cursor-pointer" href="#">SUPPORT</a>
+<a class="text-text-secondary font-caption text-caption hover:text-neon-yellow transition-colors cursor-pointer" href="#">QUIT GAME</a>
+</div>
+</footer>
+<!-- Typewriter Logic -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dialogElement = document.getElementById('dialog-text');
+            const fullText = dialogElement.getAttribute('data-full-text');
+            dialogElement.textContent = ''; // Clear initial
+            
+            let index = 0;
+            const speed = 40; // ms per char
+
+            // Create cursor span
+            const cursor = document.createElement('span');
+            cursor.className = 'typewriter-cursor text-neon-cyan';
+            
+            // Create text node wrapper
+            const textNode = document.createTextNode('');
+            dialogElement.appendChild(textNode);
+            dialogElement.appendChild(cursor);
+
+            function typeWriter() {
+                if (index < fullText.length) {
+                    textNode.nodeValue += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    // Remove cursor when done to show blinking arrow instead
+                    cursor.style.display = 'none';
+                }
+            }
+
+            // Start typing
+            setTimeout(typeWriter, 500); // Small delay before typing starts
+        });
+    </script>
+</body></html>

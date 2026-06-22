@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wall of Fame - Farewell Quest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#e7bdb8",
+                        "surface": "#12121f",
+                        "bg-surface": "#161629",
+                        "surface-bright": "#383847",
+                        "on-surface": "#e3e0f4",
+                        "on-secondary-fixed": "#2f004c",
+                        "secondary": "#e4b5ff",
+                        "inverse-surface": "#e3e0f4",
+                        "on-error": "#690005",
+                        "border-pixel": "#5555AA",
+                        "surface-container-high": "#292937",
+                        "on-primary-fixed-variant": "#095300",
+                        "neon-yellow": "#FFE135",
+                        "surface-variant": "#343342",
+                        "on-secondary-fixed-variant": "#6f00a9",
+                        "background": "#12121f",
+                        "tertiary": "#fff8f7",
+                        "secondary-container": "#7c04bc",
+                        "on-secondary-container": "#e1b0ff",
+                        "bg-elevated": "#1F1F40",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#1a1a28",
+                        "text-primary": "#E8E8F0",
+                        "on-primary-container": "#107100",
+                        "outline": "#85967c",
+                        "on-background": "#e3e0f4",
+                        "inverse-primary": "#106e00",
+                        "text-secondary": "#8888AA",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#2ae500",
+                        "on-primary-fixed": "#022100",
+                        "neon-cyan": "#00F5FF",
+                        "error": "#FF3B3B",
+                        "on-tertiary-container": "#7a5955",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-tertiary-fixed": "#2c1513",
+                        "surface-tint": "#2ae500",
+                        "secondary-fixed": "#f4daff",
+                        "surface-container-lowest": "#0d0d1a",
+                        "on-secondary": "#4e0079",
+                        "primary-container": "#39ff14",
+                        "on-tertiary": "#442927",
+                        "on-tertiary-fixed-variant": "#5d3f3c",
+                        "primary": "#efffe3",
+                        "primary-fixed": "#79ff5b",
+                        "on-surface-variant": "#baccb0",
+                        "on-primary": "#053900",
+                        "surface-dim": "#12121f",
+                        "surface-container-highest": "#343342",
+                        "secondary-fixed-dim": "#e4b5ff",
+                        "outline-variant": "#3c4b35",
+                        "tertiary-container": "#ffd3ce",
+                        "surface-container": "#1e1e2c",
+                        "inverse-on-surface": "#2f2f3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "pixel-unit": "4px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "button-label": ["\"Press Start 2P\""],
+                        "section-title": ["\"Press Start 2P\""],
+                        "hero-title": ["\"Press Start 2P\""],
+                        "dialog-text": ["VT323"],
+                        "caption": ["VT323"],
+                        "stats-value": ["VT323"],
+                        "hero-title-mobile": ["\"Press Start 2P\""]
+                    },
+                    "fontSize": {
+                        "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
+                        "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
+                        "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+                        "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pixel-border {
+            box-shadow: 
+                0 -4px 0 0 theme('colors.border-pixel'),
+                0 4px 0 0 theme('colors.border-pixel'),
+                -4px 0 0 0 theme('colors.border-pixel'),
+                4px 0 0 0 theme('colors.border-pixel'),
+                inset 0 4px 0 0 theme('colors.bg-elevated'),
+                inset 0 -4px 0 0 theme('colors.bg-elevated'),
+                inset 4px 0 0 0 theme('colors.bg-elevated'),
+                inset -4px 0 0 0 theme('colors.bg-elevated'),
+                inset 0 8px 0 0 theme('colors.border-pixel'),
+                inset 0 -8px 0 0 theme('colors.border-pixel'),
+                inset 8px 0 0 0 theme('colors.border-pixel'),
+                inset -8px 0 0 0 theme('colors.border-pixel');
+        }
+        .pixel-button {
+            box-shadow: 0 4px 0 0 #93000a, 0 8px 0 0 #0d0d1a;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .pixel-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0px 0 0 #93000a, 0 4px 0 0 #0d0d1a;
+        }
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+        }
+        .crt-glow {
+            text-shadow: 0 0 5px theme('colors.neon-cyan'), 0 0 10px theme('colors.neon-cyan');
+        }
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid theme('colors.neon-cyan');
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: theme('colors.neon-cyan'); } }
+    </style>
+</head>
+<body class="bg-surface text-text-primary font-dialog-text min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- CRT Scanline Overlay -->
+<div class="fixed inset-0 pointer-events-none z-50 scanlines opacity-50"></div>
+<!-- Top Navigation -->
+<nav class="fixed top-0 left-0 w-full z-40 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-surface border-b-4 border-border-pixel shadow-[0_4px_0_0_#0d0d1a]">
+<div class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">
+            FAREWELL QUEST
+        </div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">QUEST</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">PARTY</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">LOG</a>
+<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="#">WALL</a>
+</div>
+<div class="flex gap-4">
+<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">volume_up</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-24 px-margin-mobile md:px-margin-desktop pb-12 flex flex-col items-center gap-12 z-10">
+<!-- Header -->
+<div class="text-center w-full max-w-4xl pt-8">
+<h1 class="font-hero-title text-hero-title-mobile md:text-hero-title text-neon-yellow drop-shadow-[0_0_10px_rgba(255,225,53,0.8)] mb-4 uppercase tracking-widest">HALL OF HEROES</h1>
+<p class="font-dialog-text text-dialog-text text-text-secondary typewriter inline-block">RECORD YOUR FINAL SAVE STATE...</p>
+</div>
+<!-- Photobooth Section -->
+<section class="w-full max-w-3xl flex flex-col items-center gap-6">
+<div class="pixel-border bg-surface-container-high p-4 w-full aspect-video relative flex flex-col items-center justify-center overflow-hidden">
+<!-- Arcade Monitor Bezel -->
+<div class="absolute inset-2 border-8 border-bg-elevated rounded-lg pointer-events-none z-10 flex items-start justify-center pt-2">
+<span class="font-button-label text-[10px] text-error crt-glow">REC ●</span>
+</div>
+<!-- Camera Feed Placeholder -->
+<div class="w-full h-full bg-black relative flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-70 filter contrast-125 saturate-150" data-alt="A pixel art rendering of an empty arcade room, dimly lit with a glowing neon sign in the background. The visual style mimics a 16-bit retro game aesthetic with scanlines and a slight CRT bloom. Colors consist of deep purples, dark blues, and vibrant cyan highlights. The mood is nostalgic and expectant, typical of a 'press start' screen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtQfjTMAKB4MhzTEGWpTX1LmYbtYHN5C-9eNjAf7MYnqVjnicC190VCQySAqCdxCKWZ01EEb1UHs4U9SazHOinHXtVL9jVdTrTZzRP0wTu33lRjZfNwgZEgtInLaHUulzWdiVNO0xa-KhLE5k8Lfg6mMfYBg-2_R9FrKme4TQMtQxroIGWVOMquxFnoli8nSMgPCmfPSDbSJgv65_dgJb2BURYKI7bk1gdGBSCIMzeGlT6OeVZs_HN-c_0XaeVchJU7ek_5anq_Io2"/>
+<span class="material-symbols-outlined text-6xl text-text-secondary opacity-50 z-10">videocam</span>
+</div>
+</div>
+<button class="pixel-button bg-error text-on-error font-button-label text-button-label px-8 py-4 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-2xl">camera</span>
+                CAPTURE MEMORY
+            </button>
+</section>
+<!-- Wall of Fame Grid -->
+<section class="w-full max-w-6xl mt-8">
+<div class="flex justify-between items-end mb-6 border-b-4 border-border-pixel pb-2">
+<h2 class="font-section-title text-section-title text-primary uppercase">ARCHIVES</h2>
+<div class="font-stats-value text-stats-value text-neon-yellow flex items-center gap-2">
+<span class="material-symbols-outlined">star</span>
+                    SCORE: 999,999
+                </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
+<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A 16-bit pixel art portrait of a character with spiky blue hair and a cyberpunk visor, grinning confidently. The character is set against a dark, neon-lit digital grid background. The color palette uses deep navy, vivid cyan, and magenta. The aesthetic is heavily influenced by retro 90s RPG character select screens with a nostalgic, glowing finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXdAecWQQXx_MD302crAoys3vNy1qIoFP7ER_K4LqK4JPvd2rsBg2lr_ih8TKxp8CwAZhNNXwBWeC5mq6qwOgrTBA4ki5ARK2Mg2rBrXJZwQK7pDTr6IM6LLJwuYJWPZvxQG8oEzcovz0iAtqBRXnQrCnDEGN-MHR6ug52BT-6inpQP26YvlILcdxNUPnWO7sbcIG1fNtjVwmgJzu-nkFV0xDxmXU8c8GkEQgzpjizvKgLb1TK7FFT2mAHkeRB0hMffG7_tTrrHsVY"/>
+</div>
+<div>
+<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Player One</h3>
+<p class="font-caption text-caption text-text-secondary">"GG WP Team! Thanks for the epic loot."</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
+<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A retro 16-bit style pixel portrait of a female character with pink hair and a glowing neon green headset. She looks determined. Background is a dark arcade cabinet texture. Colors are muted darks with bright neon pink and green accents, mimicking a classic fighting game character roster image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7gHnl9TgRSo2iNsyNd6jXrTVAjCMNwzzVfAjFm6ZTiIhY5ZhmwRwehxC9Yz2y4AwULbpKfYXnF_aBadc9PKvQEAdJ2gNzPGUBN4YcXQ9T7aSAlB-6ay0PpR0pC3Qj5HTVe2V52C3UnkZaVkqg5kppxJaaqBEIq7594WFAq7Zub-wwbbIic0jQvU-GU6fOUrDmD6S1eMI3hd1-nnoV3XBCGv2agCwbvMJ85IIythXLqIEbKgMAj6qOodscemkAPvcVksPt9RF4PaFn"/>
+</div>
+<div>
+<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Code Ninja</h3>
+<p class="font-caption text-caption text-text-secondary">"May your bugs be few and your frames high."</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group relative">
+<div class="absolute -top-3 -right-3 bg-neon-yellow text-surface font-button-label text-[10px] px-2 py-1 rotate-12 z-10 border-2 border-surface">NEW</div>
+<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
+<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A pixel art avatar of a wizard wearing a starry cloak, holding a glowing staff. The style is late 80s RPG. The background is a dark, starlit night sky. The color scheme is predominantly deep midnight blue, silver, and bright magical purple. The overall mood is mysterious yet playful, like an NPC from a vintage adventure game." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR7gFTcTfT40Nv1jIfOJioNZYTj1BAaxGfLlVr-6Y1XaBDZ5-D-gPitF3aSXvyxWuvVWvu5-Er_ASsK4VrzhrDxTdGeRG7xdVOFHKwhSqSq7DYLGw6yj3eGcc_w3ZOY6WbF7HH8QmysBHb_C6c0tGBTWKZ01oeZijPfjt5PKC1qdGn5q6qi1p9C9Lp_P_MopBPHVcC3LMHHaxAy-wxEw8Ial7uaXSRAJUkfOAIrx95W6ZoQ898rOwPzpS-lv2A8_SzPBAComtMT1dx"/>
+</div>
+<div>
+<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Grand Magus</h3>
+<p class="font-caption text-caption text-text-secondary">"The quest continues in a new realm."</p>
+</div>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="font-button-label text-button-label text-text-secondary hover:text-neon-yellow flex items-center gap-2 transition-colors">
+                    LOAD MORE DATA <span class="material-symbols-outlined text-sm animate-bounce">arrow_downward</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest border-t-4 border-border-pixel z-20 relative">
+<div class="text-on-surface font-button-label text-button-label text-center md:text-left">
+            FAREWELL QUEST
+        </div>
+<div class="font-caption text-caption text-text-secondary text-center md:text-left">
+            © 199X RETRO QUEST SYSTEMS - INSERT COIN TO CONTINUE
+        </div>
+<div class="flex gap-6 font-caption text-caption">
+<a class="text-text-secondary hover:text-neon-yellow transition-colors cursor-pointer" href="#">CREDITS</a>
+<a class="text-text-secondary hover:text-neon-yellow transition-colors cursor-pointer" href="#">SUPPORT</a>
+<a class="text-text-secondary hover:text-neon-yellow transition-colors cursor-pointer" href="#">QUIT GAME</a>
+</div>
+</footer>
+</body></html>
