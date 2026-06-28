@@ -13,6 +13,7 @@ let isMuted = savedState ? savedState === 'true' : false;
 const path = window.location.pathname.toLowerCase();
 const isTitleScreen = path.endsWith('index.html') || path.endsWith('/') || !path.includes('.html');
 const isLogScreen = path.endsWith('rei.html') || path.endsWith('qony.html') || path.endsWith('ica.html');
+const isGameScreen = path.endsWith('whack_a_coworker.html');
 
 // Main Adventure Theme
 const melodyMain = [
@@ -40,8 +41,34 @@ const melodyFarewell = [
     [349.23, 0.6], [329.63, 0.2], [293.66, 0.8], [0, 0.4]
 ];
 
-const melody = isTitleScreen ? melodyTitle : (isLogScreen ? melodyFarewell : melodyMain);
-const tempo = isTitleScreen ? 1.5 : (isLogScreen ? 0.9 : 1.3);
+// Arcade Whack-a-Mole Theme
+// Fast, punchy 8-bit chiptune — C major, energetic with syncopated rhythms
+const melodyGame = [
+    // === Phrase A — main hook, bouncy ascending run ===
+    [523.25, 0.1], [587.33, 0.1], [659.25, 0.1], [698.46, 0.1],
+    [783.99, 0.2], [698.46, 0.1], [659.25, 0.1],
+    [587.33, 0.1], [523.25, 0.1], [493.88, 0.1], [523.25, 0.2], [0, 0.1],
+
+    // === Phrase A repeat — slight variation ===
+    [523.25, 0.1], [659.25, 0.1], [783.99, 0.1], [1046.50, 0.2],
+    [880.00, 0.1], [783.99, 0.1], [698.46, 0.1], [659.25, 0.1],
+    [587.33, 0.2], [523.25, 0.2], [0, 0.1],
+
+    // === Phrase B — response, punchy staccato ===
+    [392.00, 0.1], [0, 0.05], [392.00, 0.1], [0, 0.05],
+    [523.25, 0.1], [0, 0.05], [659.25, 0.15],
+    [587.33, 0.1], [0, 0.05], [523.25, 0.1], [0, 0.05],
+    [493.88, 0.2], [0, 0.1],
+
+    // === Phrase C — bridge, climbing triplet feel ===
+    [329.63, 0.1], [392.00, 0.1], [493.88, 0.1], [587.33, 0.1],
+    [659.25, 0.1], [783.99, 0.1], [880.00, 0.2],
+    [783.99, 0.1], [698.46, 0.1], [659.25, 0.1], [587.33, 0.1],
+    [523.25, 0.3], [0, 0.2],
+];
+
+const melody = isTitleScreen ? melodyTitle : (isLogScreen ? melodyFarewell : (isGameScreen ? melodyGame : melodyMain));
+const tempo = isTitleScreen ? 1.5 : (isLogScreen ? 0.9 : (isGameScreen ? 1.8 : 1.3));
 
 function initAudio() {
     if (!audioCtx) {

@@ -6,6 +6,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="assets/audio.js"></script>
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
@@ -194,7 +195,7 @@
   <nav class="hidden md:flex gap-8">
     <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="index.html">QUEST</a>
     <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="chara_selection.html">PARTY</a>
-    <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="Rei.html">LOG</a>
+
     <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="wall_of_Fame.html">WALL</a>
     <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 uppercase" href="whack_a_coworker.html">GAME</a>
   </nav>
@@ -203,8 +204,6 @@
       <span class="material-symbols-outlined sound-on" style="font-variation-settings:'FILL' 1;">volume_up</span>
       <span class="material-symbols-outlined sound-off" style="font-variation-settings:'FILL' 1;">volume_off</span>
     </button>
-    <img alt="Player Avatar" class="w-8 h-8 rounded-none border-2 border-border-pixel"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlMR79Oj9MtjhEPZs9FxdtKQTu4d-m8H02dd86IfYDXJjNFvR9N3SQCKLvyKlG5KZDShRU_jHBRVnZoDrKU7FJqU3zR_W8UCx8E5OB5cLI-O-z4D4r4tLV1wz6PRWza33MLMnZRMP6teFhew096IpTcsBGCu5Zvh81-nPCg0v2dGsHWbPTM56UdNdHWspPozqU_Y5TU-Arosj9wFMqkmyydABAkC3u_ajAynWC0fSmDFDIOme1FtLKJg"/>
   </div>
 </header>
 
@@ -260,29 +259,32 @@
       </div>
 
       <!-- Game Over overlay -->
-      <div id="over-overlay" class="absolute inset-0 bg-black/85 z-50 flex flex-col items-center justify-center backdrop-blur-md p-6 border-4 border-border-pixel hidden">
-        <h2 class="font-hero-title text-hero-title text-error drop-shadow-[0_0_10px_rgba(255,59,59,0.8)] mb-6 text-center animate-pulse">GAME OVER</h2>
-        <div class="bg-bg-elevated border-4 border-border-pixel p-6 w-full max-w-md mb-6 flex flex-col gap-4">
-          <div class="flex justify-between items-center border-b-2 border-surface-variant pb-3">
-            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">FINAL SCORE</span>
-            <span id="final-score" class="font-caption text-[32px] text-neon-yellow drop-shadow-[0_0_6px_rgba(255,225,53,0.6)]">0</span>
+      <div id="over-overlay" class="absolute inset-0 bg-black/80 z-50 flex flex-col items-center justify-center backdrop-blur-sm p-4 hidden">
+        <div class="bg-surface-container-lowest border-4 border-border-pixel p-6 md:p-8 w-full max-w-[550px] shadow-[8px_8px_0_0_#0d0d1a,12px_12px_0_0_rgba(85,85,170,0.5)] flex flex-col items-center animate-bonk-pop">
+          <h2 class="font-hero-title text-[36px] md:text-[44px] text-error drop-shadow-[4px_4px_0_#4a0000] mb-6 text-center animate-pulse tracking-wide">GAME OVER</h2>
+          <div class="bg-bg-elevated border-4 border-border-pixel p-4 md:p-5 w-full mb-8 flex flex-col gap-3">
+            <div class="flex justify-between items-center border-b-2 border-surface-variant pb-2">
+              <span class="font-button-label text-on-surface-variant text-[11px] uppercase tracking-wider">FINAL SCORE</span>
+              <span id="final-score" class="font-caption text-[32px] text-neon-yellow drop-shadow-[0_0_6px_rgba(255,225,53,0.6)]">0</span>
+            </div>
+            <div class="flex justify-between items-center border-b-2 border-surface-variant pb-2">
+              <span class="font-button-label text-on-surface-variant text-[11px] uppercase tracking-wider">HIGH SCORE</span>
+              <span id="high-score-display" class="font-caption text-[28px] text-white">0</span>
+            </div>
+            <div class="flex justify-between items-center pb-1">
+              <span class="font-button-label text-on-surface-variant text-[11px] uppercase tracking-wider">ACCURACY</span>
+              <span id="accuracy-display" class="font-caption text-[24px] text-neon-cyan">0%</span>
+            </div>
+            <div class="mt-2 border-t-2 border-surface-variant pt-3">
+              <h3 class="font-button-label text-neon-cyan text-[11px] mb-3 text-center uppercase tracking-wider">🏆 MVP Kena Pukul</h3>
+              <div id="mvp-chart" class="flex flex-col gap-3 font-caption text-[16px] max-h-40 overflow-y-auto pr-2 custom-scroll"></div>
+            </div>
           </div>
-          <div class="flex justify-between items-center border-b-2 border-surface-variant pb-3">
-            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">HIGH SCORE</span>
-            <span id="high-score-display" class="font-caption text-[28px] text-white">0</span>
+          <div class="flex flex-wrap justify-center gap-4 w-full">
+            <button id="btn-restart" class="pixel-btn bg-primary-container text-on-primary-container font-button-label text-[13px] md:text-[14px] px-4 py-3 border-2 border-primary-fixed uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_0_#107100] transition-transform active:translate-y-0 active:shadow-none">TRY AGAIN</button>
+            <button id="btn-menu" onclick="window.location.href='index.html'" class="pixel-btn bg-surface-variant text-on-surface font-button-label text-[13px] md:text-[14px] px-4 py-3 border-2 border-border-pixel uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_0_#0d0d1a] transition-transform active:translate-y-0 active:shadow-none">MENU</button>
+            <button id="btn-photobooth" class="pixel-btn bg-surface-container-high text-neon-cyan font-button-label text-[13px] md:text-[14px] px-4 py-3 border-2 border-neon-cyan uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_0_#0d0d1a] transition-transform active:translate-y-0 active:shadow-none">📷 PHOTOBOOTH</button>
           </div>
-          <div class="flex justify-between items-center pb-1">
-            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">ACCURACY</span>
-            <span id="accuracy-display" class="font-caption text-[24px] text-neon-cyan">0%</span>
-          </div>
-          <div class="mt-2 border-t-2 border-surface-variant pt-4">
-            <h3 class="font-button-label text-neon-cyan text-[11px] mb-4 text-center uppercase">🏆 MVP Kena Pukul</h3>
-            <div id="mvp-chart" class="flex flex-col gap-3 font-caption text-[18px] max-h-52 overflow-y-auto pr-1"></div>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <button id="btn-restart" class="pixel-btn bg-primary-container text-on-primary-container font-button-label text-[14px] px-8 py-3 border-2 border-primary-fixed uppercase">TRY AGAIN?</button>
-          <button id="btn-photobooth" class="pixel-btn bg-surface-bright text-neon-cyan font-button-label text-[14px] px-8 py-3 border-2 border-neon-cyan uppercase">📷 PHOTOBOOTH</button>
         </div>
       </div>
     </div><!-- /arena -->
@@ -305,15 +307,17 @@
 // ─────────────────────────────────────────
 const CHARACTERS = [
   { id:"ica",   name:"Teh Ica",   points:100, speed:1.0, barColor:"bg-secondary-container",
-    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuBhUXuiuiiwwvNj07WImMnEUx7EGZ4IqOKIFcAwXpkG85Qxhlo_-g2kxhqkCUE7IZCpBivX14u2tFs3sgGl0gQvYjhxtij4GuBmKbdmPXuqKE-jcnEGwE22thiJHM6_krKT8A57aAFlO62cw_CidtKGL_TLkSgOgGmA5Kv6CNZrrLNIod9p75NdG_B1vH4YqQrwFRY-81SMSeFTlO2CI06ixgvIue3GyC84VxRV1wyx4fcg3i7begQdkA" },
+    sprite:"assets/images/chibi_ica.png" },
   { id:"qony",  name:"Teh Qony",  points:150, speed:1.3, barColor:"bg-primary-container",
-    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuAORFfGZrbDm5-vJWvW6y5uCnd7bA02KkgGpeIZXUjQ9L3-X0LleGo2DWxekTf_1LoCbEQ2H4KESw0lp7YYC9tQKv8xY9kiRqbvNKSEaBxdZaCWPOLcDtHniqCwvz60fropL4lLheOirdJyx8BOQoK8KPhnA-gv9VRDCxws0mFuokMJ7bZVYWR_pzxGb7Q8C_gdmaQy2C-mQjst9StOiTZdsPWxC5-MscFWXilinu2N2UTl-kG8eTzsOA" },
+    sprite:"assets/images/chibi_qony.png" },
   { id:"rei",   name:"Teh Rei",   points:120, speed:1.1, barColor:"bg-error",
-    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuCfE5iZk_CUFIPnXJGL_TRNC8_gZn7nyYwMYjAiE1s7t5p99ehzUQ6WJlGRbbX1OdPF_g_DYkzN_m3oiLgwIND9mfocIwv6-o4I_Ltt88_rRLrV4jStAfIym1MVriQRjPpJJRbnBk-_QGEg84siHWIVDZYp2fPgqfD3hcyhAnwg66jSKMejYgAqp1VxuASVIiMeobor6foia_FZsigpfFd2rYurE6szVA3D7EUrMqGHGPZduyYlXEGtTA" },
-  { id:"surya", name:"Surya",     points:200, speed:1.6, barColor:"bg-neon-cyan",
-    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuCKJzkargFvp4_afQx42HZaPLEhqN5qi7y5WUyaN3twyrqNJ491lYfTyW3kNrKlBluienYWtUmakqcWuSiRYTfvDEfymG9Vbo2uJOPfot6bW21yNahMh6_Nbjy_iSdgkOf7F3so-gQBO56bbx0TueTSax3GAkeRJmyZ20ueulV7GP5tYNCwVH1tIk6wFUPSV6JlgQtE7WIYNxjrTosKkv3WxAHf9Aa9XiNuckyNG0Cc2D4ZXfgGA0oLkw" },
+    sprite:"assets/images/chibi_rei.png" },
+  { id:"alfin", name:"Alfin",     points:200, speed:1.6, barColor:"bg-neon-cyan",
+    sprite:"assets/images/chibi_alfin.png" },
+  { id:"reza",  name:"Reza",      points:140, speed:1.4, barColor:"bg-primary",
+    sprite:"assets/images/chibi_reza.png" },
   { id:"disa",  name:"Teh Disa",  points:130, speed:1.2, barColor:"bg-neon-yellow",
-    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuD4CfCaoIJiItVqDINaK1GAjCcvanMMwdVPFw_4y_RcqyuMfbCDPb0zSFyP5NwN_BLzZLURyWmouNluv3ezcXhTAQmGSaWOiB-BqEPEw40YPlrsABJ9FDnVxpj4xr-IlwodUkmNmIuvWBu7Rt1E43jrZP67GDMVeYvJxTK1c9OUctKuoxjhS1TP2jIVcUZ03XRU2nmTjqJXg-4DctvzRzJ5nXDvfiDaxi9RdQcD5CweFR8Vw8K3x7yDMA" }
+    sprite:"assets/images/chibi_disa.png" }
 ];
 
 const DIFFICULTY_CONFIG = {
@@ -324,12 +328,12 @@ const DIFFICULTY_CONFIG = {
 
 // Chiptune-style oscillator SFX — no external files needed
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
-let audioCtx = null;
+let sfxAudioCtx = null;
 let soundEnabled = true;
 
 function getAudioCtx() {
-  if (!audioCtx) audioCtx = new AudioCtx();
-  return audioCtx;
+  if (!sfxAudioCtx) sfxAudioCtx = new AudioCtx();
+  return sfxAudioCtx;
 }
 
 // Synthesise a short retro blip
@@ -356,7 +360,8 @@ const CHAR_SFX = {
   ica:   () => { playBlip(880, 'square', 0.10, 0.2); setTimeout(() => playBlip(660, 'square', 0.08, 0.15), 60); },
   qony:  () => { playBlip(660, 'sawtooth', 0.13, 0.18); },
   rei:   () => { playBlip(520, 'square', 0.08, 0.2); setTimeout(() => playBlip(780, 'square', 0.10, 0.2), 80); },
-  surya: () => { playBlip(440, 'sawtooth', 0.06, 0.2); setTimeout(() => playBlip(880, 'square', 0.12, 0.2), 50); setTimeout(() => playBlip(1100, 'square', 0.10, 0.15), 120); },
+  alfin: () => { playBlip(440, 'sawtooth', 0.06, 0.2); setTimeout(() => playBlip(880, 'square', 0.12, 0.2), 50); setTimeout(() => playBlip(1100, 'square', 0.10, 0.15), 120); },
+  reza:  () => { playBlip(550, 'triangle', 0.1, 0.2); setTimeout(() => playBlip(440, 'triangle', 0.15, 0.2), 60); },
   disa:  () => { playBlip(700, 'triangle', 0.14, 0.18); }
 };
 
@@ -812,14 +817,17 @@ diffBtns.forEach(btn => {
 btnSound.addEventListener('click', () => {
   soundEnabled = !soundEnabled;
   btnSound.classList.toggle('muted', !soundEnabled);
+  // Toggle background music if audio.js is present
+  if (typeof toggleMute === 'function') toggleMute();
+  
   // Resume AudioContext if needed (browser policy)
-  if (soundEnabled && audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if (soundEnabled && sfxAudioCtx && sfxAudioCtx.state === 'suspended') sfxAudioCtx.resume();
   playBlip(soundEnabled ? 880 : 220, 'square', 0.08, 0.15);
 });
 
 // Resume AudioContext on first interaction (Chrome policy)
 document.addEventListener('pointerdown', () => {
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if (sfxAudioCtx && sfxAudioCtx.state === 'suspended') sfxAudioCtx.resume();
 }, { once: true });
 
 // ─────────────────────────────────────────

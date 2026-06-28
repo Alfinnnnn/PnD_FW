@@ -17,25 +17,14 @@
 <div class="fixed inset-0 crt-scanlines z-50 pointer-events-none"></div>
 <!-- Starfield Background -->
 <div class="absolute inset-0 star-field opacity-30"></div>
-<!-- TopAppBar -->
-<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-surface border-b-4 border-border-pixel shadow-[0_4px_0_0_#0d0d1a]">
-<div class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">
-            FAREWELL QUEST
-        </div>
-<div class="hidden md:flex gap-8 items-center Headlines: font-section-title text-section-title. Labels: font-button-label text-button-label.">
-<a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
-<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="whack_a_coworker.html">GAME</a>
-</div>
-<div class="flex gap-4">
-<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">settings</span></button>
-<button onclick="toggleMute(event)" class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span id="volume-icon" class="material-symbols-outlined text-text-secondary">volume_off</span></button>
-</div>
-</nav>
 <!-- Main Content Canvas -->
-<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop relative z-10 w-full h-[calc(100vh-6rem)]">
+<main class="flex-grow flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop relative z-10 w-full h-screen">
+<!-- Volume Button -->
+<div class="absolute top-8 right-8 z-50">
+<button onclick="toggleMute(event)" class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<span id="volume-icon" class="material-symbols-outlined text-text-secondary">volume_up</span>
+</button>
+</div>
 <!-- Hero Section -->
 <section class="flex flex-col items-center text-center space-y-12 w-full max-w-4xl mx-auto">
 <!-- Avatar / Sprite Placeholder -->
