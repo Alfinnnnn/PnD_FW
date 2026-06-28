@@ -12,7 +12,7 @@ let isMuted = savedState ? savedState === 'true' : false;
 // Determine which page we are on
 const path = window.location.pathname.toLowerCase();
 const isTitleScreen = path.endsWith('index.html') || path.endsWith('/') || !path.includes('.html');
-const isLogScreen = path.endsWith('rei.html');
+const isLogScreen = path.endsWith('rei.html') || path.endsWith('qony.html') || path.endsWith('ica.html');
 
 // Main Adventure Theme
 const melodyMain = [

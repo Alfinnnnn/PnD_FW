@@ -19,25 +19,26 @@
 <div class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]">
             FAREWELL QUEST
         </div>
-<div class="hidden md:flex gap-8 items-center Headlines: font-section-title text-section-title. Labels: font-button-label text-button-label.">
+<div class="hidden md:flex gap-8 items-center">
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
 <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="whack_a_coworker.html">GAME</a>
 </div>
 <div class="flex gap-4">
 <button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">settings</span></button>
 <button onclick="toggleMute(event)" class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span id="volume-icon" class="material-symbols-outlined text-text-secondary">volume_off</span></button>
 </div>
 </nav>
-<main class="flex-grow container mx-auto px-margin-desktop md:px-margin-desktop mt-8">
+<main class="flex-grow container mx-auto px-margin-desktop md:px-margin-desktop mt-8 mb-16">
 <header class="text-center mb-12">
 <h1 class="font-hero-title text-hero-title text-neon-yellow drop-shadow-[4px_4px_0_#7c04bc] mb-4">SELECT YOUR COMPANION</h1>
 <p class="font-dialog-text text-dialog-text text-text-secondary">CHOOSE A PARTY MEMBER TO JOIN YOUR QUEST...</p>
 </header>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
 <!-- Character Card: Active -->
-<div class="bg-surface-container-high pixel-border-active p-4 flex flex-col items-center cursor-pointer transform scale-105 transition-all duration-200" onclick="selectCharacter(this)">
+<div class="bg-surface-container-high pixel-border-active p-4 flex flex-col items-center cursor-pointer transform scale-105 transition-all duration-200" onclick="selectCharacter(this)" data-target="Rei.html">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
 <img class="w-full h-full object-cover" data-alt="A pixel-art style portrait of a female character with dark hair in a retro 16-bit RPG aesthetic. Bright neon cyan highlights. Solid dark background." src="assets/images/img_206a8f28.png"/>
 </div>
@@ -47,7 +48,7 @@
 <!-- Character Card -->
 <div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="A 16-bit pixel art portrait of a male character with spiky hair, wearing light armor. Retro arcade aesthetic with neon purple accents against a dark background." src="assets/images/img_5882fa35.png"/>
+<img class="w-full h-full object-cover" data-alt="A 16-bit pixel art portrait of a male character with spiky hair, wearing light armor. Retro arcade aesthetic with neon purple accents against a dark background." src="assets/images/Alfin.png"/>
 </div>
 <h3 class="font-button-label text-button-label text-on-surface mb-2">Alfin</h3>
 <p class="font-caption text-caption text-text-secondary">Data Analyst</p>
@@ -61,7 +62,7 @@
 <p class="font-caption text-caption text-text-secondary">UI/UX Designer</p>
 </div>
 <!-- Character Card -->
-<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)">
+<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)" data-target="qony.html">
 <div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
 <img class="w-full h-full object-cover" data-alt="16-bit arcade pixel art portrait of a cleric or healer character, bright pastel colors with a dark gritty console background. High contrast neon edges." src="assets/images/img_a15e9dc6.png"/>
 </div>
@@ -76,6 +77,16 @@
 <h3 class="font-button-label text-button-label text-on-surface mb-2">Disa</h3>
 <p class="font-caption text-caption text-text-secondary">Eduplex Assistant</p>
 </div>
+<!-- Character Card -->
+<div class="bg-surface-container-high pixel-border p-4 flex flex-col items-center cursor-pointer hover:scale-105 hover:shadow-[0_0_15px_rgba(191,95,255,0.5)] transition-all duration-200" onclick="selectCharacter(this)" data-target="ica.html">
+<div class="w-32 h-32 mb-4 bg-surface-container-lowest border-4 border-border-pixel flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A 16-bit retro pixel art portrait of a female character named Teh Ica." src="assets/images/img_c130db73.png"/>
+</div>
+<h3 class="font-button-label text-button-label text-on-surface mb-2">Ica</h3>
+<p class="font-caption text-caption text-text-secondary">Marketing and Communications</p>
+</div>
+</div>
+
 </div>
 </main>
 <!-- Footer -->
@@ -89,8 +100,78 @@
 <a class="text-text-secondary hover:text-neon-yellow transition-colors cursor-pointer text-on-surface font-button-label text-button-label" href="#">QUIT GAME</a>
 </div>
 </footer>
+
+<!-- Custom Confirm Modal -->
+<div id="confirmModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black bg-opacity-80 backdrop-blur-sm px-4">
+    <div class="bg-surface-container-lowest border-4 border-border-pixel p-6 md:p-8 max-w-md w-full shadow-[8px_8px_0_0_#0d0d1a,12px_12px_0_0_rgba(85,85,170,0.5)] transform scale-95 transition-transform duration-200" id="confirmModalContent">
+        <h2 class="font-section-title text-section-title text-neon-yellow mb-4 text-center">SYSTEM PROMPT</h2>
+        <p class="font-dialog-text text-dialog-text text-on-surface text-center mb-8 leading-relaxed" id="confirmModalText">Apakah kamu ingin memilih karakter ini?</p>
+        <div class="flex justify-center gap-4">
+            <button id="btnCancel" class="bg-surface-container-high text-on-surface font-button-label text-button-label py-3 px-6 border-2 border-border-pixel shadow-[4px_4px_0_0_#0d0d1a] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#0d0d1a] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all">TIDAK</button>
+            <button id="btnConfirm" class="bg-primary-container text-on-primary-container font-button-label text-button-label py-3 px-6 border-2 border-primary-fixed shadow-[4px_4px_0_0_#107100,8px_8px_0_0_rgba(16,113,0,0.5)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#107100,4px_4px_0_0_rgba(16,113,0,0.5)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all">YA</button>
+        </div>
+    </div>
+</div>
+
 <script>
+        const modal = document.getElementById('confirmModal');
+        const modalContent = document.getElementById('confirmModalContent');
+        const modalText = document.getElementById('confirmModalText');
+        const btnCancel = document.getElementById('btnCancel');
+        const btnConfirm = document.getElementById('btnConfirm');
+        let currentTargetUrl = '';
+
+        function showModal(text, isConfirm) {
+            modalText.innerText = text;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            
+            if (isConfirm) {
+                btnCancel.style.display = 'block';
+                btnConfirm.innerText = 'YA';
+            } else {
+                btnCancel.style.display = 'none';
+                btnConfirm.innerText = 'OK';
+            }
+        }
+
+        function hideModal() {
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        btnCancel.addEventListener('click', hideModal);
+        btnConfirm.addEventListener('click', () => {
+            if (currentTargetUrl) {
+                playSelectSFX();
+                window.location.href = currentTargetUrl;
+            } else {
+                hideModal();
+            }
+        });
+
         function selectCharacter(element) {
+            // Check if already active (second click)
+            if (element.classList.contains('pixel-border-active')) {
+                const target = element.getAttribute('data-target');
+                if (target) {
+                    currentTargetUrl = target;
+                    showModal("Choose this hero and begin your adventure?", true);
+                } else {
+                    currentTargetUrl = '';
+                    showModal("This hero is still on active duty and cannot be recruited yet.", false);
+                }
+                return;
+            }
+
             playSelectSFX();
             // Remove active class from all cards
             document.querySelectorAll('.pixel-border-active').forEach(card => {

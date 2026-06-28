@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Whack-a-Coworker | FAREWELL QUEST</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed-dim": "#e4b5ff",
+          "inverse-primary": "#106e00",
+          "neon-cyan": "#00F5FF",
+          "on-secondary-fixed-variant": "#6f00a9",
+          "text-secondary": "#8888AA",
+          "on-primary": "#053900",
+          "surface-container-high": "#292937",
+          "secondary-fixed": "#f4daff",
+          "on-secondary": "#4e0079",
+          "secondary": "#e4b5ff",
+          "inverse-on-surface": "#2f2f3d",
+          "background": "#12121f",
+          "on-secondary-fixed": "#2f004c",
+          "on-tertiary-fixed": "#2c1513",
+          "on-primary-fixed": "#022100",
+          "secondary-container": "#7c04bc",
+          "on-tertiary-container": "#7a5955",
+          "on-primary-fixed-variant": "#095300",
+          "surface-dim": "#12121f",
+          "primary-fixed": "#79ff5b",
+          "on-surface-variant": "#baccb0",
+          "outline-variant": "#3c4b35",
+          "border-pixel": "#5555AA",
+          "surface-container-highest": "#343342",
+          "outline": "#85967c",
+          "error": "#FF3B3B",
+          "on-primary-container": "#107100",
+          "surface": "#12121f",
+          "tertiary-fixed": "#ffdad6",
+          "surface-tint": "#2ae500",
+          "error-container": "#93000a",
+          "on-background": "#e3e0f4",
+          "surface-bright": "#383847",
+          "on-tertiary-fixed-variant": "#5d3f3c",
+          "surface-container": "#1e1e2c",
+          "primary-fixed-dim": "#2ae500",
+          "on-tertiary": "#442927",
+          "primary-container": "#39ff14",
+          "inverse-surface": "#e3e0f4",
+          "surface-container-low": "#1a1a28",
+          "bg-elevated": "#1F1F40",
+          "primary": "#efffe3",
+          "on-error-container": "#ffdad6",
+          "on-secondary-container": "#e1b0ff",
+          "surface-variant": "#343342",
+          "on-surface": "#e3e0f4",
+          "on-error": "#690005",
+          "neon-yellow": "#FFE135",
+          "bg-surface": "#161629",
+          "tertiary": "#fff8f7",
+          "tertiary-container": "#ffd3ce",
+          "surface-container-lowest": "#0d0d1a",
+          "tertiary-fixed-dim": "#e7bdb8",
+          "text-primary": "#E8E8F0"
+        },
+        "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        "spacing": { "pixel-unit": "4px", "margin-mobile": "16px", "margin-desktop": "40px", "gutter": "16px" },
+        "fontFamily": {
+          "caption": ["VT323", "monospace"],
+          "hero-title": ["\"Press Start 2P\"", "cursive"],
+          "button-label": ["\"Press Start 2P\"", "cursive"],
+          "dialog-text": ["VT323", "monospace"],
+          "hero-title-mobile": ["\"Press Start 2P\"", "cursive"],
+          "section-title": ["\"Press Start 2P\"", "cursive"],
+          "stats-value": ["VT323", "monospace"]
+        },
+        "fontSize": {
+          "caption": ["18px", { "lineHeight": "1.2", "fontWeight": "400" }],
+          "hero-title": ["48px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+          "button-label": ["14px", { "lineHeight": "1.0", "fontWeight": "400" }],
+          "dialog-text": ["24px", { "lineHeight": "1.4", "fontWeight": "400" }],
+          "hero-title-mobile": ["24px", { "lineHeight": "1.5", "fontWeight": "400" }],
+          "section-title": ["24px", { "lineHeight": "2.0", "fontWeight": "400" }],
+          "stats-value": ["22px", { "lineHeight": "1.2", "fontWeight": "400" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { image-rendering: pixelated; }
+  .scanlines {
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  .crt-flicker { animation: flicker 0.15s infinite alternate; }
+  @keyframes flicker { 0% { opacity: 0.95; } 100% { opacity: 1; } }
+  .pixel-border {
+    box-shadow: 0 -4px 0 0 #5555AA, 0 4px 0 0 #5555AA, -4px 0 0 0 #5555AA, 4px 0 0 0 #5555AA, 0 0 0 4px #161629;
+    border: 4px solid #161629;
+    box-sizing: border-box;
+  }
+  .pixel-btn { box-shadow: 0 4px 0 0 #095300; transition: all 0.1s steps(2); }
+  .pixel-btn:active { transform: translateY(4px); box-shadow: 0 0 0 0 #095300; }
+  .dirt-bg {
+    background-color: #2A1A0E;
+    background-image: radial-gradient(#1a0f08 15%, transparent 16%), radial-gradient(#1a0f08 15%, transparent 16%);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+  }
+  .hole {
+    background: radial-gradient(ellipse at center, #000 0%, #111 70%, #2A1A0E 100%);
+    box-shadow: inset 0 8px 16px rgba(0,0,0,0.9);
+    border-bottom: 4px solid #4a2e1b;
+  }
+  .combo-glow { box-shadow: 0 0 15px #7c04bc; }
+
+  /* ── Avatar state animations ── */
+  @keyframes rise {
+    from { transform: translateY(110%); }
+    to   { transform: translateY(0%); }
+  }
+  @keyframes fall {
+    from { transform: translateY(0%); }
+    to   { transform: translateY(110%); }
+  }
+  @keyframes idle-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-5px); }
+  }
+  @keyframes hit-flash {
+    0%   { filter: brightness(1) saturate(1);  opacity: 1; }
+    40%  { filter: brightness(3) saturate(0) drop-shadow(0 0 12px #FFE135); opacity: 1; }
+    100% { filter: brightness(1) saturate(1);  opacity: 0; }
+  }
+  @keyframes bonk-pop {
+    0%   { transform: translateY(0)   scale(1);   opacity: 1; }
+    60%  { transform: translateY(-24px) scale(1.3); opacity: 1; }
+    100% { transform: translateY(-48px) scale(1.1); opacity: 0; }
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-4px); }
+    40%      { transform: translateX(4px); }
+    60%      { transform: translateX(-3px); }
+    80%      { transform: translateX(3px); }
+  }
+
+  .avatar-rising  { animation: rise 220ms ease-out forwards; }
+  .avatar-up      { animation: idle-float 0.9s ease-in-out infinite; }
+  .avatar-falling { animation: fall 280ms ease-in forwards; }
+  .hit-flash-anim { animation: hit-flash 220ms ease-out forwards; }
+  .bonk-pop-anim  { animation: bonk-pop 550ms ease-out forwards; }
+  .life-shake     { animation: shake 350ms ease-in-out; }
+
+  /* Sprite wrapper clips animation overflow */
+  .sprite-clip { overflow: hidden; }
+
+  /* Crosshair cursor on sprites */
+  .avatar-sprite { cursor: crosshair; }
+  .avatar-sprite:hover { filter: drop-shadow(0 0 8px #00F5FF); }
+
+  /* Hole slot: clips anything below the oval */
+  .hole-slot { position: relative; }
+
+  /* ── Sound toggle ── */
+  #btn-sound.muted .sound-on  { display: none; }
+  #btn-sound:not(.muted) .sound-off { display: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .avatar-rising, .avatar-up, .avatar-falling,
+    .hit-flash-anim, .bonk-pop-anim, .life-shake,
+    .crt-flicker { animation-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body class="bg-background text-text-primary min-h-screen flex flex-col relative overflow-x-hidden selection:bg-neon-cyan selection:text-background font-caption text-caption crt-flicker">
+
+<!-- CRT Overlay -->
+<div class="fixed inset-0 scanlines z-[100]"></div>
+<!-- Vignette -->
+<div class="fixed inset-0 pointer-events-none z-[99] bg-[radial-gradient(circle_at_center,transparent_50%,rgba(0,0,0,0.6)_100%)]"></div>
+
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-surface border-b-4 border-border-pixel shadow-[0_4px_0_0_#0d0d1a]">
+  <div class="flex items-center gap-4">
+    <h1 class="font-hero-title-mobile text-hero-title-mobile text-neon-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)] uppercase tracking-tight">FAREWELL QUEST</h1>
+  </div>
+  <nav class="hidden md:flex gap-8">
+    <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="index.html">QUEST</a>
+    <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="chara_selection.html">PARTY</a>
+    <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="Rei.html">LOG</a>
+    <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan transition-colors uppercase" href="wall_of_Fame.html">WALL</a>
+    <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 uppercase" href="whack_a_coworker.html">GAME</a>
+  </nav>
+  <div class="flex gap-4 items-center">
+    <button id="btn-sound" aria-label="Toggle sound" class="text-primary hover:text-neon-cyan transition-colors">
+      <span class="material-symbols-outlined sound-on" style="font-variation-settings:'FILL' 1;">volume_up</span>
+      <span class="material-symbols-outlined sound-off" style="font-variation-settings:'FILL' 1;">volume_off</span>
+    </button>
+    <img alt="Player Avatar" class="w-8 h-8 rounded-none border-2 border-border-pixel"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlMR79Oj9MtjhEPZs9FxdtKQTu4d-m8H02dd86IfYDXJjNFvR9N3SQCKLvyKlG5KZDShRU_jHBRVnZoDrKU7FJqU3zR_W8UCx8E5OB5cLI-O-z4D4r4tLV1wz6PRWza33MLMnZRMP6teFhew096IpTcsBGCu5Zvh81-nPCg0v2dGsHWbPTM56UdNdHWspPozqU_Y5TU-Arosj9wFMqkmyydABAkC3u_ajAynWC0fSmDFDIOme1FtLKJg"/>
+  </div>
+</header>
+
+<!-- Main -->
+<main class="flex-grow pt-[100px] pb-[80px] flex flex-col items-center justify-center relative w-full px-margin-mobile md:px-margin-desktop">
+  <div class="w-full max-w-5xl pixel-border bg-bg-elevated relative overflow-hidden flex flex-col mt-8 shadow-[0_0_30px_rgba(85,85,170,0.3)]">
+
+    <!-- HUD -->
+    <div class="bg-surface-container border-b-4 border-border-pixel p-4 flex justify-between items-center z-10 font-button-label text-button-label">
+      <div class="flex flex-col gap-1">
+        <span class="text-neon-yellow drop-shadow-[0_0_4px_rgba(255,225,53,0.5)]">SCORE</span>
+        <span id="hud-score" class="text-white text-xl">000000</span>
+      </div>
+      <div class="flex flex-col items-center gap-1">
+        <span class="text-neon-cyan drop-shadow-[0_0_4px_rgba(0,245,255,0.5)]">TIME</span>
+        <span id="hud-time" class="text-white text-2xl">60</span>
+      </div>
+      <div class="flex flex-col items-end gap-1">
+        <span class="text-error drop-shadow-[0_0_4px_rgba(255,59,59,0.5)]">LIVES</span>
+        <div id="hud-lives" class="flex gap-2"></div>
+      </div>
+    </div>
+
+    <!-- Combo Bar -->
+    <div class="w-full h-5 bg-surface-container-lowest border-b-2 border-border-pixel relative overflow-hidden">
+      <div id="combo-bar-fill" class="h-full bg-secondary-container w-0 transition-all duration-300 ease-out"></div>
+      <span id="combo-bar-text" class="absolute inset-0 flex items-center justify-center text-[10px] font-caption text-white tracking-widest uppercase">COMBO x0</span>
+    </div>
+
+    <!-- Arena -->
+    <div class="dirt-bg relative p-8 py-16 flex-grow flex flex-col justify-center items-center" style="min-height:500px">
+      <div id="game-grid" class="grid grid-cols-5 grid-rows-2 gap-x-12 gap-y-16 w-full max-w-4xl relative z-10">
+        <!-- Holes injected by JS -->
+      </div>
+
+      <!-- Countdown -->
+      <div id="countdown-overlay" class="absolute inset-0 z-30 flex items-center justify-center pointer-events-none hidden">
+        <div id="countdown-text" class="text-[120px] font-hero-title text-neon-yellow drop-shadow-[0_0_20px_rgba(255,225,53,0.8)] leading-none"></div>
+      </div>
+
+      <!-- Idle / Start overlay -->
+      <div id="idle-overlay" class="absolute inset-0 bg-black/70 z-40 flex flex-col items-center justify-center backdrop-blur-sm p-4">
+        <h2 class="font-hero-title text-hero-title text-neon-cyan drop-shadow-[0_0_10px_rgba(0,245,255,0.8)] mb-8 text-center leading-tight">WHACK-A<br/>COWORKER!</h2>
+        <div class="flex gap-4 mb-8" id="difficulty-selector">
+          <button data-diff="easy"   class="diff-btn pixel-btn font-button-label text-button-label px-6 py-3 border-2 uppercase">EASY</button>
+          <button data-diff="normal" class="diff-btn pixel-btn font-button-label text-button-label px-6 py-3 border-2 uppercase">NORMAL</button>
+          <button data-diff="hard"   class="diff-btn pixel-btn font-button-label text-button-label px-6 py-3 border-2 uppercase">HARD</button>
+        </div>
+        <div class="mb-4 font-caption text-on-surface-variant text-[16px]">HI-SCORE: <span id="idle-hiscore" class="text-neon-yellow">000000</span></div>
+        <button id="btn-start" class="pixel-btn bg-primary-container text-on-primary-container font-button-label text-[18px] px-12 py-4 border-2 border-primary-fixed hover:bg-primary-fixed-dim uppercase animate-pulse">
+          INSERT COIN TO START
+        </button>
+      </div>
+
+      <!-- Game Over overlay -->
+      <div id="over-overlay" class="absolute inset-0 bg-black/85 z-50 flex flex-col items-center justify-center backdrop-blur-md p-6 border-4 border-border-pixel hidden">
+        <h2 class="font-hero-title text-hero-title text-error drop-shadow-[0_0_10px_rgba(255,59,59,0.8)] mb-6 text-center animate-pulse">GAME OVER</h2>
+        <div class="bg-bg-elevated border-4 border-border-pixel p-6 w-full max-w-md mb-6 flex flex-col gap-4">
+          <div class="flex justify-between items-center border-b-2 border-surface-variant pb-3">
+            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">FINAL SCORE</span>
+            <span id="final-score" class="font-caption text-[32px] text-neon-yellow drop-shadow-[0_0_6px_rgba(255,225,53,0.6)]">0</span>
+          </div>
+          <div class="flex justify-between items-center border-b-2 border-surface-variant pb-3">
+            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">HIGH SCORE</span>
+            <span id="high-score-display" class="font-caption text-[28px] text-white">0</span>
+          </div>
+          <div class="flex justify-between items-center pb-1">
+            <span class="font-button-label text-on-surface-variant text-[11px] uppercase">ACCURACY</span>
+            <span id="accuracy-display" class="font-caption text-[24px] text-neon-cyan">0%</span>
+          </div>
+          <div class="mt-2 border-t-2 border-surface-variant pt-4">
+            <h3 class="font-button-label text-neon-cyan text-[11px] mb-4 text-center uppercase">🏆 MVP Kena Pukul</h3>
+            <div id="mvp-chart" class="flex flex-col gap-3 font-caption text-[18px] max-h-52 overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <button id="btn-restart" class="pixel-btn bg-primary-container text-on-primary-container font-button-label text-[14px] px-8 py-3 border-2 border-primary-fixed uppercase">TRY AGAIN?</button>
+          <button id="btn-photobooth" class="pixel-btn bg-surface-bright text-neon-cyan font-button-label text-[14px] px-8 py-3 border-2 border-neon-cyan uppercase">📷 PHOTOBOOTH</button>
+        </div>
+      </div>
+    </div><!-- /arena -->
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest border-t-4 border-border-pixel mt-auto relative z-50">
+  <p class="font-caption text-caption text-text-secondary">© 199X RETRO QUEST SYSTEMS — INSERT COIN TO CONTINUE</p>
+  <div class="flex gap-6">
+    <a class="text-text-secondary hover:text-neon-yellow transition-colors font-button-label text-button-label cursor-pointer uppercase" href="#">CREDITS</a>
+    <a class="text-text-secondary hover:text-neon-yellow transition-colors font-button-label text-button-label cursor-pointer uppercase" href="#">SUPPORT</a>
+    <a class="text-text-secondary hover:text-neon-yellow transition-colors font-button-label text-button-label cursor-pointer uppercase" href="#">QUIT GAME</a>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────
+//  DATA
+// ─────────────────────────────────────────
+const CHARACTERS = [
+  { id:"ica",   name:"Teh Ica",   points:100, speed:1.0, barColor:"bg-secondary-container",
+    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuBhUXuiuiiwwvNj07WImMnEUx7EGZ4IqOKIFcAwXpkG85Qxhlo_-g2kxhqkCUE7IZCpBivX14u2tFs3sgGl0gQvYjhxtij4GuBmKbdmPXuqKE-jcnEGwE22thiJHM6_krKT8A57aAFlO62cw_CidtKGL_TLkSgOgGmA5Kv6CNZrrLNIod9p75NdG_B1vH4YqQrwFRY-81SMSeFTlO2CI06ixgvIue3GyC84VxRV1wyx4fcg3i7begQdkA" },
+  { id:"qony",  name:"Teh Qony",  points:150, speed:1.3, barColor:"bg-primary-container",
+    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuAORFfGZrbDm5-vJWvW6y5uCnd7bA02KkgGpeIZXUjQ9L3-X0LleGo2DWxekTf_1LoCbEQ2H4KESw0lp7YYC9tQKv8xY9kiRqbvNKSEaBxdZaCWPOLcDtHniqCwvz60fropL4lLheOirdJyx8BOQoK8KPhnA-gv9VRDCxws0mFuokMJ7bZVYWR_pzxGb7Q8C_gdmaQy2C-mQjst9StOiTZdsPWxC5-MscFWXilinu2N2UTl-kG8eTzsOA" },
+  { id:"rei",   name:"Teh Rei",   points:120, speed:1.1, barColor:"bg-error",
+    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuCfE5iZk_CUFIPnXJGL_TRNC8_gZn7nyYwMYjAiE1s7t5p99ehzUQ6WJlGRbbX1OdPF_g_DYkzN_m3oiLgwIND9mfocIwv6-o4I_Ltt88_rRLrV4jStAfIym1MVriQRjPpJJRbnBk-_QGEg84siHWIVDZYp2fPgqfD3hcyhAnwg66jSKMejYgAqp1VxuASVIiMeobor6foia_FZsigpfFd2rYurE6szVA3D7EUrMqGHGPZduyYlXEGtTA" },
+  { id:"surya", name:"Surya",     points:200, speed:1.6, barColor:"bg-neon-cyan",
+    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuCKJzkargFvp4_afQx42HZaPLEhqN5qi7y5WUyaN3twyrqNJ491lYfTyW3kNrKlBluienYWtUmakqcWuSiRYTfvDEfymG9Vbo2uJOPfot6bW21yNahMh6_Nbjy_iSdgkOf7F3so-gQBO56bbx0TueTSax3GAkeRJmyZ20ueulV7GP5tYNCwVH1tIk6wFUPSV6JlgQtE7WIYNxjrTosKkv3WxAHf9Aa9XiNuckyNG0Cc2D4ZXfgGA0oLkw" },
+  { id:"disa",  name:"Teh Disa",  points:130, speed:1.2, barColor:"bg-neon-yellow",
+    sprite:"https://lh3.googleusercontent.com/aida-public/AB6AXuD4CfCaoIJiItVqDINaK1GAjCcvanMMwdVPFw_4y_RcqyuMfbCDPb0zSFyP5NwN_BLzZLURyWmouNluv3ezcXhTAQmGSaWOiB-BqEPEw40YPlrsABJ9FDnVxpj4xr-IlwodUkmNmIuvWBu7Rt1E43jrZP67GDMVeYvJxTK1c9OUctKuoxjhS1TP2jIVcUZ03XRU2nmTjqJXg-4DctvzRzJ5nXDvfiDaxi9RdQcD5CweFR8Vw8K3x7yDMA" }
+];
+
+const DIFFICULTY_CONFIG = {
+  easy:   { spawnInterval:1400, upDuration:1200, maxSimultaneous:2, comboDecay:2500 },
+  normal: { spawnInterval:900,  upDuration:800,  maxSimultaneous:3, comboDecay:2000 },
+  hard:   { spawnInterval:550,  upDuration:500,  maxSimultaneous:5, comboDecay:1500 }
+};
+
+// Chiptune-style oscillator SFX — no external files needed
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+let soundEnabled = true;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new AudioCtx();
+  return audioCtx;
+}
+
+// Synthesise a short retro blip
+function playBlip(freq = 440, type = 'square', duration = 0.12, vol = 0.18) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.5, ctx.currentTime + duration);
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + duration);
+  } catch(e) {}
+}
+
+// Unique SFX per character (different freq + waveform combos)
+const CHAR_SFX = {
+  ica:   () => { playBlip(880, 'square', 0.10, 0.2); setTimeout(() => playBlip(660, 'square', 0.08, 0.15), 60); },
+  qony:  () => { playBlip(660, 'sawtooth', 0.13, 0.18); },
+  rei:   () => { playBlip(520, 'square', 0.08, 0.2); setTimeout(() => playBlip(780, 'square', 0.10, 0.2), 80); },
+  surya: () => { playBlip(440, 'sawtooth', 0.06, 0.2); setTimeout(() => playBlip(880, 'square', 0.12, 0.2), 50); setTimeout(() => playBlip(1100, 'square', 0.10, 0.15), 120); },
+  disa:  () => { playBlip(700, 'triangle', 0.14, 0.18); }
+};
+
+function playSfxEscape() { playBlip(220, 'sawtooth', 0.18, 0.12); }
+function playSfxComboUp(level) { playBlip(440 + level * 80, 'square', 0.08, 0.15); }
+function playSfxCountdown() { playBlip(660, 'square', 0.15, 0.2); }
+function playSfxGo() {
+  [440, 550, 660, 880].forEach((f, i) => setTimeout(() => playBlip(f, 'square', 0.1, 0.2), i * 60));
+}
+function playSfxGameOver() {
+  [440, 330, 220, 165].forEach((f, i) => setTimeout(() => playBlip(f, 'sawtooth', 0.2, 0.15), i * 120));
+}
+
+// ─────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────
+let phase = 'idle';       // idle | countdown | playing | over
+let score = 0;
+let highScore = parseInt(localStorage.getItem('farewell_hiscore') || '0');
+let timeLeft = 60;
+let lives = 3;
+let combo = 0;
+let difficulty = 'normal';
+let totalClicks = 0;
+let totalHits = 0;
+
+// hitCount tracks per-character whacks for MVP chart
+let hitCount = {};
+CHARACTERS.forEach(c => hitCount[c.id] = 0);
+
+// holes[i] = { id, charId, holeState, timers:[] }
+// holeState: 'empty' | 'rising' | 'up' | 'falling'
+let holes = Array(10).fill(null).map((_, i) => ({ id:i, charId:null, holeState:'empty', timers:[] }));
+
+let gameTimer = null;
+let spawnTimer = null;
+let comboDecayTimer = null;
+
+// ─────────────────────────────────────────
+//  DOM REFS
+// ─────────────────────────────────────────
+const elGrid        = document.getElementById('game-grid');
+const elScore       = document.getElementById('hud-score');
+const elTime        = document.getElementById('hud-time');
+const elLives       = document.getElementById('hud-lives');
+const elComboFill   = document.getElementById('combo-bar-fill');
+const elComboText   = document.getElementById('combo-bar-text');
+const elIdle        = document.getElementById('idle-overlay');
+const elOver        = document.getElementById('over-overlay');
+const elCountdown   = document.getElementById('countdown-overlay');
+const elCountText   = document.getElementById('countdown-text');
+const elIdleHiscore = document.getElementById('idle-hiscore');
+const btnStart      = document.getElementById('btn-start');
+const btnRestart    = document.getElementById('btn-restart');
+const btnPhotobooth = document.getElementById('btn-photobooth');
+const btnSound      = document.getElementById('btn-sound');
+const diffBtns      = document.querySelectorAll('.diff-btn');
+
+// ─────────────────────────────────────────
+//  BOARD INIT
+// ─────────────────────────────────────────
+function initBoard() {
+  elGrid.innerHTML = '';
+  holes.forEach(hole => {
+    const slot = document.createElement('div');
+    slot.className = 'hole-slot flex flex-col items-center';
+    slot.innerHTML = `
+      <div class="sprite-clip relative w-20 h-24 flex items-end justify-center">
+        <img id="spr-${hole.id}"
+          src="" alt=""
+          draggable="false"
+          class="avatar-sprite absolute bottom-0 w-16 h-20 object-contain hidden select-none pointer-events-auto"
+          style="image-rendering:pixelated;"
+        />
+        <!-- BONK label + points, animated separately -->
+        <div id="bonk-${hole.id}" class="absolute bottom-20 left-1/2 -translate-x-1/2 pointer-events-none text-center hidden z-20">
+          <div class="font-hero-title-mobile text-[14px] text-neon-yellow drop-shadow-[2px_2px_0_#000] leading-tight">BONK!</div>
+          <div id="pts-${hole.id}" class="font-button-label text-[11px] text-white drop-shadow-[1px_1px_0_#000]">+100</div>
+        </div>
+      </div>
+      <!-- Oval hole -->
+      <div class="hole w-20 h-7 rounded-[50%] -mt-3 relative z-10"></div>
+      <!-- Character name -->
+      <div id="name-${hole.id}" class="font-caption text-[14px] text-text-secondary mt-1 h-5 text-center"></div>
+    `;
+    elGrid.appendChild(slot);
+
+    // Whack event — pointer for mouse+touch
+    const spr = slot.querySelector(`#spr-${hole.id}`);
+    spr.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      totalClicks++;
+      handleWhack(hole.id);
+    });
+  });
+}
+
+// ─────────────────────────────────────────
+//  HUD
+// ─────────────────────────────────────────
+function renderHUD() {
+  elScore.textContent = score.toString().padStart(6, '0');
+  elTime.textContent  = timeLeft;
+  elIdleHiscore.textContent = highScore.toString().padStart(6, '0');
+
+  // Lives hearts
+  const heartHTML = count => Array(count).fill(
+    `<span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1;">favorite</span>`
+  ).join('');
+  const emptyHTML = count => Array(count).fill(
+    `<span class="material-symbols-outlined text-surface-variant">favorite_border</span>`
+  ).join('');
+  elLives.innerHTML = heartHTML(Math.max(lives, 0)) + emptyHTML(Math.max(3 - lives, 0));
+
+  // Combo bar (max combo = 5)
+  const pct = (combo / 5) * 100;
+  elComboFill.style.width = pct + '%';
+  elComboText.textContent = `COMBO x${combo}`;
+  if (combo > 0) elComboFill.classList.add('combo-glow');
+  else           elComboFill.classList.remove('combo-glow');
+
+  // Time urgency: pulse when ≤ 10s
+  if (timeLeft <= 10 && phase === 'playing') elTime.classList.add('animate-pulse', 'text-error');
+  else                                       elTime.classList.remove('animate-pulse', 'text-error');
+}
+
+// ─────────────────────────────────────────
+//  DIFFICULTY UI
+// ─────────────────────────────────────────
+function renderDiffUI() {
+  diffBtns.forEach(btn => {
+    const d = btn.dataset.diff;
+    if (d === difficulty) {
+      btn.className = 'diff-btn pixel-btn bg-surface-bright text-neon-yellow font-button-label text-button-label px-6 py-3 border-2 border-neon-yellow drop-shadow-[0_0_5px_rgba(255,225,53,0.5)] uppercase';
+    } else {
+      btn.className = 'diff-btn pixel-btn bg-surface-variant text-on-surface font-button-label text-button-label px-6 py-3 border-2 border-border-pixel hover:border-neon-cyan uppercase opacity-70';
+    }
+  });
+}
+
+// ─────────────────────────────────────────
+//  HOLE STATE MACHINE
+//  Each hole has its own timer array to prevent
+//  stale-closure bugs from overlapping timeouts
+// ─────────────────────────────────────────
+function clearHoleTimers(holeId) {
+  const hole = holes[holeId];
+  hole.timers.forEach(clearTimeout);
+  hole.timers = [];
+}
+
+function setHoleState(holeId, newState, charId) {
+  const hole = holes[holeId];
+  clearHoleTimers(holeId);
+
+  hole.holeState = newState;
+  if (charId !== undefined) hole.charId = charId;
+
+  const spr   = document.getElementById(`spr-${holeId}`);
+  const nameEl = document.getElementById(`name-${holeId}`);
+  const char  = CHARACTERS.find(c => c.id === hole.charId);
+
+  // Strip all animation classes
+  spr.classList.remove('avatar-rising','avatar-up','avatar-falling','hit-flash-anim','hidden');
+
+  switch (newState) {
+
+    case 'empty':
+      spr.classList.add('hidden');
+      spr.src = '';
+      nameEl.textContent = '';
+      hole.charId = null;
+      break;
+
+    case 'rising': {
+      spr.src = char.sprite;
+      nameEl.textContent = char.name;
+      nameEl.style.color = '';
+      // force reflow so animation restarts cleanly
+      void spr.offsetWidth;
+      spr.classList.add('avatar-rising');
+
+      const t = setTimeout(() => {
+        if (holes[holeId].holeState === 'rising') setHoleState(holeId, 'up');
+      }, 220);
+      hole.timers.push(t);
+      break;
+    }
+
+    case 'up': {
+      void spr.offsetWidth;
+      spr.classList.add('avatar-up');
+      const cfg = DIFFICULTY_CONFIG[difficulty];
+      const upMs = cfg.upDuration * char.speed;
+
+      const t = setTimeout(() => {
+        // Only escape if still 'up' (not already whacked)
+        if (holes[holeId].holeState === 'up') {
+          setHoleState(holeId, 'falling');
+          onEscape(holeId);
+        }
+      }, upMs);
+      hole.timers.push(t);
+      break;
+    }
+
+    case 'falling':
+      void spr.offsetWidth;
+      spr.classList.add('avatar-falling');
+      nameEl.style.color = '#FF3B3B';
+
+      const t = setTimeout(() => setHoleState(holeId, 'empty'), 280);
+      hole.timers.push(t);
+      break;
+  }
+}
+
+// ─────────────────────────────────────────
+//  SPAWN
+// ─────────────────────────────────────────
+function spawnCharacter() {
+  if (phase !== 'playing') return;
+  const cfg = DIFFICULTY_CONFIG[difficulty];
+
+  const emptyHoles  = holes.filter(h => h.holeState === 'empty');
+  const activeCount = holes.filter(h => h.holeState === 'rising' || h.holeState === 'up').length;
+
+  if (emptyHoles.length === 0 || activeCount >= cfg.maxSimultaneous) return;
+
+  const target = emptyHoles[Math.floor(Math.random() * emptyHoles.length)];
+  const char   = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+
+  setHoleState(target.id, 'rising', char.id);
+}
+
+// ─────────────────────────────────────────
+//  WHACK
+// ─────────────────────────────────────────
+function handleWhack(holeId) {
+  const hole = holes[holeId];
+  if (!hole || hole.holeState !== 'up') return;
+
+  const char = CHARACTERS.find(c => c.id === hole.charId);
+  totalHits++;
+
+  // Score
+  const multiplier = Math.min(combo + 1, 5);
+  const earned = char.points * multiplier;
+  score += earned;
+  hitCount[char.id]++;
+
+  // Combo
+  const prevCombo = combo;
+  combo = Math.min(combo + 1, 5);
+  resetComboDecay();
+  if (combo > prevCombo) playSfxComboUp(combo);
+
+  // Character SFX
+  if (CHAR_SFX[char.id]) CHAR_SFX[char.id]();
+
+  // BONK! visual
+  showBonk(holeId, earned);
+
+  // Immediately hide sprite (whacked)
+  clearHoleTimers(holeId);
+  hole.holeState = 'whacked'; // prevent escape from firing
+  const spr = document.getElementById(`spr-${holeId}`);
+  spr.classList.remove('avatar-up');
+  spr.classList.add('hit-flash-anim');
+
+  const t = setTimeout(() => setHoleState(holeId, 'empty'), 220);
+  hole.timers.push(t);
+
+  renderHUD();
+}
+
+function showBonk(holeId, earned) {
+  const bonkEl = document.getElementById(`bonk-${holeId}`);
+  const ptsEl  = document.getElementById(`pts-${holeId}`);
+  ptsEl.textContent = `+${earned}`;
+  bonkEl.classList.remove('hidden', 'bonk-pop-anim');
+  void bonkEl.offsetWidth; // reflow
+  bonkEl.classList.add('bonk-pop-anim');
+  setTimeout(() => bonkEl.classList.add('hidden'), 560);
+}
+
+// ─────────────────────────────────────────
+//  ESCAPE (character not whacked in time)
+// ─────────────────────────────────────────
+function onEscape(holeId) {
+  if (phase !== 'playing') return;
+  playSfxEscape();
+
+  lives = Math.max(lives - 1, 0);
+  renderHUD();
+
+  // Shake the lives display
+  elLives.classList.remove('life-shake');
+  void elLives.offsetWidth;
+  elLives.classList.add('life-shake');
+
+  if (lives <= 0) endGame();
+}
+
+// ─────────────────────────────────────────
+//  COMBO DECAY
+// ─────────────────────────────────────────
+function resetComboDecay() {
+  clearTimeout(comboDecayTimer);
+  comboDecayTimer = setTimeout(() => {
+    combo = 0;
+    renderHUD();
+  }, DIFFICULTY_CONFIG[difficulty].comboDecay);
+}
+
+// ─────────────────────────────────────────
+//  GAME FLOW
+// ─────────────────────────────────────────
+function startSequence() {
+  // Reset state
+  score = 0; timeLeft = 60; lives = 3; combo = 0;
+  totalClicks = 0; totalHits = 0;
+  CHARACTERS.forEach(c => hitCount[c.id] = 0);
+  holes.forEach(h => { clearHoleTimers(h.id); h.holeState = 'empty'; h.charId = null; });
+  // Re-init sprites to clean state
+  holes.forEach(h => {
+    const spr = document.getElementById(`spr-${h.id}`);
+    const nameEl = document.getElementById(`name-${h.id}`);
+    if (spr)    { spr.classList.add('hidden'); spr.classList.remove('avatar-rising','avatar-up','avatar-falling','hit-flash-anim'); spr.src = ''; }
+    if (nameEl) nameEl.textContent = '';
+  });
+
+  elIdle.classList.add('hidden');
+  elOver.classList.add('hidden');
+  renderHUD();
+
+  // Countdown
+  phase = 'countdown';
+  elCountdown.classList.remove('hidden');
+  let count = 3;
+  elCountText.textContent = count;
+  playSfxCountdown();
+
+  const countInt = setInterval(() => {
+    count--;
+    if (count > 0) {
+      elCountText.textContent = count;
+      playSfxCountdown();
+    } else if (count === 0) {
+      elCountText.textContent = 'GO!';
+      playSfxGo();
+    } else {
+      clearInterval(countInt);
+      elCountdown.classList.add('hidden');
+      phase = 'playing';
+      startGameLoop();
+    }
+  }, 1000);
+}
+
+function startGameLoop() {
+  const cfg = DIFFICULTY_CONFIG[difficulty];
+
+  gameTimer = setInterval(() => {
+    timeLeft--;
+    renderHUD();
+    if (timeLeft <= 0) endGame();
+  }, 1000);
+
+  spawnTimer = setInterval(spawnCharacter, cfg.spawnInterval);
+}
+
+function endGame() {
+  if (phase === 'over') return;
+  phase = 'over';
+  clearInterval(gameTimer);
+  clearInterval(spawnTimer);
+  clearTimeout(comboDecayTimer);
+  playSfxGameOver();
+
+  // Clear all active holes
+  holes.forEach(h => { clearHoleTimers(h.id); setHoleState(h.id, 'empty'); });
+
+  // Save high score
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem('farewell_hiscore', highScore.toString());
+  }
+
+  renderHUD();
+  renderResultScreen();
+  elOver.classList.remove('hidden');
+}
+
+// ─────────────────────────────────────────
+//  RESULT SCREEN
+// ─────────────────────────────────────────
+function renderResultScreen() {
+  document.getElementById('final-score').textContent       = score.toString().padStart(6, '0');
+  document.getElementById('high-score-display').textContent = highScore.toString().padStart(6, '0');
+
+  const acc = totalClicks > 0 ? Math.round((totalHits / totalClicks) * 100) : 0;
+  document.getElementById('accuracy-display').textContent  = acc + '%';
+
+  const chart = document.getElementById('mvp-chart');
+  chart.innerHTML = '';
+
+  const maxHits = Math.max(...Object.values(hitCount), 1);
+  const sorted  = [...CHARACTERS].sort((a, b) => hitCount[b.id] - hitCount[a.id]);
+
+  sorted.forEach((char, idx) => {
+    const hits  = hitCount[char.id];
+    const pct   = Math.round((hits / maxHits) * 100);
+    const isMVP = idx === 0 && hits > 0;
+
+    const row = document.createElement('div');
+    row.className = 'flex items-center gap-2';
+    row.innerHTML = `
+      <span class="w-16 text-right text-white truncate text-[14px] shrink-0">${char.name.split(' ').pop()}</span>
+      <div class="flex-grow bg-surface-container h-4 border border-border-pixel relative overflow-hidden">
+        <div class="${char.barColor} h-full transition-all duration-500" style="width:${pct}%"></div>
+      </div>
+      <span class="w-10 text-neon-yellow text-right text-[14px] shrink-0">${hits}${isMVP && hits > 0 ? ' 🏆' : ''}</span>
+    `;
+    chart.appendChild(row);
+  });
+}
+
+// ─────────────────────────────────────────
+//  EVENT LISTENERS
+// ─────────────────────────────────────────
+btnStart.addEventListener('click', startSequence);
+
+btnRestart.addEventListener('click', () => {
+  elOver.classList.add('hidden');
+  elIdle.classList.remove('hidden');
+  phase = 'idle';
+  renderHUD();
+});
+
+btnPhotobooth.addEventListener('click', () => {
+  // Navigate to photobooth page — adjust href as needed
+  alert('Navigating to Photobooth...\n(Sambungkan ke halaman D Farewell Quest)');
+});
+
+diffBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    difficulty = btn.dataset.diff;
+    renderDiffUI();
+  });
+});
+
+btnSound.addEventListener('click', () => {
+  soundEnabled = !soundEnabled;
+  btnSound.classList.toggle('muted', !soundEnabled);
+  // Resume AudioContext if needed (browser policy)
+  if (soundEnabled && audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  playBlip(soundEnabled ? 880 : 220, 'square', 0.08, 0.15);
+});
+
+// Resume AudioContext on first interaction (Chrome policy)
+document.addEventListener('pointerdown', () => {
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}, { once: true });
+
+// ─────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────
+initBoard();
+renderDiffUI();
+renderHUD();
+</script>
+</body></html>
