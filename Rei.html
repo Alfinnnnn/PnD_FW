@@ -31,13 +31,33 @@
 <!-- Active Tab -->
 <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="Rei.html">LOG</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="trivia_game.html">TRIVIA</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="whack_a_coworker.html">GAME</a>
 </div>
 <div class="flex gap-4 items-center">
-<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span class="material-symbols-outlined">settings</span></button>
+<button onclick="toggleMobileMenu()" class="md:hidden text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span class="material-symbols-outlined">menu</span></button>
+<button class="hidden md:block text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span class="material-symbols-outlined">settings</span></button>
 <button onclick="toggleMute(event)" class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75"><span id="volume-icon" class="material-symbols-outlined">volume_up</span></button>
 </div>
 </nav>
+<!-- Mobile Sidebar -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-300 md:hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-64 bg-surface-container border-l-4 border-border-pixel transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col p-6 gap-6 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center mb-4 border-b-2 border-border-pixel pb-2">
+            <span class="font-button-label text-neon-cyan uppercase">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-primary hover:text-neon-cyan transition-colors">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="index.html">QUEST</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="chara_selection.html">PARTY</a>
+        <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow hover:text-neon-cyan transition-colors w-fit" href="Rei.html">LOG</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="wall_of_Fame.html">WALL</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors uppercase" href="trivia_game.html">TRIVIA</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="whack_a_coworker.html">GAME</a>
+    </div>
+</div>
 <!-- Main Content Canvas -->
 <main class="flex-grow pt-[100px] px-margin-mobile md:px-margin-desktop pb-8 flex flex-col md:flex-row gap-8 max-w-7xl mx-auto w-full z-10 relative">
 <!-- Left Side: Character Stats Card -->
@@ -151,6 +171,23 @@
 </footer>
 <!-- Typewriter Logic -->
 <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const panel = document.getElementById('mobile-menu-panel');
+            const isClosed = menu.classList.contains('pointer-events-none');
+            
+            if (isClosed) {
+                menu.classList.remove('pointer-events-none', 'opacity-0');
+                menu.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('opacity-0');
+                menu.classList.remove('opacity-100');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => menu.classList.add('pointer-events-none'), 300);
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const dialogElement = document.getElementById('dialog-text');
             const fullText = dialogElement.getAttribute('data-full-text');

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html class="dark" lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OFFICE TRIVIA QUEST</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "on-background": "#e7deff","primary-fixed-dim": "#dab9ff","surface-dim": "#140f29",
+        "surface-container-high": "#2b2640","outline": "#978d9d","surface-container-low": "#1d1831",
+        "tertiary-container": "#ff7469","surface": "#140f29","secondary": "#ecffe3",
+        "surface-tint": "#dab9ff","surface-container-lowest": "#0f0a23","on-error": "#690005",
+        "primary": "#dab9ff","surface-variant": "#36314c","on-secondary": "#003907",
+        "background": "#140f29","outline-variant": "#4b4452","secondary-fixed-dim": "#00e639",
+        "on-primary": "#470084","surface-container": "#211c35","surface-container-highest": "#36314c",
+        "primary-container": "#bd85ff","on-primary-fixed": "#2a0053","error": "#ffb4ab",
+        "secondary-container": "#13ff43","tertiary": "#ffb4ab","on-surface": "#e7deff",
+        "on-surface-variant": "#cec3d4","on-primary-container": "#4e0a8c","on-tertiary": "#690006"
+      },
+      borderRadius: { "DEFAULT": "0px","lg": "0px","xl": "0px","full": "9999px" },
+      spacing: { "gutter": "16px","container-max": "800px" },
+      fontFamily: {
+        "headline-lg": ["'Press Start 2P'","monospace"],
+        "body-md": ["'VT323'","monospace"],
+        "stats-mono": ["'Press Start 2P'","monospace"],
+        "body-lg": ["'VT323'","monospace"],
+        "display-game": ["'Press Start 2P'","monospace"],
+        "label-caps": ["'Press Start 2P'","monospace"]
+      },
+      fontSize: {
+        "headline-lg": ["18px",{lineHeight:"24px",fontWeight:"700"}],
+        "body-md": ["20px",{lineHeight:"24px",fontWeight:"400"}],
+        "stats-mono": ["10px",{lineHeight:"12px",fontWeight:"400"}],
+        "body-lg": ["24px",{lineHeight:"28px",fontWeight:"400"}],
+        "display-game": ["14px",{lineHeight:"1.2",letterSpacing:"1px",fontWeight:"700"}],
+        "label-caps": ["10px",{lineHeight:"14px",fontWeight:"700"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { background-color:#0f0a23; color:#e7deff; image-rendering:pixelated; overflow-x:hidden; }
+  .crt-overlay::before {
+    content:" "; display:block; position:fixed; top:0; left:0; bottom:0; right:0;
+    background: linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,0.25) 50%),
+                linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06));
+    z-index:999; background-size:100% 4px,3px 100%; pointer-events:none;
+  }
+  .pixel-border { border:2px solid #4b4452; box-shadow:inset 0 0 0 1px #0f0a23; }
+  .pixel-border-primary { border:2px solid #dab9ff; }
+  .pixel-border-success { border:2px solid #00e639; }
+  .pixel-border-error { border:2px solid #ff7469; }
+  .retro-progress { background:repeating-linear-gradient(90deg,transparent,transparent 9px,#0f0a23 9px,#0f0a23 10px); }
+  .flicker { animation:flicker 0.15s infinite; }
+  @keyframes flicker { 0%{opacity:0.9;} 50%{opacity:1;} 100%{opacity:0.95;} }
+  .active-btn:active { transform:translate(2px,2px); box-shadow:none; }
+  .option-btn { transition: all 0.1s; }
+  .option-btn:hover { background:#2b2640; }
+  #gameover-screen { display:none; }
+  #levelup-toast { display:none; }
+  #feedback-box { display:none; }
+  #feedback-modal { display:none; }
+
+  @keyframes modal-pop {
+    0%   { transform: scale(0.85) translateY(20px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .modal-pop-anim { animation: modal-pop 0.18s steps(4) forwards; }
+  .next-btn-pixel {
+    border: 3px solid #00e639;
+    box-shadow: 0 0 0 2px #0f0a23, 0 0 0 4px #00e639, 4px 4px 0 4px rgba(0,0,0,0.8);
+    transition: all 0.07s steps(2);
+  }
+  .next-btn-pixel:hover { background:#00e639; color:#0f0a23; box-shadow:0 0 0 2px #0f0a23,0 0 0 4px #00e639,2px 2px 0 4px rgba(0,0,0,0.8); }
+  .next-btn-pixel:active { transform:translate(4px,4px); box-shadow:none; }
+  .wrong-btn-pixel {
+    border: 3px solid #ff7469;
+    box-shadow: 0 0 0 2px #0f0a23, 0 0 0 4px #ff7469, 4px 4px 0 4px rgba(0,0,0,0.8);
+    transition: all 0.07s steps(2);
+  }
+  .wrong-btn-pixel:hover { background:#ff7469; color:#0f0a23; box-shadow:0 0 0 2px #0f0a23,0 0 0 4px #ff7469,2px 2px 0 4px rgba(0,0,0,0.8); }
+  .wrong-btn-pixel:active { transform:translate(4px,4px); box-shadow:none; }
+  #intro-modal { display:flex; }
+
+  @keyframes pixel-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+  }
+  @keyframes cursor-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  @keyframes scanline-intro {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  .pixel-float { animation: pixel-float 2s ease-in-out infinite; }
+  .cursor-blink { animation: cursor-blink 1s step-end infinite; }
+  .pixel-box {
+    border: 4px solid #dab9ff;
+    box-shadow: 0 0 0 4px #0f0a23, 0 0 0 8px #dab9ff, 8px 8px 0 8px rgba(0,0,0,0.5);
+    image-rendering: pixelated;
+  }
+  .start-btn-pixel {
+    border: 3px solid #00e639;
+    box-shadow: 0 0 0 2px #0f0a23, 0 0 0 4px #00e639, 4px 4px 0 4px rgba(0,0,0,0.8);
+    transition: all 0.07s steps(2);
+  }
+  .start-btn-pixel:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+  .start-btn-pixel:hover {
+    background: #00e639;
+    color: #0f0a23;
+    box-shadow: 0 0 0 2px #0f0a23, 0 0 0 4px #00e639, 2px 2px 0 4px rgba(0,0,0,0.8);
+  }
+  .modal-scanline::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.15) 3px, rgba(0,0,0,0.15) 4px);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+</style>
+<script src="assets/audio.js"></script>
+</head>
+<body class="crt-overlay font-body-md flex flex-col min-h-screen">
+
+<!-- TopAppBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-[40px] py-4 bg-[#12121f] border-b-4 border-[#5555AA] shadow-[0_4px_0_0_#0d0d1a]">
+  <div class="font-['Press_Start_2P'] text-[18px] md:text-[24px] text-[#00F5FF] drop-shadow-[0_0_8px_rgba(0,245,255,0.8)] uppercase">
+      FAREWELL QUEST
+  </div>
+  <div class="hidden md:flex gap-8 items-center font-['Press_Start_2P'] text-[14px]">
+      <a class="text-[#baccb0] pb-1 hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="index.html">QUEST</a>
+      <a class="text-[#baccb0] pb-1 hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="chara_selection.html">PARTY</a>
+      <a class="text-[#baccb0] pb-1 hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="wall_of_Fame.html">WALL</a>
+      <a class="text-[#FFE135] border-b-4 border-[#FFE135] pb-1 hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="trivia_game.html">TRIVIA</a>
+      <a class="text-[#baccb0] pb-1 hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="whack_a_coworker.html">GAME</a>
+  </div>
+  <div class="flex gap-4">
+      <button onclick="toggleMobileMenu()" class="md:hidden hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 text-[#efffe3]"><span class="material-symbols-outlined">menu</span></button>
+      <button onclick="toggleMute(event)" class="hover:text-[#00F5FF] hover:scale-105 transition-transform active:translate-y-1 duration-75 text-[#efffe3]"><span id="volume-icon" class="material-symbols-outlined text-[#8888AA]">volume_up</span></button>
+  </div>
+</nav>
+
+<!-- Mobile Sidebar -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-300 md:hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-64 bg-[#12121f] border-l-4 border-[#5555AA] transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col p-6 gap-6 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center mb-4 border-b-2 border-[#5555AA] pb-2 font-['Press_Start_2P']">
+            <span class="text-[12px] text-[#00F5FF] uppercase">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-[#baccb0] hover:text-[#00F5FF] transition-colors">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <a class="text-[#baccb0] font-['Press_Start_2P'] text-[12px] hover:text-[#00F5FF] transition-colors" href="index.html">QUEST</a>
+        <a class="text-[#baccb0] font-['Press_Start_2P'] text-[12px] hover:text-[#00F5FF] transition-colors" href="chara_selection.html">PARTY</a>
+        <a class="text-[#baccb0] font-['Press_Start_2P'] text-[12px] hover:text-[#00F5FF] transition-colors" href="wall_of_Fame.html">WALL</a>
+        <a class="text-[#FFE135] font-['Press_Start_2P'] text-[12px] border-b-4 border-[#FFE135] hover:text-[#00F5FF] transition-colors w-fit uppercase" href="trivia_game.html">TRIVIA</a>
+        <a class="text-[#baccb0] font-['Press_Start_2P'] text-[12px] hover:text-[#00F5FF] transition-colors" href="whack_a_coworker.html">GAME</a>
+    </div>
+</div>
+
+<!-- INTRO MODAL -->
+<div id="intro-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4" style="background:rgba(10,6,30,0.92);backdrop-filter:blur(4px);">
+  <div class="pixel-box modal-scanline relative bg-[#0f0a23] w-full max-w-md p-0 overflow-hidden">
+
+    <!-- Header Bar -->
+    <div class="bg-primary px-4 py-2 flex items-center justify-between">
+      <div class="flex gap-1.5">
+        <span class="w-3 h-3 bg-[#ff7469] inline-block border border-[#0f0a23]"></span>
+        <span class="w-3 h-3 bg-[#FFD700] inline-block border border-[#0f0a23]"></span>
+        <span class="w-3 h-3 bg-[#00e639] inline-block border border-[#0f0a23]"></span>
+      </div>
+      <span class="font-stats-mono text-stats-mono text-on-primary-fixed uppercase tracking-widest">OFFICE_TRIVIA.EXE</span>
+      <span class="font-stats-mono text-stats-mono text-on-primary-fixed">v1.0</span>
+    </div>
+
+    <!-- Content -->
+    <div class="p-8 flex flex-col items-center gap-6 text-center">
+
+      <!-- Icon -->
+      <div class="pixel-float text-6xl">🎮</div>
+
+      <!-- Title -->
+      <div class="flex flex-col gap-2">
+        <h1 class="font-display-game text-display-game text-secondary-fixed-dim uppercase leading-relaxed tracking-widest">
+          OFFICE TRIVIA QUEST
+        </h1>
+        <div class="font-stats-mono text-[8px] text-on-surface-variant uppercase tracking-widest">*** FAREWELL QUEST MINI-GAME ***</div>
+      </div>
+
+      <!-- Rules -->
+      <div class="w-full border border-outline-variant p-4 text-left flex flex-col gap-2 bg-surface-container">
+        <div class="font-stats-mono text-[9px] text-primary uppercase mb-1 tracking-wider">▶ RULES :</div>
+        <div class="font-body-md text-[18px] text-on-surface-variant flex items-start gap-2"><span class="text-secondary-fixed-dim shrink-0">■</span><span>9 pertanyaan tentang kebiasaan tim kamu</span></div>
+        <div class="font-body-md text-[18px] text-on-surface-variant flex items-start gap-2"><span class="text-secondary-fixed-dim shrink-0">■</span><span>8 detik untuk setiap soal!</span></div>
+        <div class="font-body-md text-[18px] text-on-surface-variant flex items-start gap-2"><span class="text-[#FFD700] shrink-0">■</span><span>Kumpulkan XP & naik level</span></div>
+        <div class="font-body-md text-[18px] text-on-surface-variant flex items-start gap-2"><span class="text-[#ff7469] shrink-0">■</span><span>Soal urutan acak setiap main</span></div>
+      </div>
+
+      <!-- Start Button -->
+      <button id="intro-start-btn" onclick="startGame()" class="start-btn-pixel bg-[#0f0a23] text-secondary-fixed-dim font-display-game text-display-game uppercase px-10 py-4 w-full">
+        ▶ INSERT COIN TO PLAY
+      </button>
+      <div class="font-stats-mono text-[8px] text-on-surface-variant cursor-blink">_ PRESS START _</div>
+
+    </div>
+  </div>
+</div>
+
+<main class="flex-grow flex flex-col items-center py-4 px-4 sm:px-0 pb-32 mt-24">
+  <div class="w-full max-w-[800px] flex flex-col gap-0 border-x-2 border-outline-variant bg-surface-container-low min-h-[calc(100vh-128px)]">
+
+    <!-- Score & Q Bar -->
+    <div class="px-6 py-3 border-b-2 border-outline-variant bg-surface-container-highest flex justify-between items-center font-stats-mono text-stats-mono">
+      <span id="header-q" class="text-secondary-fixed-dim">Q 1/9</span>
+      <span id="header-score" class="text-secondary-fixed-dim">SCORE: 0</span>
+    </div>
+
+    <!-- XP Bar -->
+    <div class="px-6 py-4 border-b-2 border-outline-variant">
+      <div class="flex justify-between items-end mb-2">
+        <div class="font-stats-mono text-stats-mono flex gap-2 items-center">
+          <span class="text-on-surface-variant">TRIVIA MASTER</span>
+          <span id="lvl-badge" class="bg-primary-container text-on-primary-fixed px-2 py-0.5">LVL 1</span>
+        </div>
+        <div id="xp-label" class="font-stats-mono text-stats-mono text-on-surface-variant">0 / 300 XP</div>
+      </div>
+      <div class="h-4 bg-surface-container-highest w-full pixel-border border-outline-variant relative overflow-hidden">
+        <div id="xp-bar" class="absolute inset-0 bg-primary h-full retro-progress transition-all duration-500" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Question Section -->
+    <div id="game-section" class="flex flex-col flex-1">
+      <div class="px-6 py-8 flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+          <div class="font-stats-mono text-stats-mono text-on-surface-variant uppercase flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-primary inline-block"></span>
+            <span id="q-counter">PERTANYAAN 1 DARI 9</span>
+          </div>
+          <div id="q-category" class="inline-block self-start bg-[#FFD700] text-black font-stats-mono text-[10px] px-2 py-1 uppercase font-bold">KATEGORI</div>
+        </div>
+        <h2 id="q-text" class="text-body-lg font-body-lg text-on-background leading-relaxed"></h2>
+      </div>
+
+      <div class="h-px bg-outline-variant mx-6"></div>
+
+      <!-- Options -->
+      <div class="px-6 py-6 flex flex-col gap-4" id="options-container"></div>
+
+      <!-- Feedback Modal -->
+      <div id="feedback-modal" class="fixed inset-0 z-[55] flex items-center justify-center p-4" style="background:rgba(10,6,30,0.8);backdrop-filter:blur(3px);">
+        <div id="feedback-modal-inner" class="pixel-box modal-scanline modal-pop-anim relative bg-[#0f0a23] w-full max-w-lg overflow-hidden">
+
+          <!-- Header Bar -->
+          <div id="feedback-modal-header" class="px-4 py-2 flex items-center justify-between">
+            <span id="feedback-result-icon" class="font-stats-mono text-stats-mono uppercase tracking-widest"></span>
+            <span id="feedback-xp" class="font-stats-mono text-stats-mono"></span>
+          </div>
+
+          <!-- Content -->
+          <div class="p-5 flex flex-col gap-4">
+            <p id="feedback-text" class="text-body-lg font-body-lg text-on-background leading-relaxed"></p>
+
+            <!-- Level up badge (hidden by default) -->
+            <div id="feedback-levelup" class="hidden bg-primary px-4 py-2 flex items-center justify-center gap-3 flicker">
+              <span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings:'FILL' 1">star</span>
+              <span id="feedback-levelup-text" class="font-stats-mono text-stats-mono text-on-primary-fixed uppercase tracking-widest">LEVEL UP!</span>
+              <span class="material-symbols-outlined text-on-primary-fixed" style="font-variation-settings:'FILL' 1">star</span>
+            </div>
+
+            <!-- Next Button -->
+            <button id="feedback-next-btn" onclick="nextQuestion()" class="next-btn-pixel bg-[#0f0a23] text-secondary-fixed-dim font-display-game text-display-game uppercase px-6 py-3 w-full">
+              ▶ NEXT QUESTION
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Level Up Toast -->
+      <div id="levelup-toast" class="bg-primary px-6 py-3 flex justify-between items-center text-on-primary-fixed font-stats-mono text-stats-mono flicker">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">star</span>
+        <span id="levelup-text" class="uppercase tracking-widest">LEVEL UP!</span>
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">star</span>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="flex flex-col items-center justify-center flex-1 py-16 px-6 gap-8">
+      <div class="text-center flex flex-col gap-4">
+        <div class="font-stats-mono text-stats-mono text-secondary-fixed-dim tracking-widest">*** GAME OVER ***</div>
+        <h2 class="text-display-game font-display-game text-primary text-2xl leading-relaxed">QUEST COMPLETE!</h2>
+      </div>
+      <div class="w-full max-w-sm flex flex-col gap-3 pixel-border border-outline-variant p-6">
+        <div class="flex justify-between font-stats-mono text-stats-mono">
+          <span class="text-on-surface-variant">SKOR AKHIR</span>
+          <span id="final-score" class="text-secondary-fixed-dim">0</span>
+        </div>
+        <div class="flex justify-between font-stats-mono text-stats-mono">
+          <span class="text-on-surface-variant">BENAR</span>
+          <span id="final-correct" class="text-secondary-fixed-dim">0 / 9</span>
+        </div>
+        <div class="flex justify-between font-stats-mono text-stats-mono">
+          <span class="text-on-surface-variant">TOTAL XP</span>
+          <span id="final-xp" class="text-primary">0 XP</span>
+        </div>
+        <div class="flex justify-between font-stats-mono text-stats-mono">
+          <span class="text-on-surface-variant">LEVEL</span>
+          <span id="final-level" class="text-[#FFD700]">LVL 1</span>
+        </div>
+        <div class="h-px bg-outline-variant my-2"></div>
+        <div id="rank-label" class="text-center text-body-lg font-body-lg text-[#00FFFF]"></div>
+      </div>
+      <button onclick="restartGame()" class="bg-[#2b2640] border-2 border-outline-variant px-8 py-3 flex items-center gap-4 hover:bg-primary hover:text-on-primary-fixed transition-all active-btn group">
+        <span class="font-display-game text-display-game">PLAY AGAIN</span>
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">replay</span>
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer Controls -->
+<footer class="bg-surface-container-lowest border-t-2 border-outline-variant fixed bottom-0 left-0 w-full z-50">
+  <div class="max-w-[800px] mx-auto px-gutter h-16 flex justify-between items-center">
+    <div class="flex flex-col gap-1">
+      <div id="progress-squares" class="flex gap-1.5"></div>
+      <div id="progress-label" class="font-stats-mono text-[8px] text-on-surface-variant">1 / 9 PERTANYAAN</div>
+    </div>
+    <div class="hidden md:flex flex-col items-center gap-1 flex-1 max-w-xs mx-12">
+      <div class="flex justify-between w-full font-stats-mono text-[8px] text-on-surface-variant mb-1">
+        <span>WAKTU</span>
+        <span id="timer-label" class="text-[#00FFFF]">20s</span>
+      </div>
+      <div class="h-2 bg-surface-container-highest w-full pixel-border border-outline-variant relative">
+        <div id="timer-bar" class="absolute inset-0 bg-[#00FFFF] h-full transition-none" style="width:100%"></div>
+      </div>
+    </div>
+    <button id="next-btn" onclick="nextQuestion()" class="hidden"></button>
+  </div>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    category: "KEBIASAAN KANTOR",
+    text: "Siapa yang paling sering tiba-tiba mulai topik \"makan apa dong hari ini?\"",
+    options: ["Rei","Alfin","Ica","Qony", "Disa","Reza"],
+    correct: 0,
+    feedback: "Yep! Teh Rei emang ahlinya belokin topik ke makanan. Apapun topiknya pasti belok ke makan apa kita hari ini? (sebelum jam 11 kita harus udah order!!!)",
+    xp: 100
+  },
+  {
+    category: "ROOM CULTURE",
+    text: "Siapa yang paling sering tiba-tiba nyanyi atau celetuk random pas lagi asik kerja?",
+    options: ["Alfin","Rei","Qony","Ica", "Disa","Reza"],
+    correct: 2,
+    feedback: "Teh Qony dengan vibesnya yang gak pernah bisa ditebak, kadang kalem kadang nyanyi random tiba-tiba! (jalan-jalan dengan sepatu rodaku?; Jangan terlalu diamba-ambakan lho yha?)",
+    xp: 100
+  },
+  {
+    category: "BULLY CORNER",
+    text: "Siapa yang paling sering di-bully sama anak-anak?",
+    options: ["Ica","Qony","Alfin","Rei", "Disa","Reza"],
+    correct: 2,
+    feedback: "Yaaaaa, Siapa lagi kalau bukan Alfin yang paling sering jadi bulan-bulanan anak-anak (terutama sama Kang Reza dan Teh Rei):)",
+    xp: 100
+  },
+  {
+    category: "KOCAK MOMENT",
+    text: "Siapa yang paling pernah keluar kantor sambil engkol pake heels?",
+    options: ["Qony","Rei","Ica","Alfin", "Disa","Reza"],
+    correct: 2,
+    feedback: "Engkol with a Style? Teh Ica lahh! walopun harus engkol, style number 1. (sekarangmah dah bener ygy :) .",
+    xp: 100
+  },
+  {
+    category: "SOCIAL LIFE",
+    text: "Siapa yang paling sering jadi penghubung dan tahu semua info/gosip terbaru di kantor?",
+    options: ["Alfin","Ica","Qony","Rei", "Disa","Reza"],
+    correct: 4,
+    feedback: "Teh Disa adalah sumber info utama di kantor! Info A1? Teh Disa ini sumbernya (ingpo terus teh ndiss jangan kendor!!!).",
+    xp: 100
+  },
+  {
+    category: "WORK CULTURE",
+    text: "Siapa yang celetukannya paling asbun sedunia akhirat?",
+    options: ["Rei","Qony","Ica","Alfin", "Disa","Reza"],
+    correct: 5,
+    feedback: "Kang Reza dengan khasnya yang asbun, out of the box dan gak pernah terduga! (gila nih orang asbunnya gak ketolong euyy)",
+    xp: 100
+  },
+  {
+    category: "KOCAK MOMENTS",
+    text: "Siapa yang pernah salah kirim stiker di grup Product saat topik serius?",
+    options: ["Alfin","Ica","Rei","Qony", "Disa","Reza"],
+    correct: 2,
+    feedback: "Reply pake stiker Anjing brazilian dance??? padahal lagi bahas topik serius. (makasih lho teh Rei)",
+    xp: 100
+  },
+  {
+    category: "BURN OUT",
+    text: "Siapa yang paling Sering ngeluh kalo kerjaan lagi banyak?",
+    options: ["Qony","Alfin","Rei","Ica", "Disa","Reza"],
+    correct: [0, 1, 2, 3, 4, 5],
+    feedback: "KITA SEMUA LAHH, SIAPA LAGIII??? Hahaha. Semangattt!!!",
+    xp: 100
+  },
+  {
+    category: "OFFICE LEGEND",
+    text: "Siapa yang paling baik hati, rajin, selalu menolong semua orang, gak pernah marah, selalu positive vibes, pokoknya perfect dehh?",
+    options: ["Ica","Rei","Alfin","Qony", "Disa","Reza"],
+    correct: 2,
+    feedback: "ALFIN LAHHH! SIAPA LAGI??? (yang buat game mah bebass yaaa, hehe :v )",
+    xp: 150
+  }
+];
+
+const TIME_PER_Q = 8;
+let currentQ = 0;
+let score = 0;
+let totalXP = 0;
+let correctCount = 0;
+let answered = false;
+let timerInterval = null;
+let timeLeft = TIME_PER_Q;
+
+const XP_LEVELS = [0, 300, 700, 1100];
+
+function getLevel(xp) {
+  let lvl = 1;
+  for (let i = 1; i < XP_LEVELS.length; i++) {
+    if (xp >= XP_LEVELS[i]) lvl = i + 1;
+  }
+  return lvl;
+}
+
+function getLevelXP(lvl) {
+  return XP_LEVELS[lvl - 1] || 0;
+}
+
+function getNextLevelXP(lvl) {
+  return XP_LEVELS[lvl] || XP_LEVELS[XP_LEVELS.length - 1] + 300;
+}
+
+function updateXPBar() {
+  const lvl = getLevel(totalXP);
+  const curLvlXP = getLevelXP(lvl);
+  const needed = getNextLevelXP(lvl);
+  const pct = Math.min(100, ((totalXP - curLvlXP) / (needed - curLvlXP)) * 100);
+  document.getElementById('xp-bar').style.width = pct + '%';
+  document.getElementById('xp-label').textContent = totalXP + ' / ' + needed + ' XP';
+  document.getElementById('lvl-badge').textContent = 'LVL ' + lvl;
+}
+
+function buildProgressSquares() {
+  const c = document.getElementById('progress-squares');
+  c.innerHTML = '';
+  QUESTIONS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'w-3 h-3 ';
+    if (i < currentQ) d.className += 'bg-secondary-fixed-dim';
+    else if (i === currentQ) d.className += 'bg-[#FFD700]';
+    else d.className += 'border border-outline-variant';
+    c.appendChild(d);
+  });
+  document.getElementById('progress-label').textContent = (currentQ + 1) + ' / ' + QUESTIONS.length + ' PERTANYAAN';
+}
+
+function loadQuestion() {
+  answered = false;
+  timeLeft = TIME_PER_Q;
+  const q = QUESTIONS[currentQ];
+
+  document.getElementById('header-q').textContent = 'Q ' + (currentQ + 1) + '/' + QUESTIONS.length;
+  document.getElementById('header-score').textContent = 'SCORE: ' + score;
+  document.getElementById('q-counter').textContent = 'PERTANYAAN ' + (currentQ + 1) + ' DARI ' + QUESTIONS.length;
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-text').textContent = '"' + q.text + '"';
+  document.getElementById('feedback-modal').style.display = 'none';
+  document.getElementById('levelup-toast').style.display = 'none';
+
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+  nextBtn.classList.remove('opacity-100');
+
+  buildProgressSquares();
+
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  const labels = ['A','B','C','D','E','F'];
+  q.options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.id = 'opt-' + idx;
+    div.className = 'flex items-center group cursor-pointer pixel-border border-outline-variant p-4 option-btn';
+    div.innerHTML = `<span class="font-stats-mono text-primary mr-6">${labels[idx]}</span><span class="text-body-md text-on-surface">${opt}</span>`;
+    div.onclick = () => selectAnswer(idx);
+    container.appendChild(div);
+  });
+
+  // Only start timer if modal is already dismissed
+  const modal = document.getElementById('intro-modal');
+  if (!modal || modal.style.display === 'none') {
+    startTimer();
+  }
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  updateTimerUI();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerUI();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      if (!answered) timeOut();
+    }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  document.getElementById('timer-label').textContent = timeLeft + 's';
+  const pct = (timeLeft / TIME_PER_Q) * 100;
+  const bar = document.getElementById('timer-bar');
+  bar.style.width = pct + '%';
+  bar.style.backgroundColor = timeLeft <= 5 ? '#ff7469' : timeLeft <= 10 ? '#FFD700' : '#00FFFF';
+}
+
+function timeOut() {
+  answered = true;
+  const q = QUESTIONS[currentQ];
+  highlightAnswer(-1, q.correct);
+  if (typeof playWrongSFX === 'function') playWrongSFX();
+  const correctAnswers = Array.isArray(q.correct) ? q.correct.map(c => q.options[c]).join(", ") : q.options[q.correct];
+  showFeedback("⏰ Waktu habis! Jawaban yang benar adalah: " + correctAnswers, false, 0);
+  enableNext();
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timerInterval);
+  const q = QUESTIONS[currentQ];
+  const isCorrect = Array.isArray(q.correct) ? q.correct.includes(idx) : idx === q.correct;
+
+  highlightAnswer(idx, q.correct);
+
+  const prevLevel = getLevel(totalXP);
+  if (isCorrect) {
+    if (typeof playCorrectSFX === 'function') playCorrectSFX();
+    score++;
+    correctCount++;
+    totalXP += q.xp;
+    updateXPBar();
+    const newLevel = getLevel(totalXP);
+    if (newLevel > prevLevel) {
+      // Show level up inside feedback modal
+      const lvlBadge = document.getElementById('feedback-levelup');
+      document.getElementById('feedback-levelup-text').textContent = 'LEVEL UP! LVL ' + prevLevel + ' → LVL ' + newLevel;
+      lvlBadge.style.display = 'flex';
+    }
+    showFeedback(q.feedback, true, q.xp);
+  } else {
+    if (typeof playWrongSFX === 'function') playWrongSFX();
+    const correctAnswers = Array.isArray(q.correct) ? q.correct.map(c => q.options[c]).join(", ") : q.options[q.correct];
+    showFeedback("Jawaban yang benar: " + correctAnswers + ". " + q.feedback, false, 0);
+  }
+  document.getElementById('header-score').textContent = 'SCORE: ' + score;
+  enableNext();
+}
+
+function highlightAnswer(selected, correct) {
+  const labels = ['A','B','C','D','E','F'];
+  const isCorrectArr = Array.isArray(correct);
+  const checkCorrect = (i) => isCorrectArr ? correct.includes(i) : i === correct;
+
+  QUESTIONS[currentQ].options.forEach((opt, idx) => {
+    const el = document.getElementById('opt-' + idx);
+    if (!el) return;
+    el.classList.remove('option-btn');
+    el.style.cursor = 'default';
+    
+    const isThisCorrect = checkCorrect(idx);
+    
+    if (isThisCorrect) {
+      if (selected === -1 || selected === idx || isCorrectArr) {
+        el.className = 'flex items-center pixel-border-success bg-surface-container/30 p-4 relative';
+        el.innerHTML = `<span class="font-stats-mono text-secondary-fixed-dim mr-6">${labels[idx]}</span><span class="text-body-md text-secondary-fixed-dim">${opt}</span><span class="material-symbols-outlined absolute right-4 text-secondary-fixed-dim">check</span>`;
+      } else {
+        el.className = 'flex items-center pixel-border border-outline-variant p-4 opacity-40';
+        el.innerHTML = `<span class="font-stats-mono text-primary mr-6">${labels[idx]}</span><span class="text-body-md text-on-surface">${opt}</span>`;
+      }
+    } else if (idx === selected && !isThisCorrect) {
+      el.className = 'flex items-center pixel-border-error bg-surface-container/10 p-4 relative';
+      el.innerHTML = `<span class="font-stats-mono text-tertiary-container mr-6">${labels[idx]}</span><span class="text-body-md text-tertiary-container">${opt}</span><span class="material-symbols-outlined absolute right-4 text-tertiary-container">close</span>`;
+    } else {
+      el.className = 'flex items-center pixel-border border-outline-variant p-4 opacity-40';
+      el.innerHTML = `<span class="font-stats-mono text-primary mr-6">${labels[idx]}</span><span class="text-body-md text-on-surface">${opt}</span>`;
+    }
+  });
+}
+
+function showFeedback(text, correct, xp) {
+  const modal = document.getElementById('feedback-modal');
+  const inner = document.getElementById('feedback-modal-inner');
+  const header = document.getElementById('feedback-modal-header');
+  const icon = document.getElementById('feedback-result-icon');
+  const lvlBadge = document.getElementById('feedback-levelup');
+
+  // Reset levelup badge
+  lvlBadge.style.display = 'none';
+  lvlBadge.classList.remove('flex');
+
+  document.getElementById('feedback-text').textContent = text;
+
+  if (correct) {
+    header.style.background = '#00391a';
+    header.style.borderBottom = '2px solid #00e639';
+    icon.textContent = '✅ ANJAY BENER!';
+    icon.style.color = '#00e639';
+    document.getElementById('feedback-xp').textContent = '+' + xp + ' XP ✨';
+    document.getElementById('feedback-xp').style.color = '#00e639';
+    const nextBtn = document.getElementById('feedback-next-btn');
+    nextBtn.className = 'next-btn-pixel bg-[#0f0a23] text-secondary-fixed-dim font-display-game text-display-game uppercase px-6 py-3 w-full';
+  } else {
+    header.style.background = '#3a0a08';
+    header.style.borderBottom = '2px solid #ff7469';
+    icon.textContent = '❌ WRONG!';
+    icon.style.color = '#ff7469';
+    document.getElementById('feedback-xp').textContent = 'HUUUU, KOK SALAH SIH!?!?!?';
+    document.getElementById('feedback-xp').style.color = '#cec3d4';
+    const nextBtn = document.getElementById('feedback-next-btn');
+    nextBtn.className = 'wrong-btn-pixel bg-[#0f0a23] text-[#ff7469] font-display-game text-display-game uppercase px-6 py-3 w-full';
+  }
+
+  // Re-trigger pop animation
+  inner.classList.remove('modal-pop-anim');
+  void inner.offsetWidth;
+  inner.classList.add('modal-pop-anim');
+
+  modal.style.display = 'flex';
+}
+
+function enableNext() {
+  // now handled by feedback modal, nothing needed
+}
+
+function nextQuestion() {
+  if (!answered) return;
+  // Close feedback modal
+  const modal = document.getElementById('feedback-modal');
+  modal.style.display = 'none';
+  currentQ++;
+  if (currentQ >= QUESTIONS.length) {
+    showGameOver();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showGameOver() {
+  document.getElementById('game-section').style.display = 'none';
+  document.getElementById('gameover-screen').style.display = 'flex';
+  document.getElementById('next-btn').style.display = 'none';
+  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-correct').textContent = correctCount + ' / ' + QUESTIONS.length;
+  document.getElementById('final-xp').textContent = totalXP + ' / ' + getNextLevelXP(getLevel(totalXP)) + ' XP';
+  document.getElementById('final-level').textContent = 'LVL ' + getLevel(totalXP);
+  let rank = '';
+  if (correctCount <= 4) {
+    rank = 'BUKAN GOLONGAN KAMI!!!';
+  } else if (correctCount < 8) {
+    rank = 'AH KAMU BUKAN BESPREN!!!';
+  } else {
+    rank = 'KAMU GOLONGAN KAMI, BESPREN LAH KITAA!!!';
+  }
+  document.getElementById('rank-label').textContent = rank;
+  buildProgressSquares();
+}
+
+function restartGame() {
+  shuffleQuestions();
+  currentQ = 0; score = 0; totalXP = 0; correctCount = 0;
+  document.getElementById('game-section').style.display = 'flex';
+  document.getElementById('gameover-screen').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'flex';
+  updateXPBar();
+  loadQuestion();
+}
+
+function shuffleQuestions() {
+  const lastQ = QUESTIONS.pop();
+  for (let i = QUESTIONS.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
+  }
+  QUESTIONS.push(lastQ);
+}
+
+// Init
+shuffleQuestions();
+updateXPBar();
+loadQuestion();
+
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const panel = document.getElementById('mobile-menu-panel');
+    const isClosed = menu.classList.contains('pointer-events-none');
+    
+    if (isClosed) {
+        menu.classList.remove('pointer-events-none', 'opacity-0');
+        menu.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+    } else {
+        menu.classList.add('opacity-0');
+        menu.classList.remove('opacity-100');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => menu.classList.add('pointer-events-none'), 300);
+    }
+}
+
+function startGame() {
+  const modal = document.getElementById('intro-modal');
+  modal.style.transition = 'opacity 0.3s';
+  modal.style.opacity = '0';
+  setTimeout(() => {
+    modal.style.display = 'none';
+    startTimer(); // Now start the timer
+  }, 300);
+}
+</script>
+</body>
+</html>

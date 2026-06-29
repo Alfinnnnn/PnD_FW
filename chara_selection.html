@@ -24,13 +24,32 @@
 <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
 
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="trivia_game.html">TRIVIA</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="whack_a_coworker.html">GAME</a>
 </div>
 <div class="flex gap-4">
-<button class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">settings</span></button>
+<button onclick="toggleMobileMenu()" class="md:hidden hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">menu</span></button>
+<button class="hidden md:block hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span class="material-symbols-outlined">settings</span></button>
 <button onclick="toggleMute(event)" class="hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 text-primary dark:text-primary"><span id="volume-icon" class="material-symbols-outlined text-text-secondary">volume_off</span></button>
 </div>
 </nav>
+<!-- Mobile Sidebar -->
+<div id="mobile-menu" class="fixed inset-0 z-[60] pointer-events-none opacity-0 transition-opacity duration-300 md:hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-64 bg-surface-container border-l-4 border-border-pixel transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col p-6 gap-6 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center mb-4 border-b-2 border-border-pixel pb-2">
+            <span class="font-button-label text-neon-cyan uppercase">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-primary hover:text-neon-cyan transition-colors">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="index.html">QUEST</a>
+        <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow hover:text-neon-cyan transition-colors w-fit" href="chara_selection.html">PARTY</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="wall_of_Fame.html">WALL</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors uppercase" href="trivia_game.html">TRIVIA</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="whack_a_coworker.html">GAME</a>
+    </div>
+</div>
 <main class="flex-grow container mx-auto px-margin-desktop md:px-margin-desktop mt-8 mb-16">
 <header class="text-center mb-12">
 <h1 class="font-hero-title text-hero-title text-neon-yellow drop-shadow-[4px_4px_0_#7c04bc] mb-4">SELECT YOUR COMPANION</h1>
@@ -114,6 +133,23 @@
 </div>
 
 <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const panel = document.getElementById('mobile-menu-panel');
+            const isClosed = menu.classList.contains('pointer-events-none');
+            
+            if (isClosed) {
+                menu.classList.remove('pointer-events-none', 'opacity-0');
+                menu.classList.add('opacity-100');
+                panel.classList.remove('translate-x-full');
+            } else {
+                menu.classList.add('opacity-0');
+                menu.classList.remove('opacity-100');
+                panel.classList.add('translate-x-full');
+                setTimeout(() => menu.classList.add('pointer-events-none'), 300);
+            }
+        }
+
         const modal = document.getElementById('confirmModal');
         const modalContent = document.getElementById('confirmModalContent');
         const modalText = document.getElementById('confirmModalText');

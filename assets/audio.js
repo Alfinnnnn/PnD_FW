@@ -14,6 +14,7 @@ const path = window.location.pathname.toLowerCase();
 const isTitleScreen = path.endsWith('index.html') || path.endsWith('/') || !path.includes('.html');
 const isLogScreen = path.endsWith('rei.html') || path.endsWith('qony.html') || path.endsWith('ica.html');
 const isGameScreen = path.endsWith('whack_a_coworker.html');
+const isTriviaScreen = path.endsWith('trivia_game.html');
 
 // Main Adventure Theme
 const melodyMain = [
@@ -67,8 +68,24 @@ const melodyGame = [
     [523.25, 0.3], [0, 0.2],
 ];
 
-const melody = isTitleScreen ? melodyTitle : (isLogScreen ? melodyFarewell : (isGameScreen ? melodyGame : melodyMain));
-const tempo = isTitleScreen ? 1.5 : (isLogScreen ? 0.9 : (isGameScreen ? 1.8 : 1.3));
+// Trivia Quest Theme - Suspenseful, thinking vibe (steady, repetitive, minor arpeggios)
+const melodyTrivia = [
+    // D minor
+    [293.66, 0.25], [349.23, 0.25], [440.00, 0.25], [349.23, 0.25],
+    [293.66, 0.25], [349.23, 0.25], [440.00, 0.25], [349.23, 0.25],
+    // Bb major
+    [233.08, 0.25], [293.66, 0.25], [349.23, 0.25], [293.66, 0.25],
+    [233.08, 0.25], [293.66, 0.25], [349.23, 0.25], [293.66, 0.25],
+    // A major (tense dominant)
+    [220.00, 0.25], [277.18, 0.25], [329.63, 0.25], [277.18, 0.25],
+    [220.00, 0.25], [277.18, 0.25], [329.63, 0.25], [277.18, 0.25],
+    // Back to D minor with a little variation
+    [293.66, 0.25], [349.23, 0.25], [440.00, 0.25], [523.25, 0.25],
+    [587.33, 0.5], [0, 0.5]
+];
+
+const melody = isTitleScreen ? melodyTitle : (isLogScreen ? melodyFarewell : (isGameScreen ? melodyGame : (isTriviaScreen ? melodyTrivia : melodyMain)));
+const tempo = isTitleScreen ? 1.5 : (isLogScreen ? 0.9 : (isGameScreen ? 1.8 : (isTriviaScreen ? 1.3 : 1.3)));
 
 function initAudio() {
     if (!audioCtx) {
@@ -131,6 +148,55 @@ function playSelectSFX() {
     
     osc.start(now);
     osc.stop(now + 0.3);
+}
+
+function playCorrectSFX() {
+    if (isMuted || !audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'square';
+    const now = audioCtx.currentTime;
+    
+    // Classic 8-bit coin/correct sound (rapid pitch jump)
+    osc.frequency.setValueAtTime(987.77, now); // B5
+    osc.frequency.setValueAtTime(1318.51, now + 0.1); // E6
+    
+    gain.gain.setValueAtTime(0.05, now);
+    gain.gain.setValueAtTime(0.05, now + 0.2);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(now);
+    osc.stop(now + 0.3);
+}
+
+function playWrongSFX() {
+    if (isMuted || !audioCtx) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'sawtooth';
+    const now = audioCtx.currentTime;
+    
+    // Classic 8-bit wrong sound (descending low pitch)
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(80, now + 0.3);
+    
+    gain.gain.setValueAtTime(0.05, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start(now);
+    osc.stop(now + 0.4);
 }
 
 function updateVolumeIcon() {

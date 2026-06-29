@@ -24,10 +24,14 @@
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="index.html">QUEST</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="chara_selection.html">PARTY</a>
 <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="wall_of_Fame.html">WALL</a>
+<a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75 uppercase" href="trivia_game.html">TRIVIA</a>
 <a class="text-on-surface-variant font-button-label text-button-label pb-1 hover:text-neon-cyan hover:scale-105 transition-transform active:translate-y-1 duration-75" href="whack_a_coworker.html">GAME</a>
 </div>
 <div class="flex gap-4">
-<button class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<button onclick="toggleMobileMenu()" class="md:hidden text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<button class="hidden md:block text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
 <span class="material-symbols-outlined">settings</span>
 </button>
 <button onclick="toggleMute(event)" class="text-primary dark:text-primary hover:text-neon-cyan hover:scale-105 transition-transform">
@@ -35,6 +39,23 @@
 </button>
 </div>
 </nav>
+<!-- Mobile Sidebar -->
+<div id="mobile-menu" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300 md:hidden">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleMobileMenu()"></div>
+    <div id="mobile-menu-panel" class="absolute top-0 right-0 h-full w-64 bg-surface-container border-l-4 border-border-pixel transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col p-6 gap-6 shadow-[-5px_0_15px_rgba(0,0,0,0.5)]">
+        <div class="flex justify-between items-center mb-4 border-b-2 border-border-pixel pb-2">
+            <span class="font-button-label text-neon-cyan uppercase">MENU</span>
+            <button onclick="toggleMobileMenu()" class="text-primary hover:text-neon-cyan transition-colors">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+        </div>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="index.html">QUEST</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="chara_selection.html">PARTY</a>
+        <a class="text-neon-yellow font-button-label text-button-label border-b-4 border-neon-yellow hover:text-neon-cyan transition-colors w-fit" href="wall_of_Fame.html">WALL</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors uppercase" href="trivia_game.html">TRIVIA</a>
+        <a class="text-on-surface-variant font-button-label text-button-label hover:text-neon-cyan transition-colors" href="whack_a_coworker.html">GAME</a>
+    </div>
+</div>
 <!-- Main Content -->
 <main class="flex-grow pt-24 px-margin-mobile md:px-margin-desktop pb-12 flex flex-col items-center gap-12 z-10">
 <!-- Header -->
@@ -96,48 +117,78 @@
 <h2 class="font-section-title text-section-title text-primary uppercase">ARCHIVES</h2>
 <div class="font-stats-value text-stats-value text-neon-yellow flex items-center gap-2">
 <span class="material-symbols-outlined">star</span>
-                    SCORE: 999,999
+                    MEMORIES: 3
                 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Card 1 -->
-<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
-<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A 16-bit pixel art portrait of a character with spiky blue hair and a cyberpunk visor, grinning confidently. The character is set against a dark, neon-lit digital grid background. The color palette uses deep navy, vivid cyan, and magenta. The aesthetic is heavily influenced by retro 90s RPG character select screens with a nostalgic, glowing finish." src="assets/images/img_a781cd42.png"/>
-</div>
-<div>
-<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Player One</h3>
-<p class="font-caption text-caption text-text-secondary">"GG WP Team! Thanks for the epic loot."</p>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group">
-<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A retro 16-bit style pixel portrait of a female character with pink hair and a glowing neon green headset. She looks determined. Background is a dark arcade cabinet texture. Colors are muted darks with bright neon pink and green accents, mimicking a classic fighting game character roster image." src="assets/images/img_8f10eeba.png"/>
-</div>
-<div>
-<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Code Ninja</h3>
-<p class="font-caption text-caption text-text-secondary">"May your bugs be few and your frames high."</p>
-</div>
-</div>
-<!-- Card 3 -->
-<div class="wall-pixel-border bg-surface-container-low p-4 flex flex-col gap-4 hover:scale-105 hover:shadow-[0_0_15px_rgba(0,245,255,0.5)] transition-all duration-200 group relative">
-<div class="absolute -top-3 -right-3 bg-neon-yellow text-surface font-button-label text-[10px] px-2 py-1 rotate-12 z-10 border-2 border-surface">NEW</div>
-<div class="aspect-square bg-bg-elevated border-4 border-border-pixel overflow-hidden relative">
-<img class="w-full h-full object-cover filter contrast-125 group-hover:brightness-110 transition-all" data-alt="A pixel art avatar of a wizard wearing a starry cloak, holding a glowing staff. The style is late 80s RPG. The background is a dark, starlit night sky. The color scheme is predominantly deep midnight blue, silver, and bright magical purple. The overall mood is mysterious yet playful, like an NPC from a vintage adventure game." src="assets/images/img_23074950.png"/>
-</div>
-<div>
-<h3 class="font-button-label text-button-label text-neon-cyan uppercase mb-2">Grand Magus</h3>
-<p class="font-caption text-caption text-text-secondary">"The quest continues in a new realm."</p>
-</div>
-</div>
-</div>
-<div class="mt-8 flex justify-center">
-<button class="font-button-label text-button-label text-text-secondary hover:text-neon-yellow flex items-center gap-2 transition-colors">
-                    LOAD MORE DATA <span class="material-symbols-outlined text-sm animate-bounce">arrow_downward</span>
-</button>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+  <!-- Card 1 — Wall1 -->
+  <div class="wall-pixel-border bg-surface-container-low flex flex-col hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(0,245,255,0.4)] transition-all duration-200 group overflow-hidden">
+    <div class="w-full overflow-hidden relative border-b-4 border-border-pixel wall-photo-frame" id="frame-1" style="height:280px; cursor:grab;">
+      <img class="w-full object-cover select-none" id="wall-img-1" draggable="false" src="assets/images/Wall1.webp" alt="Wall of Fame 1" style="position:absolute; top:0; left:0; width:100%; user-select:none;"/>
+      <!-- Drag hint -->
+      <div class="absolute bottom-2 right-2 pointer-events-none flex items-center gap-1 bg-black/60 px-2 py-1 z-10" id="hint-1">
+        <span class="material-symbols-outlined text-[14px] text-neon-cyan">drag_pan</span>
+        <span style="font-family:'Press Start 2P'; font-size:7px; color:#00F5FF;">DRAG</span>
+      </div>
+      <!-- Scanline overlay -->
+      <div class="absolute inset-0 pointer-events-none" style="background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);"></div>
+      <!-- Neon corner accent -->
+      <div class="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-neon-cyan"></div>
+      <div class="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-neon-cyan"></div>
+    </div>
+    <div class="p-4 flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <h3 class="font-button-label text-button-label text-neon-cyan uppercase">CHAPTER I</h3>
+        <span class="font-button-label text-[10px] text-neon-yellow bg-surface-container px-2 py-0.5 border border-neon-yellow">★★★★★★★★★★</span>
+      </div>
+      <p class="font-caption text-[16px] text-text-secondary leading-snug">"Bukber @ Travello Hotel."</p>
+    </div>
+  </div>
+
+  <!-- Card 2 — Wall2 (center, slightly elevated) -->
+  <div class="wall-pixel-border bg-surface-container-low flex flex-col hover:scale-[1.03] hover:shadow-[0_0_24px_rgba(255,225,53,0.5)] transition-all duration-200 group overflow-hidden md:-mt-4 relative">
+    <!-- NEW badge -->
+    <div class="absolute -top-3 -right-3 z-10 bg-neon-yellow text-surface font-button-label text-[10px] px-2 py-1 border-2 border-surface rotate-6">★ FEATURED</div>
+    <div class="w-full relative border-b-4 border-neon-yellow" id="frame-2">
+      <img class="w-full block" id="wall-img-2" src="assets/images/Wall2.webp" alt="Wall of Fame 2" style="display:block; width:100%; height:auto;"/>
+      <div class="absolute inset-0 pointer-events-none" style="background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);"></div>
+      <div class="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-neon-yellow"></div>
+      <div class="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-neon-yellow"></div>
+    </div>
+    <div class="p-4 flex flex-col gap-2 border-t-4 border-neon-yellow">
+      <div class="flex items-center justify-between">
+        <h3 class="font-button-label text-button-label text-neon-yellow uppercase">CHAPTER II</h3>
+        <span class="font-button-label text-[10px] text-neon-yellow bg-surface-container px-2 py-0.5 border border-neon-yellow">★★★★★</span>
+      </div>
+      <p class="font-caption text-[16px] text-text-secondary leading-snug">"Bukbek with Voucher dari beliau."</p>
+    </div>
+  </div>
+
+  <!-- Card 3 — Wall3 -->
+  <div class="wall-pixel-border bg-surface-container-low flex flex-col hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(0,245,255,0.4)] transition-all duration-200 group overflow-hidden">
+    <div class="w-full overflow-hidden relative border-b-4 border-border-pixel wall-photo-frame" id="frame-3" style="height:280px; cursor:grab;">
+      <img class="w-full object-cover select-none" id="wall-img-3" draggable="false" src="assets/images/Wall3.webp" alt="Wall of Fame 3" style="position:absolute; top:0; left:0; width:100%; user-select:none;"/>
+      <div class="absolute bottom-2 right-2 pointer-events-none flex items-center gap-1 bg-black/60 px-2 py-1 z-10" id="hint-3">
+        <span class="material-symbols-outlined text-[14px] text-neon-cyan">drag_pan</span>
+        <span style="font-family:'Press Start 2P'; font-size:7px; color:#00F5FF;">DRAG</span>
+      </div>
+      <div class="absolute inset-0 pointer-events-none" style="background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.08) 3px,rgba(0,0,0,0.08) 4px);"></div>
+      <div class="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-neon-cyan"></div>
+      <div class="absolute top-0 right-0 w-4 h-4 border-t-4 border-r-4 border-neon-cyan"></div>
+    </div>
+    <div class="p-4 flex flex-col gap-2">
+      <div class="flex items-center justify-between">
+        <h3 class="font-button-label text-button-label text-neon-cyan uppercase">CHAPTER III</h3>
+        <span class="font-button-label text-[10px] text-neon-yellow bg-surface-container px-2 py-0.5 border border-neon-yellow">★★★★</span>
+      </div>
+      <p class="font-caption text-[16px] text-text-secondary leading-snug">"Akhirnya Karaoke setelah wacana teruss."</p>
+    </div>
+  </div>
+
 </div>
 </section>
+
 </main>
 <!-- Footer -->
 <footer class="w-full py-8 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-lowest border-t-4 border-border-pixel z-20 relative">
@@ -154,6 +205,108 @@
 </div>
 </footer>
 <script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const panel = document.getElementById('mobile-menu-panel');
+    const isClosed = menu.classList.contains('pointer-events-none');
+    
+    if (isClosed) {
+        menu.classList.remove('pointer-events-none', 'opacity-0');
+        menu.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+    } else {
+        menu.classList.add('opacity-0');
+        menu.classList.remove('opacity-100');
+        panel.classList.add('translate-x-full');
+        setTimeout(() => menu.classList.add('pointer-events-none'), 300);
+    }
+}
+
+// ── Wall photo drag-to-pan (X + Y) ──
+function initDraggablePhoto(frameId, imgId, hintId) {
+  const frame = document.getElementById(frameId);
+  const img   = document.getElementById(imgId);
+  const hint  = document.getElementById(hintId);
+  if (!frame || !img) return;
+
+  function fitImg() {
+    const fW = frame.offsetWidth;
+    const fH = frame.offsetHeight;
+    const naturalRatio = img.naturalHeight / img.naturalWidth;
+    const renderedH = fW * naturalRatio;
+    // Make image fill at least the frame in both dimensions
+    if (renderedH >= fH) {
+      img.style.width  = fW + 'px';
+      img.style.height = renderedH + 'px';
+    } else {
+      // Image is wider than tall relative to frame — fit by height
+      const renderedW = fH / naturalRatio;
+      img.style.height = fH + 'px';
+      img.style.width  = renderedW + 'px';
+    }
+    img._offsetX = 0;
+    img._offsetY = 0;
+    img.style.left = '0px';
+    img.style.top  = '0px';
+  }
+  if (img.complete && img.naturalWidth) fitImg();
+  else img.addEventListener('load', fitImg);
+
+  let dragging = false, startX = 0, startY = 0, startOX = 0, startOY = 0;
+
+  function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+
+  function onDown(e) {
+    dragging = true;
+    const src = e.type.startsWith('touch') ? e.touches[0] : e;
+    startX = src.clientX;
+    startY = src.clientY;
+    startOX = img._offsetX || 0;
+    startOY = img._offsetY || 0;
+    frame.style.cursor = 'grabbing';
+    if (hint) hint.style.opacity = '0';
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!dragging) return;
+    const src = e.type.startsWith('touch') ? e.touches[0] : e;
+    const dx = src.clientX - startX;
+    const dy = src.clientY - startY;
+    const fW = frame.offsetWidth;
+    const fH = frame.offsetHeight;
+    const imgW = parseFloat(img.style.width)  || img.offsetWidth;
+    const imgH = parseFloat(img.style.height) || img.offsetHeight;
+    const minX = fW - imgW;
+    const minY = fH - imgH;
+    const newX = clamp(startOX + dx, Math.min(minX, 0), 0);
+    const newY = clamp(startOY + dy, Math.min(minY, 0), 0);
+    img._offsetX = newX;
+    img._offsetY = newY;
+    img.style.left = newX + 'px';
+    img.style.top  = newY + 'px';
+    e.preventDefault();
+  }
+
+  function onUp() {
+    dragging = false;
+    frame.style.cursor = 'grab';
+  }
+
+  frame.addEventListener('mousedown',  onDown, { passive: false });
+  frame.addEventListener('touchstart', onDown, { passive: false });
+  window.addEventListener('mousemove', onMove, { passive: false });
+  window.addEventListener('touchmove', onMove, { passive: false });
+  window.addEventListener('mouseup',   onUp);
+  window.addEventListener('touchend',  onUp);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initDraggablePhoto('frame-1', 'wall-img-1', 'hint-1');
+  initDraggablePhoto('frame-2', 'wall-img-2', 'hint-2');
+  initDraggablePhoto('frame-3', 'wall-img-3', 'hint-3');
+});
+
 let videoStream = null;
 let mediaRecorder;
 let recordedChunks = [];
